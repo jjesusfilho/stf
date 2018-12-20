@@ -1,0 +1,32 @@
+Package: stf
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9001
+Authors@R: 
+    person(given = "Jose",
+           family = "de Jesus Filho",
+           role = c("aut", "cre"),
+           email = "jjesus@abj.org.br")
+Description: Retrieves data from Brazilian Supreme Court decisions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Imports: 
+    httr,
+    xml2,
+    dplyr,
+    tibble,
+    purrr,
+    stringr,
+    magrittr,
+    lubridate,
+    furrr,
+    future,
+    janitor,
+    readxl,
+    rlang,
+    tidyr,
+    unrtf
+Suggests: 
+    testthat
