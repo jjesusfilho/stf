@@ -4,43 +4,99 @@
 stf
 ===
 
-The goal of stf is to obtain and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data so you might get it almost ready for your analysis.
+The goal of stf is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data so you might get it almost ready for your analysis.
 
 Installation
 ------------
 
-You can install the released version of stf from [CRAN](https://CRAN.R-project.org) with:
+You can install stf from github with:
 
 ``` r
-install.packages("stf")
+# install.packages("devtools")
+devtools::install_github("courtsbr/stf")
 ```
 
-Usage
------
+You also have to make sure the packages [tesseract](https://github.com/ropensci/tesseract) and [pdftools](https://github.com/ropensci/pdftools) are installed as well as their dependencies.
 
-This is a basic example which shows you how to solve a common problem:
+You also have to download the `tesseract` trained data for Portuguese. You can find directions for Linux, Mac-OS and Windows [here](https://github.com/tesseract-ocr/tesseract/wiki)
+
+Usage for STF
+-------------
+
+### Read metadata
+
+Suppose you want to download the metadata from the Brazilian Supreme Court panel opinions with the expression "excesso de prazo". You can run this function:
 
 ``` r
-## basic example code
+df<-stf_opinion_metadata(open_search="excesso de prazo")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Or simply:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+df<-stf_opinion_metadata("excesso adj2 prazo")
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+By using "adj2" you are telling the search engine that "prazo" is one word apart from "excesso".
 
-You can also embed plots, for example:
+If you want to search for monocratic decisions, you can use another functio:
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+``` r
+df<-stf__mono_metadata("excesso adj2 prazo")
+```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+In order to find all the options, use the help function:
+
+``` r
+?stf_opinion_metadata()
+```
+
+Suppose now that you want to read all cases where "Telefônica" is a party. You can add the suffix ".PART." to the search:
+
+``` r
+telefonicaDF<-stf_opinion_metadata("telefonica.PART.")
+```
+
+If you want to see all the possible suffixes, the function `stf_help_view()` will load the help page on the Rstudio viewer pane:
+
+``` r
+stf_help_view()
+```
+
+### Download whole opinion text (inteiro teor):
+
+Once you have imported the metadata, you can use the same data frame to import the whole decision. Beware that decisions published before 2011 and even some of that year are in pdf image, not text. Those decisions are converted to `png` and submmited to OCR in order to be read. The limitation is that it might take a long time to read all opinions.
+
+### Vocabulary correspondence
+
+The table below shows a rough translation of the Brazilian Supreme Court's opinion's elements to US English:
+
+| Portuguese           | English               |
+|----------------------|-----------------------|
+| Acórdão              | Opinion               |
+| Ementa               | Syllabus              |
+| Relator              | Reporter              |
+| Ministro             | Justice               |
+| Órgão julgador       | Judicial panel        |
+| Decisão              | Decision              |
+| Processo             | Docket number         |
+| Parte                | Party                 |
+| Acompanhamento       | Docket sheet          |
+| Classe               | Petition type         |
+| Prover/conceder      | Reverse               |
+| Desprover/denegar    | Affirm                |
+| Anular decisão       | Remand                |
+| Origem               | Original jurisdiction |
+| Data da distribuição | Argued date           |
+| Data do julgamento   | Decision's date       |
+
+### Read the full opinion text (inteiro teor):
+
+Once you have imported the metadata, you can use the same data frame to import the full opinion's text. Beware that opinions published before 2011 and even some of that year are in pdf image, not in text. Those opinions are downloaded, converted to `png`, and subsequently submmited to OCR in order to be read.
+
+The limitation is that it takes a considerable amount of time to read the opinion's text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.
+
+``` r
+decisionTelefonica<-stf_opinion(telefonicaDF[1,]). 
+# Downloads just the first decision from the dataset imported above.
+```
