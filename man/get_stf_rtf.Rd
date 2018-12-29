@@ -4,10 +4,10 @@
 \alias{get_stf_rtf}
 \title{Gets rtf texts from url connection}
 \usage{
-get_stf_rtf(x)
+get_stf_rtf(url)
 }
 \arguments{
-\item{x}{docs_url vector to rtf text.}
+\item{url}{docs_url vector to rtf text.}
 }
 \value{
 a tibble
@@ -16,7 +16,7 @@ a tibble
 Gets rtf texts from url connection
 }
 \details{
-This functions is wrapper around download_stf_rtf
+This functions is a wrapper around download_stf_rtf
 and read_stf_rtf. It just returns a tibble with the
 text and the text id already parsed, without downloading it
 to your local disk.

@@ -1,4 +1,4 @@
-#' Reads Brazilian Supreme Court decision's follow-up
+#' Reads Brazilian Supreme Court decision's docket sheet.
 #'
 #' @param path where to find the htmls downloaded by download_docket
 #' @param plan defalts to sequential. See \code{future::plan} for all options.
@@ -7,10 +7,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' andamento <- read_stf_followup(path=".",plan="multiprocess")
+#' andamento <- read_stf_docket_sheet(path=".",plan="multiprocess")
 #' }
 #'
-read_stf_followup <- function(path=".", plan = "sequential"){
+read_stf_docket_sheet <- function(path=".", plan = "sequential"){
 
   arquivos <- list.files(path,full.names = TRUE)
 

@@ -13,7 +13,7 @@
 #' }
 get_stf_rtf <- function(url) {
 
-  id <- str_extract(url,"\\d{3,}")
+  id <- stringr::str_extract(url,"\\d{3,}")
 
   purrr::map2_dfr(url,id,purrr::possibly(~{
 
