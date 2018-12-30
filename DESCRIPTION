@@ -27,6 +27,11 @@ Imports:
     readxl,
     rlang,
     tidyr,
-    unrtf
+    unrtf,
+    crul,
+    assertthat,
+    pdftools,
+    rvest,
+    tesseract
 Suggests: 
     testthat

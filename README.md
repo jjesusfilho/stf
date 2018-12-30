@@ -25,7 +25,7 @@ Usage for STF
 
 ### Read metadata
 
-Suppose you want to download the metadata from the Brazilian Supreme Court panel opinions with the expression "excesso de prazo". You can run this function:
+Suppose you want to download the metadata from the Brazilian Supreme Court panel opinions with the expression "excesso de prazo". You can apply this function:
 
 ``` r
 df<-stf_opinion_metadata(open_search="excesso de prazo")
@@ -34,21 +34,21 @@ df<-stf_opinion_metadata(open_search="excesso de prazo")
 Or simply:
 
 ``` r
-df<-stf_opinion_metadata("excesso adj2 prazo")
+df<-get_stf_precedent_metadata("excesso adj2 prazo")
 ```
 
 By using "adj2" you are telling the search engine that "prazo" is one word apart from "excesso".
 
-If you want to search for monocratic decisions, you can use another functio:
+If you want to search for monocratic decisions, you can use another function:
 
 ``` r
-df<-stf__mono_metadata("excesso adj2 prazo")
+df<-get_stf_mono_metadata("excesso adj2 prazo")
 ```
 
 In order to find all the options, use the help function:
 
 ``` r
-?stf_opinion_metadata()
+?stf_precedent_metadata()
 ```
 
 Suppose now that you want to read all cases where "Telefônica" is a party. You can add the suffix ".PART." to the search:
@@ -57,15 +57,22 @@ Suppose now that you want to read all cases where "Telefônica" is a party. You 
 telefonicaDF<-stf_opinion_metadata("telefonica.PART.")
 ```
 
-If you want to see all the possible suffixes, the function `stf_help_view()` will load the help page on the Rstudio viewer pane:
+If you want to see all the possible suffixes, the function `stf_help_view()` will load the help page on R viewer pane:
 
 ``` r
 stf_help_view()
 ```
 
-### Download whole opinion text (inteiro teor):
+### Read the full opinion text (inteiro teor):
 
-Once you have imported the metadata, you can use the same data frame to import the whole decision. Beware that decisions published before 2011 and even some of that year are in pdf image, not text. Those decisions are converted to `png` and submmited to OCR in order to be read. The limitation is that it might take a long time to read all opinions.
+Once you have imported the metadata, you can use the same data frame to import the full opinion's text. Beware that opinions published before 2011 and even some of that year are in pdf image, not in text. Those opinions are downloaded, converted to `png`, and subsequently submmited to OCR in order to be read.
+
+The limitation is that it takes a considerable amount of time to read the opinion's text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.
+
+``` r
+decisionTelefonica<-stf_opinion(telefonicaDF[1,]). 
+# Downloads just the first decision from the dataset imported above.
+```
 
 ### Vocabulary correspondence
 
@@ -89,14 +96,3 @@ The table below shows a rough translation of the Brazilian Supreme Court's opini
 | Origem               | Original jurisdiction |
 | Data da distribuição | Argued date           |
 | Data do julgamento   | Decision's date       |
-
-### Read the full opinion text (inteiro teor):
-
-Once you have imported the metadata, you can use the same data frame to import the full opinion's text. Beware that opinions published before 2011 and even some of that year are in pdf image, not in text. Those opinions are downloaded, converted to `png`, and subsequently submmited to OCR in order to be read.
-
-The limitation is that it takes a considerable amount of time to read the opinion's text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.
-
-``` r
-decisionTelefonica<-stf_opinion(telefonicaDF[1,]). 
-# Downloads just the first decision from the dataset imported above.
-```
