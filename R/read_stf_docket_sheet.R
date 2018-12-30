@@ -54,7 +54,7 @@ read_stf_docket_sheet <- function(path=".", plan = "sequential"){
     docs_url <- item %>%
       purrr::map(~xml2::xml_find_all(.x,".//div[contains(@class,'andamento-docs')]/a/@href") %>%
                    xml2::xml_text() %>%
-                   xml2::url_absolute("portal.stf.jus.br/processos/")) %>%
+                   xml2::url_absolute("http://portal.stf.jus.br/processos/")) %>%
       purrr::map_if(rlang::is_empty,~NA_character_)
 
 
