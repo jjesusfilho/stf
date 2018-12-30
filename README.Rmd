@@ -18,6 +18,13 @@ knitr::opts_chunk$set(
 
 The goal of stf is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data so you might get it almost ready for your analysis.
 
+Functions are grouped in four categories:
+
+1. Download functions: They start with the verb download and create file or directories.
+2. Read functions: They read data from files downloaded by download functions.
+3. Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they skip the downloading step so you you are going to miss the files. But on the other hand, these functions are faster.
+4. View functions: They don't return any object or file, they just browse the help pages from STF gateway.
+5. Tidy functions. I am still building these functions. They will help you to clean and preprocess data for posterior analysis. I will only add fuctions that are stf specific, other tidy functions are available in the [JurisMiner](github.com/courtsbr/JurisMiner) or [abjutils](github.com/courtsbr/abjutils) packages.
 
 ## Installation
 
@@ -25,7 +32,7 @@ You can install stf from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("courtsbr/stf")
+devtools::install_github("jjesusfilho/stf")
 ```
 
 You also have to make sure the packages [tesseract](https://github.com/ropensci/tesseract) and [pdftools](https://github.com/ropensci/pdftools) are installed as well as their dependencies.
@@ -36,10 +43,10 @@ You also have to download the `tesseract` trained data for Portuguese. You can f
 
 ### Read metadata
 
-Suppose you want to download the metadata from the Brazilian Supreme Court panel opinions with the expression "excesso de prazo". You can apply this function:
+Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression "excesso de prazo". You can apply this function:
 
 ```{r example1,eval=FALSE}
-df<-stf_opinion_metadata(open_search="excesso de prazo")
+df<-get_stf_precedent_metadata(open_search="excesso de prazo")
 ```
 
 Or simply:
@@ -59,19 +66,19 @@ df<-get_stf_mono_metadata("excesso adj2 prazo")
 In order to find all the options, use the help function:
 
 ```{r example4,eval=FALSE}
-?stf_precedent_metadata()
+?get_stf_precedent_metadata()
 ```
 
 Suppose now that you want to read all cases where "Telefônica" is a party. You can add the suffix ".PART." to the search:
 
 ```{r example5,eval=FALSE}
-telefonicaDF<-stf_opinion_metadata("telefonica.PART.")
+telefonicaDF<-get_stf_precedent_metadata("telefonica.PART.")
 ```
 
 If you want to see all the possible suffixes, the function `stf_help_view()` will load the help page on R viewer pane:
 
 ```{r example6,eval=FALSE}
-stf_help_view()
+view_stf_help()
 ```
 
 ### Read the full opinion text (inteiro teor):
@@ -81,10 +88,20 @@ Once you have imported the metadata, you can use the same data frame to import t
 The limitation is that it takes a considerable amount of time to read the opinion's text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.
 
 ```{r example7,eval=FALSE}
-decisionTelefonica<-stf_opinion(telefonicaDF[1,]). 
+decisionTelefonica<-download_stf_dockets(telefonicaDF[1,]). 
 # Downloads just the first decision from the dataset imported above.
 ```
 
+
+## When you have the docket number
+
+If you have the docket number, you can use it to download all information about that lawsuit:
+
+```{r example8,eval=FALSE}
+download_stf_dockets(action="HC",docket_number = "4040")
+```
+
+From that, you have a bunch of functions to read all html files downloaded in nine folders corresponding to each tab of the docket page. Check the reference page to see all of them.
 
 
 
