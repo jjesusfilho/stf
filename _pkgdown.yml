@@ -1,0 +1,11 @@
+pandoc: 1.19.2.1
+pkgdown: 1.3.0
+pkgdown_sha: ~
+articles: []
+
+authors:
+  José de Jesus Filho:
+    href: http://josejesus.info
+  ABJ:
+    href: https://www.abj.org.br
+    html: <img src="https://abj.org.br/wp-content/themes/abj/assets/images/logo.jpg" height="24" />
