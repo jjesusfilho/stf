@@ -1,7 +1,8 @@
 #' Reads rtf files
 #'
 #' @param file of paths to the rtf files to be read.
-#' @param plan
+#' @param plan Defaults to "sequential". Check \code{future::plan}
+#'     for datails.
 #' @return a tibble with tree columns: incidente, texto, and doc_id.
 #' @export
 #'

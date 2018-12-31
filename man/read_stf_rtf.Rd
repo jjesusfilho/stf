@@ -8,6 +8,9 @@ read_stf_rtf(file = NULL, plan = "sequential")
 }
 \arguments{
 \item{file}{of paths to the rtf files to be read.}
+
+\item{plan}{Defaults to "sequential". Check \code{future::plan}
+for datails.}
 }
 \value{
 a tibble with tree columns: incidente, texto, and doc_id.

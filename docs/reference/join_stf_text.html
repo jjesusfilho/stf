@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reads rtf files — read_stf_rtf • stf</title>
+<title>Joins pdf and rtf texts to docket sheet — join_stf_text • stf</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Reads rtf files — read_stf_rtf" />
+<meta property="og:title" content="Joins pdf and rtf texts to docket sheet — join_stf_text" />
 
-<meta property="og:description" content="Reads rtf files" />
+<meta property="og:description" content="Joins pdf and rtf texts to docket sheet" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -94,41 +94,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reads rtf files</h1>
+    <h1>Joins pdf and rtf texts to docket sheet</h1>
     
-    <div class="hidden name"><code>read_stf_rtf.Rd</code></div>
+    <div class="hidden name"><code>join_stf_text.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Reads rtf files</p>
+    <p>Joins pdf and rtf texts to docket sheet</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>read_stf_rtf</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>plan</span> <span class='kw'>=</span> <span class='st'>"sequential"</span>)</pre>
+    <pre class="usage"><span class='fu'>join_stf_text</span>(<span class='no'>sheet</span>, <span class='kw'>rtf</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pdf</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>file</th>
-      <td><p>of paths to the rtf files to be read.</p></td>
+      <th>sheet</th>
+      <td><p>docket sheet used to download the texts with
+functions download_stf_rtf and download_stf_pdf.</p></td>
     </tr>
     <tr>
-      <th>plan</th>
-      <td><p>Defaults to "sequential". Check <code><a href='https://www.rdocumentation.org/packages/future/topics/plan'>future::plan</a></code>
-for datails.</p></td>
+      <th>rtf</th>
+      <td><p>tibble with rtf texts</p></td>
+    </tr>
+    <tr>
+      <th>pdf</th>
+      <td><p>tibble with pdf texts</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble with tree columns: incidente, texto, and doc_id.</p>
+    <p>new tibble with all texts.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>read_stf_rtf</span>(<span class='kw'>file</span><span class='kw'>=</span><span class='st'>""</span>)
+<span class='no'>andamento</span> <span class='kw'>&lt;-</span> <span class='fu'>join_text</span>(<span class='kw'>sheet</span><span class='kw'>=</span><span class='no'>andamento</span>,<span class='kw'>rtf</span><span class='kw'>=</span><span class='no'>texto_rtf</span>,<span class='no'>texto_pdf</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

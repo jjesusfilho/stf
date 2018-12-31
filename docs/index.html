@@ -90,25 +90,25 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <h3 class="hasAnchor">
 <a href="#read-metadata" class="anchor"></a>Read metadata</h3>
 <p>Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression “excesso de prazo”. You can apply this function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw">get_stf_precedent_metadata</span>(<span class="dt">open_search=</span><span class="st">"excesso de prazo"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="dt">open_search=</span><span class="st">"excesso de prazo"</span>)</code></pre></div>
 <p>Or simply:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw">get_stf_precedent_metadata</span>(<span class="st">"excesso adj2 prazo"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</code></pre></div>
 <p>By using “adj2” you are telling the search engine that “prazo” is one word apart from “excesso”.</p>
 <p>If you want to search for monocratic decisions, you can use another function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw">get_stf_mono_metadata</span>(<span class="st">"excesso adj2 prazo"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw"><a href="reference/get_stf_mono_metadata.html">get_stf_mono_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</code></pre></div>
 <p>In order to find all the options, use the help function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?<span class="kw">get_stf_precedent_metadata</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>()</code></pre></div>
 <p>Suppose now that you want to read all cases where “Telefônica” is a party. You can add the suffix “.PART.” to the search:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">telefonicaDF&lt;-<span class="kw">get_stf_precedent_metadata</span>(<span class="st">"telefonica.PART."</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">telefonicaDF&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"telefonica.PART."</span>)</code></pre></div>
 <p>If you want to see all the possible suffixes, the function <code>stf_help_view()</code> will load the help page on R viewer pane:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">view_stf_help</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/view_stf_help.html">view_stf_help</a></span>()</code></pre></div>
 </div>
 <div id="read-the-full-opinion-text-inteiro-teor" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read-the-full-opinion-text-inteiro-teor" class="anchor"></a>Read the full opinion text (inteiro teor):</h3>
 <p>Once you have imported the metadata, you can use the same data frame to import the full opinion’s text. Beware that opinions published before 2011 and even some of that year are in pdf image, not in text. Those opinions are downloaded, converted to <code>png</code>, and subsequently submmited to OCR in order to be read.</p>
 <p>The limitation is that it takes a considerable amount of time to read the opinion’s text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decisionTelefonica&lt;-<span class="kw">download_stf_dockets</span>(telefonicaDF[<span class="dv">1</span>,]). 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decisionTelefonica&lt;-<span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(telefonicaDF[<span class="dv">1</span>,]). 
 <span class="co"># Downloads just the first decision from the dataset imported above.</span></code></pre></div>
 </div>
 </div>
@@ -116,7 +116,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <h2 class="hasAnchor">
 <a href="#when-you-have-the-docket-number" class="anchor"></a>When you have the docket number</h2>
 <p>If you have the docket number, you can use it to download all information about that lawsuit:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download_stf_dockets</span>(<span class="dt">action=</span><span class="st">"HC"</span>,<span class="dt">docket_number =</span> <span class="st">"4040"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(<span class="dt">action=</span><span class="st">"HC"</span>,<span class="dt">docket_number =</span> <span class="st">"4040"</span>)</code></pre></div>
 <p>From that, you have a bunch of functions to read all html files downloaded in nine folders corresponding to each tab of the docket page. Check the reference page to see all of them.</p>
 <div id="vocabulary-correspondence" class="section level3">
 <h3 class="hasAnchor">
