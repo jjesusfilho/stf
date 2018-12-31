@@ -2,8 +2,8 @@
 % Please edit documentation in R/get_stf_opinion.R
 \name{get_stf_opinion}
 \alias{get_stf_opinion}
-\title{Get the pdfs with the panel's opinion text  according to the metadata
-obtained by the stf_opinion_metadata function.}
+\title{Gets the pdfs with the panel's opinion text  according to the metadata
+obtained by the stf_precedent_metadata function.}
 \usage{
 get_stf_opinion(df)
 }
@@ -16,8 +16,8 @@ a text(TRUE) or an image(FALSE).}
 vector with the whole content of the opinions.
 }
 \description{
-Get the pdfs with the panel's opinion text  according to the metadata
-obtained by the stf_opinion_metadata function.
+Gets the pdfs with the panel's opinion text  according to the metadata
+obtained by the stf_precedent_metadata function.
 }
 \keyword{court}
 \keyword{opinion,}

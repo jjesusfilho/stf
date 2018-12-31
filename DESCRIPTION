@@ -1,5 +1,5 @@
 Package: stf
-Title: What the Package Does (One Line, Title Case)
+Title: Functions to collect and manipulate Brazilian's Supreme Court decisions
 Version: 0.0.0.9201
 Authors@R: 
     person(given = "Jose",

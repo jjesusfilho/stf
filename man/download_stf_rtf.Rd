@@ -2,12 +2,12 @@
 % Please edit documentation in R/download_stf_rtf.R
 \name{download_stf_rtf}
 \alias{download_stf_rtf}
-\title{Downloads rtf documents based on docs_url column from follow-up data.}
+\title{Downloads rtf documents based on docs_url column from docket sheet data.}
 \usage{
-download_stf_rtf(x = NULL, path = ".")
+download_stf_rtf(sheet, path = ".")
 }
 \arguments{
-\item{x}{docs_url vector gotten from follow-up}
+\item{sheet}{provide tibble read by function read_stf_sheet.}
 
 \item{path}{where to download the texts.}
 }
@@ -15,10 +15,13 @@ download_stf_rtf(x = NULL, path = ".")
 files with rtf texts.
 }
 \description{
-Downloads rtf documents based on docs_url column from follow-up data.
+Downloads rtf documents based on docs_url column from docket sheet data.
+}
+\details{
+You don't need to inform which urls are rtfs.
 }
 \examples{
 \dontrun{
-download_stf_rtf(x=url)
+download_stf_rtf(sheet=andamento)
 }
 }

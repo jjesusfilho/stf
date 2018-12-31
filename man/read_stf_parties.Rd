@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_stf_parties.R
 \name{read_stf_parties}
 \alias{read_stf_parties}
-\title{Read parties's names.}
+\title{Reads docket parties names.}
 \usage{
 read_stf_parties(path = ".", plan = "sequential")
 }
@@ -16,7 +16,7 @@ for all options.}
 Tibble with docket number, party name, and party class.
 }
 \description{
-Read parties's names.
+Reads docket parties names.
 }
 \examples{
 \dontrun{

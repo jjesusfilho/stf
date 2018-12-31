@@ -1,4 +1,4 @@
-#' Read decision details
+#' Reads decision details
 #'
 #' @param path where to find the htmls
 #' @param plan default to "sequential", see \code{future::plan},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/view_stf_thesaurus.R
 \name{view_stf_thesaurus}
 \alias{view_stf_thesaurus}
-\title{Function stf_thesaurus}
+\title{Displays STF's thesaurus.}
 \usage{
 view_stf_thesaurus()
 }
@@ -10,7 +10,7 @@ view_stf_thesaurus()
 This function has only side effect, it doesn't return anything.
 }
 \description{
-This function displays STF's thesaurus.
+Displays STF's thesaurus.
 }
 \examples{
 \dontrun{

@@ -1,6 +1,5 @@
-#' Function stf_thesaurus
+#' Displays STF's thesaurus.
 #'
-#' This function displays STF's thesaurus.
 #' @keywords stf, thesaurus
 #' @return This function has only side effect, it doesn't return anything.
 #' @examples

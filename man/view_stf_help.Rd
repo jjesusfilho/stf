@@ -2,7 +2,7 @@
 % Please edit documentation in R/view_stf_help.R
 \name{view_stf_help}
 \alias{view_stf_help}
-\title{Function stf_help_view}
+\title{Displays STF's help page on browser.}
 \usage{
 view_stf_help()
 }
@@ -10,7 +10,7 @@ view_stf_help()
 This function has only a side effect, it doesn't return any object or file.
 }
 \description{
-This function displays STF's help page on R viewer pane.
+Displays STF's help page on browser.
 }
 \examples{
 \dontrun{

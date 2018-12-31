@@ -6,7 +6,7 @@
 #'     text and the text id already parsed, without downloading it
 #'     to your local disk.
 #' @return a tibble
-#'
+#' @export
 #' @examples
 #' \dontrun{
 #' df <- get_stf_rtf()

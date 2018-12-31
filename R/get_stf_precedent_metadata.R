@@ -73,9 +73,8 @@ stf_parties_names<-function(z){
 }
 # End of the function
 
-# This is the main function. It collects all the metadata from the Brazilian
+# Gets all the metadata from the Brazilian
 # Supreme Court panel opinion.
-
 #' Returns metadada from Brazilian Supreme Court precedents
 #'
 #' @param open_search Words to be searched

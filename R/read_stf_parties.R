@@ -1,4 +1,4 @@
-#' Read parties's names.
+#' Reads docket parties names.
 #'
 #' @param path where to find the htmls.
 #' @param plan default to "sequential". See \code{future::plan}

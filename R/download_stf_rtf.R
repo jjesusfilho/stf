@@ -1,26 +1,28 @@
-#' Downloads rtf documents based on docs_url column from follow-up data.
+#' Downloads rtf documents based on docs_url column from docket sheet data.
 #'
-#' @param x docs_url vector gotten from follow-up
+#' @param sheet provide tibble read by function read_stf_sheet.
 #' @param path where to download the texts.
-#'
+#' @details You don't need to inform which urls are rtfs.
 #' @return files with rtf texts.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' download_stf_rtf(x=url)
+#' download_stf_rtf(sheet=andamento)
 #' }
-download_stf_rtf <- function(x = NULL, path = ".") {
-  ids <- stringr::str_extract(x, "\\d{3,}") %>%
-    paste0(".rtf")
+download_stf_rtf <- function(sheet,path=".") {
 
-  purrr::walk2(x, ids, purrr::possibly( ~ {
-    if (is.null(.x)) {
-      stop("You have to inform at least one url")
-    } else {
-      httr::GET(.x, httr::write_disk(paste0(path, "/", .y), overwrite = TRUE))
+  sheet<-sheet %>%
+    dplyr::filter(stringr::str_detect(.data$docs_url,"RTF$")) %>%
+    dplyr::select(.data$incidente,.data$docs_url)
 
-    }
+  purrr::walk2(sheet$docs_url,sheet$incidente,purrr::possibly(~{
+
+    doc_id<-stringr::str_extract(.x,"\\d{3,}")
+
+    httr::GET(.x,httr::write_disk(paste0(path,"/incidente_",.y,"_docid_",doc_id,".rtf"),overwrite=TRUE))
+
+
   }, NULL))
 
 }

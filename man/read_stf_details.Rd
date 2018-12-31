@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_stf_details.R
 \name{read_stf_details}
 \alias{read_stf_details}
-\title{Read decision details}
+\title{Reads decision details}
 \usage{
 read_stf_details(path = ".", plan = "sequential")
 }
@@ -17,7 +17,7 @@ tibble with meio (public or eletronic), sigilo (secrecy),
 numero_unico (unique number), relator_atual (current justice)
 }
 \description{
-Read decision details
+Reads decision details
 }
 \examples{
 \dontrun{

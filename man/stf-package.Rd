@@ -4,7 +4,7 @@
 \name{stf-package}
 \alias{stf}
 \alias{stf-package}
-\title{stf: What the Package Does (One Line, Title Case)}
+\title{stf: Functions to collect and manipulate Brazilian's Supreme Court decisions}
 \description{
 Retrieves data from Brazilian Supreme Court decisions.
 }

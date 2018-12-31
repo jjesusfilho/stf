@@ -1,4 +1,4 @@
-# This function gets the urls according to the search parameters provided for
+# Gets the urls according to the search parameters provided for
 # stf_mono_metadata. So this function is going to be used inside the stf_metadata function.
 
 
@@ -108,9 +108,7 @@ stf_parties_names <- function(z) {
 }
 # End of the function
 
-# This is the main function. It collects all the metadata.
-
-#' Returns metadada from Brazilian Supreme Court monocratic decisions
+#' Gets all the metadata from Brazilian Supreme Court monocratic decisions
 #'
 #' @param open_search Words to be searched
 #' @param parties_names Logical. If TRUE (default), it will attempt to fix

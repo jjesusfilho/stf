@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_stf_mono_metadata.R
 \name{get_stf_mono_metadata}
 \alias{get_stf_mono_metadata}
-\title{Returns metadada from Brazilian Supreme Court monocratic decisions}
+\title{Gets all the metadata from Brazilian Supreme Court monocratic decisions}
 \usage{
 get_stf_mono_metadata(open_search, parties_names = TRUE)
 }
@@ -16,7 +16,7 @@ parties prefixes.}
 Dataframe with the metadata
 }
 \description{
-Returns metadada from Brazilian Supreme Court monocratic decisions
+Gets all the metadata from Brazilian Supreme Court monocratic decisions
 }
 \keyword{metadata}
 \keyword{precedents,}

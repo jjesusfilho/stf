@@ -1,5 +1,5 @@
-#' Get the pdfs with the panel's opinion text  according to the metadata
-#'     obtained by the stf_opinion_metadata function.
+#' Gets the pdfs with the panel's opinion text  according to the metadata
+#'     obtained by the stf_precedent_metadata function.
 #'
 #' @param df data frame with at least two columns, one with the url,
 #'    and the other, named electronico, with a logical vector informing whether the pdf is

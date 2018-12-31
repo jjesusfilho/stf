@@ -1,4 +1,4 @@
-#' Title Downloads STF precedent sheet
+#' Downloads STF precedent sheet
 #'
 #' @param url urls from precedent sheet.
 #' @keywords stf, jurisprudência, andamento processual

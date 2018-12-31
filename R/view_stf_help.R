@@ -1,6 +1,5 @@
-#' Function stf_help_view
+#' Displays STF's help page on browser.
 #'
-#' This function displays STF's help page on R viewer pane.
 #' @keywords stf, help
 #' @return This function has only a side effect, it doesn't return any object or file.
 #' @examples

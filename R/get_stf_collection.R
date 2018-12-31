@@ -1,4 +1,3 @@
-
 #' Gets Brazilian Supreme Courts collection
 #'
 #' @param decision_type either "monocraticas", "presidente" or "colegiadas"
