@@ -11,7 +11,7 @@
 #' }
 read_stf_rtf <- function(file=NULL){
 
-  purrr::map2_dfr(file,purrr::possibly(~{
+  purrr::map_dfr(file,purrr::possibly(~{
 
     doc_id <- stringr::str_extract(.x,"(?<=docid_)\\d+")
 
