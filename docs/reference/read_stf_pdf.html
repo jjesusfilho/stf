@@ -105,14 +105,19 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>read_stf_pdf</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>read_stf_pdf</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>plan</span> <span class='kw'>=</span> <span class='st'>"sequential"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file</th>
-      <td><p>of paths to the pdf files to be read.</p></td>
+      <td><p>Paths to the pdf files to be read.</p></td>
+    </tr>
+    <tr>
+      <th>plan</th>
+      <td><p>Defaults to "sequential". Check <code><a href='https://www.rdocumentation.org/packages/future/topics/plan'>future::plan</a></code> for more
+information.</p></td>
     </tr>
     </table>
     
