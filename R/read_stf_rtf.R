@@ -1,7 +1,7 @@
 #' Reads rtf files
 #'
 #' @param file of paths to the rtf files to be read.
-#'
+#' @param plan
 #' @return a tibble with tree columns: incidente, texto, and doc_id.
 #' @export
 #'
@@ -9,9 +9,11 @@
 #' \dontrun{
 #' read_stf_rtf(file="")
 #' }
-read_stf_rtf <- function(file=NULL){
+read_stf_rtf <- function(file=NULL,plan="sequential"){
 
-  purrr::map_dfr(file,purrr::possibly(~{
+  future::plan(plan)
+
+  furrr::future_map_dfr(file,purrr::possibly(~{
 
     doc_id <- stringr::str_extract(.x,"(?<=docid_)\\d+")
 

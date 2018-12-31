@@ -4,7 +4,7 @@
 \alias{read_stf_rtf}
 \title{Reads rtf files}
 \usage{
-read_stf_rtf(file = NULL)
+read_stf_rtf(file = NULL, plan = "sequential")
 }
 \arguments{
 \item{file}{of paths to the rtf files to be read.}
