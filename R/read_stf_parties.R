@@ -43,7 +43,7 @@ read_stf_parties <- function(path=".", plan="sequential"){
       iconv("UTF-8","latin1//TRANSLIT") %>%
       stringr::str_remove("&nbsp")
 
-    tibble::tibble(docket=.y,party=coluna,party_name=parte_nome)
+    tibble::tibble(incidente=.y,parte=coluna,parte_nome=parte_nome)
 
   },NULL))
 }

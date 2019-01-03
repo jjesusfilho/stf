@@ -3,6 +3,7 @@
 #' @param dir directory where to find the xlsx files.
 #' @param action proceding (classe)
 #' @param year numeric vector of years to read.
+#' @importFrom rlang .data
 #' @return a tibble with all columns read
 #' @export
 #'
@@ -57,6 +58,8 @@ decisoes %>%
   dplyr::bind_cols(base,.) %>%
   dplyr::filter(classe==action) %>%
   dplyr::filter(year==year) %>%
-  dplyr::select(!dplyr::starts_with("na"))
+  dplyr::select(!dplyr::starts_with("na")) %>%
+  dplyr::mutate(data_autuacao = janitor::excel_numeric_to_date(as.numeric(.data$data_autuacao)),
+                data_andamento = janitor::excel_numeric_to_date(as.numeric(.data$data_andamento)))
 
 }
