@@ -3,7 +3,7 @@
 #' @param partes tibble read by read_stf_parties function.
 #' @importFrom rlang .data
 #' @importFrom stats na.omit
-#' @return Same tibble with two new columns: instancia e justica
+#' @return Same tibble with two new columns: instancia e segmento
 #' @export
 #'
 #' @examples
@@ -26,14 +26,16 @@ reclamado <-  df %>%
     na.omit() %>%
     dplyr::count(.data$reclamado) %>%
     dplyr::mutate(instancia = dplyr::case_when(
+      stringr::str_detect(.data$reclamado,"(?i)minist.rio") ~ "outros",
       stringr::str_detect(.data$reclamado,"(?i)conselho superior") ~ "segunda",
       stringr::str_detect(.data$reclamado,"(?i)superior") ~ "superior",
       stringr::str_detect(.data$reclamado,"(?i)(tribunal regional|trt|tre|trf|tribunal de justi.a|c.mara|se..o|turma|col.gio|\\tj)") ~ "segunda",
       stringr::str_detect(.data$reclamado,"(?i)(juiz|ju.za|juizado)") ~ "primeira",
-      TRUE ~ NA_character_
+      TRUE ~ "outros"
     )) %>%
 
-    dplyr::mutate(justica = dplyr::case_when(
+    dplyr::mutate(segmento = dplyr::case_when(
+      stringr::str_detect(.data$reclamado,"(?i)minit.rio") ~ "outros",
       stringr::str_detect(.data$reclamado,"(?i)(trabalho|trt|tst)") ~ "trabalho",
       stringr::str_detect(.data$reclamado,"(?i)(eleitoral|tre|tse)") ~ "eleitoral",
       stringr::str_detect(.data$reclamado,"(?i)(federal|se.ao|trf|regi.o)") ~ "federal",
@@ -46,6 +48,6 @@ reclamado <-  df %>%
 df <- df %>%
   dplyr::select(.data$incidente,.data$reclamado) %>%
   na.omit() %>%
-  dplyr::left_join(reclamado[c("reclamado","instancia","justica")], by = "reclamado") %>%
+  dplyr::left_join(reclamado[c("reclamado","instancia","segmento")], by = "reclamado") %>%
   na.omit()
 }

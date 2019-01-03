@@ -4,12 +4,19 @@
 \name{stf-package}
 \alias{stf}
 \alias{stf-package}
-\title{stf: Functions to collect and manipulate Brazilian's Supreme Court decisions}
+\title{stf: Functions to collect and manipulate Brazilian's Supreme
+    Court decisions}
 \description{
-Retrieves data from Brazilian Supreme Court decisions.
+Retrieves data from Brazilian Supreme Court
+    decisions.
 }
 \author{
 \strong{Maintainer}: Jose de Jesus Filho \email{jjesus@abj.org.br}
+
+Other contributors:
+\itemize{
+  \item Lívia Pitelli Zamarian Houaiss \email{liviapzamarian@hotmail.com} [contributor]
+}
 
 }
 \keyword{internal}

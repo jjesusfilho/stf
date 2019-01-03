@@ -1,17 +1,19 @@
 Package: stf
-Title: Functions to collect and manipulate Brazilian's Supreme Court decisions
+Title: Functions to collect and manipulate Brazilian's Supreme
+    Court decisions
 Version: 0.0.0.9201
 Authors@R: 
-    person(given = "Jose",
-           family = "de Jesus Filho",
-           role = c("aut", "cre"),
-           email = "jjesus@abj.org.br")
-Description: Retrieves data from Brazilian Supreme Court decisions.
+    c(person(given = "Jose",
+             family = "de Jesus Filho",
+             role = c("aut", "cre"),
+             email = "jjesus@abj.org.br"),
+      person(given = "Lívia",
+             family = "Pitelli Zamarian Houaiss",
+             role = "ctb",
+             email = "liviapzamarian@hotmail.com"))
+Description: Retrieves data from Brazilian Supreme Court
+    decisions.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
 Imports: 
     httr,
     xml2,
@@ -35,3 +37,7 @@ Imports:
     tesseract
 Suggests: 
     testthat
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
