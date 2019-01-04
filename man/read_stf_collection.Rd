@@ -24,6 +24,6 @@ Read STF collection
 }
 \examples{
 \dontrun{
-read_stf_collection(action=NULL,year=NULL)
+read_stf_collection(classes=NULL,years=2017:2018)
 }
 }

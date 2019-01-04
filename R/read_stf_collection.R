@@ -10,10 +10,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' read_stf_collection(action=NULL,year=NULL)
+#' read_stf_collection(classes=NULL,years=2017:2018)
 #' }
-read_stf_collection<-function (dir = ".", classes=NULL, years=NULL,plan="sequential")
+read_stf_collection <- function (dir = ".", classes=NULL, years=NULL,plan="sequential")
 {
+
+  if (is.null(years)) {
+
+    stop ('The argument years is required.')
+  }
+
   future::plan(plan)
   anos<-paste0(years,collapse="|") %>%
     paste0("(",.,")")
@@ -21,11 +27,14 @@ read_stf_collection<-function (dir = ".", classes=NULL, years=NULL,plan="sequent
     stringr::str_subset(anos)
 
   decisoes <- furrr::future_map_dfr(files, ~{
-    df <- .x %>% readxl::read_excel(col_names = FALSE) %>%
+    df <- .x %>%
+      readxl::read_excel(col_names = FALSE) %>%
       dplyr::filter(dplyr::row_number() >= stringr::str_which(X__1,
                                                               "Classe"))
     n <- t(df[1, ])
-    df %>% purrr::set_names(n) %>%
+
+    df %>%
+      purrr::set_names(n) %>%
       tail(-1)
   })
 
@@ -46,7 +55,9 @@ read_stf_collection<-function (dir = ".", classes=NULL, years=NULL,plan="sequent
       xml2::xml_text()
 
     incidente <- stringr::str_extract(hyperlink, "\\d{3,}")
+
     unlink(temp_dir)
+
     tibble::tibble(hyperlink = hyperlink, incidente)
   }, .id = "id")
 
@@ -65,7 +76,7 @@ read_stf_collection<-function (dir = ".", classes=NULL, years=NULL,plan="sequent
     dplyr::select(-dplyr::starts_with("na")) %>%
     dplyr::mutate(data_autuacao = janitor::excel_numeric_to_date(as.numeric(.data$data_autuacao)),
                   data_andamento = janitor::excel_numeric_to_date(as.numeric(.data$data_andamento))) %>%
-    dplyr::mutate(ano_andamento=lubridate::year(data_andamento))
+    dplyr::mutate(ano_andamento = lubridate::year(.data$data_andamento))
 }
 
 
