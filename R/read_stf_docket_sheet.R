@@ -14,7 +14,7 @@ read_stf_docket_sheet <- function(path=".", plan = "sequential"){
 
   arquivos <- list.files(path,full.names = TRUE)
 
-  incidentes <- stringr::str_extract(arquivos,"\\d+")
+  incidentes <- stringr::str_extract(arquivos,"\\d{3,}")
 
   future::plan(plan)
 
