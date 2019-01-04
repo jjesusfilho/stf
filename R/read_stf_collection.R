@@ -1,8 +1,9 @@
 #' Read STF collection
 #'
 #' @param dir directory where to find the xlsx files.
-#' @param action proceding (classe)
-#' @param year numeric vector of years to read.
+#' @param classes proceding (classe)
+#' @param years numeric vector of years to read.
+#' @param plan default to "sequential". Check future::plan for datails.
 #' @importFrom rlang .data
 #' @return a tibble with all columns read
 #' @export
@@ -11,7 +12,7 @@
 #' \dontrun{
 #' read_stf_collection(action=NULL,year=NULL)
 #' }
-read_stf_collection1<-function (dir = ".", classes=NULL, years=NULL,plan="sequential")
+read_stf_collection<-function (dir = ".", classes=NULL, years=NULL,plan="sequential")
 {
   future::plan(plan)
   anos<-paste0(years,collapse="|") %>%
