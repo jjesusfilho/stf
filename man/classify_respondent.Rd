@@ -10,7 +10,7 @@ classify_respondent(partes)
 \item{partes}{tibble read by read_stf_parties function.}
 }
 \value{
-Same tibble with two new columns: instancia e justica
+Same tibble with two new columns: instancia e segmento
 }
 \description{
 Classify respondents in Complaints (Reclamacao por descumprimento)
