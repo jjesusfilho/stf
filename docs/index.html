@@ -69,13 +69,13 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#stf" class="anchor"></a>stf</h1></div>
 <p>The goal of stf is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data so you might get it almost ready for your analysis.</p>
-<p>Functions are grouped in four categories:</p>
+<p>Functions are grouped in five categories:</p>
 <ol style="list-style-type: decimal">
 <li>Download functions: They start with the verb download and create file or directories.</li>
 <li>Read functions: They read data from files downloaded by download functions.</li>
-<li>Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they skip the downloading step so you you are going to miss the files. But on the other hand, these functions are faster.</li>
+<li>Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they just subsequently apply the corresponding download and read functions without storing any object to your disk.</li>
 <li>View functions: They don’t return any object or file, they just browse the help pages from STF gateway.</li>
-<li>Tidy functions. I am still building these functions. They will help you to clean and preprocess data for posterior analysis. I will only add fuctions that are stf specific, other tidy functions are available in the <a href="github.com/courtsbr/JurisMiner">JurisMiner</a> or <a href="github.com/courtsbr/abjutils">abjutils</a> packages.</li>
+<li>Tidy functions. I am still building these functions. They will help you cleaning and preprocessing data for posterior analysis. I will only add fuctions that are stf specific, other tidy functions are available in the <a href="github.com/courtsbr/JurisMiner">JurisMiner</a> and the <a href="github.com/courtsbr/abjutils">abjutils</a> packages.</li>
 </ol>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -83,12 +83,24 @@
 <p>You can install stf from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jjesusfilho/stf"</span>)</code></pre></div>
-<p>You also have to make sure the packages <a href="https://github.com/ropensci/tesseract">tesseract</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> are installed as well as their dependencies.</p>
+<p>You have to make sure the packages <a href="https://github.com/ropensci/tesseract">tesseract</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> are installed as well as their dependencies.</p>
 <p>You also have to download the <code>tesseract</code> trained data for Portuguese. You can find directions for Linux, Mac-OS and Windows <a href="https://github.com/tesseract-ocr/tesseract/wiki">here</a></p>
 </div>
 <div id="usage-for-stf" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage-for-stf" class="anchor"></a>Usage for STF</h2>
+<div id="caveats" class="section level3">
+<h3 class="hasAnchor">
+<a href="#caveats" class="anchor"></a>Caveats</h3>
+<p>The STF precedents search service is flawed by poor design and inconsistent data. To number a few:</p>
+<ol style="list-style-type: decimal">
+<li><p>There is no Webapi, which entails creating webscrapers to download public data that should be available to researchers through open data protocols and endpoints;</p></li>
+<li><p>The classes of the parties in a lawsuit are very messy. The way the justices, or their advisors, write the classes are transfered to the database without any normalization. To give an example, the reference to the attorney can be written in many forms: advogada, adv, advda, advdo, proc etc. The authors of this package have put some effort to fix that, but the creativity of the the justices and their advisors goes beyond our capacity to figure it out.</p></li>
+<li><p>Contrary to other courts, such as TJSP and STJ, the search for decisions does not return all cases. If you don’t have the docket number of every lawsuit about the matter or precedural class, you simply can’t access everything that was decided.</p></li>
+<li><p>Initially we thought that the spreadsheets listing all ruled cases of the past years were accurate, but after downloading them in different times, we have noticed that the number of cases can increase or decrease depending on the moment we downloaded. As the STF IT people don’t make any clarification about these changes, there is no way to guess how many cases were actually ruled during a certain year.</p></li>
+<li><p>Inconsistencies in the database are rife. Decisions without full opinion’s text, dates of publication with no reference to the decisions’ dates and signatures’ dates. Decisons of one justice are assigned to another justice and so on.</p></li>
+</ol>
+</div>
 <div id="read-metadata" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read-metadata" class="anchor"></a>Read metadata</h3>
@@ -120,7 +132,11 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <a href="#when-you-have-the-docket-number" class="anchor"></a>When you have the docket number</h2>
 <p>If you have the docket number, you can use it to download all information about that lawsuit:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(<span class="dt">action=</span><span class="st">"HC"</span>,<span class="dt">docket_number =</span> <span class="st">"4040"</span>)</code></pre></div>
-<p>From that, you have a bunch of functions to read all html files downloaded in nine folders corresponding to each tab of the docket page. Check the reference page to see all of them.</p>
+</div>
+<div id="working-with-the-list-of-annual-rulings" class="section level2">
+<h2 class="hasAnchor">
+<a href="#working-with-the-list-of-annual-rulings" class="anchor"></a>Working with the list of annual rulings</h2>
+<p>Another way to work with decisions ruled by the Supreme Court is by accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases.</p>
 <div id="vocabulary-correspondence" class="section level3">
 <h3 class="hasAnchor">
 <a href="#vocabulary-correspondence" class="anchor"></a>Vocabulary correspondence</h3>
@@ -164,7 +180,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <td>Party</td>
 </tr>
 <tr class="odd">
-<td>Acompanhamento</td>
+<td>Andamento</td>
 <td>Docket sheet</td>
 </tr>
 <tr class="even">
