@@ -18,13 +18,13 @@ knitr::opts_chunk$set(
 
 The goal of stf is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data so you might get it almost ready for your analysis.
 
-Functions are grouped in four categories:
+Functions are grouped in five categories:
 
 1. Download functions: They start with the verb download and create file or directories.
 2. Read functions: They read data from files downloaded by download functions.
-3. Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they skip the downloading step so you you are going to miss the files. But on the other hand, these functions are faster.
+3. Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they just subsequently apply the corresponding download and read functions without storing any object to your disk.
 4. View functions: They don't return any object or file, they just browse the help pages from STF gateway.
-5. Tidy functions. I am still building these functions. They will help you to clean and preprocess data for posterior analysis. I will only add fuctions that are stf specific, other tidy functions are available in the [JurisMiner](github.com/courtsbr/JurisMiner) or [abjutils](github.com/courtsbr/abjutils) packages.
+5. Tidy functions. I am still building these functions. They will help you cleaning and preprocessing data for posterior analysis. I will only add fuctions that are stf specific, other tidy functions are available in the [JurisMiner](github.com/courtsbr/JurisMiner) and the  [abjutils](github.com/courtsbr/abjutils) packages.
 
 ## Installation
 
@@ -35,11 +35,25 @@ You can install stf from github with:
 devtools::install_github("jjesusfilho/stf")
 ```
 
-You also have to make sure the packages [tesseract](https://github.com/ropensci/tesseract) and [pdftools](https://github.com/ropensci/pdftools) are installed as well as their dependencies.
+You have to make sure the packages [tesseract](https://github.com/ropensci/tesseract) and [pdftools](https://github.com/ropensci/pdftools) are installed as well as their dependencies.
 
 You also have to download the `tesseract` trained data for Portuguese. You can find directions for Linux, Mac-OS and Windows  [here](https://github.com/tesseract-ocr/tesseract/wiki)
 
 ## Usage for STF
+
+### Caveats
+
+The STF precedents search service is flawed by poor design and inconsistent data. To number a few:
+
+1. There is no Webapi, which entails creating webscrapers to download public data that should be available to researchers through open data protocols and endpoints;
+
+2. The classes of the parties in a lawsuit are very messy. The way the justices, or their advisors, write the classes are transfered to the database without any normalization. To give an example, the reference to the attorney  can be written in many forms: advogada, adv, advda, advdo, proc etc. The authors of this package have put some effort to fix that, but the creativity of the the justices and their advisors goes beyond our capacity to figure it out.
+
+3. Contrary  to other courts, such as TJSP and STJ, the search for decisions does not return all cases. If you don't have the docket number of every lawsuit about the matter or precedural class, you simply can't access everything that was decided.
+
+4. Initially we thought that the spreadsheets listing all ruled cases of the past years were accurate, but  after downloading them in different times, we have noticed that the number of cases can increase or decrease depending on the moment we downloaded. As the STF IT people don't make any clarification about these changes, there is no way to guess how many cases were actually ruled during a certain year.
+
+5. Inconsistencies in the database are rife. Decisions without full opinion's text, dates of publication with no reference to the decisions' dates and signatures' dates. Decisons of one justice are assigned to another justice and so on.
 
 ### Read metadata
 
@@ -101,9 +115,9 @@ If you have the docket number, you can use it to download all information about 
 download_stf_dockets(action="HC",docket_number = "4040")
 ```
 
-From that, you have a bunch of functions to read all html files downloaded in nine folders corresponding to each tab of the docket page. Check the reference page to see all of them.
+## Working with the list of annual rulings
 
-
+Another way to work with decisions ruled by the Supreme Court is by accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases.
 
 ### Vocabulary correspondence
 
@@ -119,7 +133,7 @@ The table below shows a rough translation  of the Brazilian Supreme Court's opin
 |Decisão             |Decision             |
 |Processo            |Docket number        |
 |Parte               |Party                |
-|Acompanhamento      |Docket sheet         |
+|Andamento           |Docket sheet         |
 |Classe              |Petition type        |
 |Prover/conceder     |Reverse              |
 |Desprover/denegar   |Affirm               |

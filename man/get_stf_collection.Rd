@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_stf_collection.R
 \name{get_stf_collection}
 \alias{get_stf_collection}
-\title{Gets Brazilian Supreme Courts collection}
+\title{Wraper around functions download_stf_collection and read_stf_collection.}
 \usage{
 get_stf_collection(decision_type = NULL, years = NULL)
 }
@@ -15,7 +15,7 @@ get_stf_collection(decision_type = NULL, years = NULL)
 tibble with metadata of all supreme court's decisions
 }
 \description{
-Gets Brazilian Supreme Courts collection
+Wraper around functions download_stf_collection and read_stf_collection.
 }
 \examples{
 \dontrun{
