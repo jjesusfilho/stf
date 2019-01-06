@@ -55,7 +55,8 @@ read_stf_details <- function(path = ".", plan = "sequential") {
                    sigilo,
                    numero_unico,
                    classe_numero,
-                   relator_atual)
+                   relator_atual) %>%
+      tidyr::separate(classe_numero,c("classe","numero")," ")
 
   }, NULL), .progress = TRUE)
 
