@@ -7,6 +7,7 @@ always_allow_html: yes
 
 [![Travis build status](https://travis-ci.org/jjesusfilho/stf.svg?branch=master)](https://travis-ci.org/jjesusfilho/stf)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jjesusfilho/stf?branch=master&svg=true)](https://ci.appveyor.com/project/jjesusfilho/stf)
+[![Coverage status](https://codecov.io/gh/jjesusfilho/stf/branch/master/graph/badge.svg)](https://codecov.io/github/jjesusfilho/stf?branch=master)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
 ```{r setup, include = FALSE}

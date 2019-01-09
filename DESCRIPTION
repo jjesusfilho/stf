@@ -14,28 +14,31 @@ Authors@R:
 Description: Retrieves data from Brazilian Supreme Court
     decisions.
 License: MIT + file LICENSE
+Depends: 
+    R (>= 3.1)
 Imports: 
-    httr,
-    xml2,
+    assertthat,
+    crul,
     dplyr,
-    tibble,
-    purrr,
-    stringr,
-    magrittr,
-    lubridate,
     furrr,
     future,
+    httr,
     janitor,
+    lubridate,
+    magrittr,
+    pdftools,
+    purrr,
     readxl,
     rlang,
+    rvest,
+    stringr,
+    tesseract,
+    tibble,
     tidyr,
     unrtf,
-    crul,
-    assertthat,
-    pdftools,
-    rvest,
-    tesseract
+    xml2
 Suggests: 
+    covr,
     testthat
 Encoding: UTF-8
 LazyData: true
