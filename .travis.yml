@@ -7,3 +7,7 @@ addons:
   apt:
     packages:
       - libpoppler-cpp-dev
+      - libtesseract-dev
+      - libleptonica-dev
+      - tesseract-ocr-eng
+      - tesseract-ocr-por
