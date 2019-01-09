@@ -1,6 +1,6 @@
-#' Downloads Brazilian Supreme Court lawsuits based on type of action and docket number.
+#' Downloads Brazilian Supreme Court lawsuits based on the proceding class and the docket number.
 #'
-#' @param action This is what in Brazil is called classe processual
+#' @param class This is what in Brazil is called classe processual
 #' @param docket_number Number of the lawsuit
 #'
 #' @return htmls in nine folders corresponding to each one of the stf webpage tabs.
@@ -8,39 +8,39 @@
 #'
 #' @examples
 #' \dontrun{
-#' download_stf_dockets(action="HC",docket_number="4050")
+#' download_stf_dockets(class="HC",docket_number="4050")
 #' }
-download_stf_dockets <- function(action = NULL,
+download_stf_dockets <- function(class = NULL,
                                  docket_number = NULL){
-  if (is.null(action) | is.null(docket_number)) {
-    stop("Both classe and docket_number")
+  if (is.null(class) | is.null(docket_number)) {
+    stop("You must provide both the class and the docket_number")
   }
+
+##
 
   urls <-
     paste0(
       "http://portal.stf.jus.br/processos/listarProcessos.asp?classe=",
-      action,
+      class,
       "&numeroProcesso=",
       docket_number
     )
 
 
-  diretorios <-
-    purrr::map(
-      c(
-        "partes",
-        "andamentos",
-        "informacoes",
-        "deslocamentos",
-        "peticoes",
-        "decisoes",
-        "recursos",
-        "pautas"
-      ),
-      dir.create
-    )
 
+diretorios <-
+  c(
+  "partes",
+  "andamentos",
+  "informacoes",
+  "deslocamentos",
+  "peticoes",
+  "decisoes",
+  "recursos",
+  "pautas"
+)
 
+purrr::walk(diretorios,dir.create)
 
   cd <- crul::Async$new(urls <- urls)
 
@@ -49,7 +49,9 @@ download_stf_dockets <- function(action = NULL,
   incidente <- purrr::map_chr(detalhes,  ~ .x$url) %>%
     stringr::str_extract("\\d+")
 
-  arquivos <- paste0("detalhes/", incidente, ".html")
+  dir.create("detalhes")
+  arquivos <- paste0("detalhes",format(Sys.Date(),"/date_%Y_%m_%d_"),incidente, ".html")
+
 
   purrr::walk2(detalhes, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))
 
@@ -91,14 +93,16 @@ download_stf_dockets <- function(action = NULL,
 
 
   purrr::walk2(bases, diretorios, purrr::possibly(~ {
-    cd <- crul::Async$new(urls <- names(.x))
+    cd <- crul::Async$new(urls <- .x)
 
     res <- cd$get()
 
-    incidente <- str_extract(.x, "\\d+")
+    incidente <- stringr::str_extract(.x, "\\d+")
 
-    dir <- .y
-    purrr::walk(res,  ~ writeBin(.x$content, paste0(dir, "/", incidente, ".html")))
+    arquivos <- paste0(.y,format(Sys.Date(),"/date_%Y_%m_%d_"), incidente, ".html")
+
+
+    purrr::walk2(res, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))
 
   }, NULL))
 

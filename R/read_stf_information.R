@@ -15,7 +15,7 @@ read_stf_information <- function(path = ".", plan="sequential") {
 
   files <- list.files(path, full.names = TRUE)
 
-  incidentes <- stringr::str_extract(files, "\\d{3,}")
+  incidentes <- stringr::str_extract(files, "\\d+(?=.html)")
 
   future::plan(plan)
 
@@ -45,8 +45,7 @@ read_stf_information <- function(path = ".", plan="sequential") {
       xml2::xml_find_all(
         "//div[normalize-space(text())='Data de Protocolo:']/following-sibling::div[1]"
       ) %>%
-      xml2::xml_text() %>%
-      lubridate::dmy()
+      xml2::xml_text()
 
     orgao_origem <- conteudo %>%
       xml2::xml_find_all("//div[normalize-space(text())='\u00d3rg\u00e3o de Origem:']/following-sibling::div[1]") %>%
@@ -65,7 +64,7 @@ read_stf_information <- function(path = ".", plan="sequential") {
       xml2::xml_text(trim = TRUE)
 
 
-    cbind(
+    s<-cbind(
       incidente=.y,
       assunto1=assunto1,
       assunto2=assunto2,
@@ -88,7 +87,8 @@ read_stf_information <- function(path = ".", plan="sequential") {
                   .data$orgao_origem,
                   .data$origem,
                   .data$numero_origem,
-                  .data$procedencia)
+                  .data$procedencia) %>%
+    dplyr::mutate(data_protocolo=lubridate::dmy(data_protocolo))
 
 
 }

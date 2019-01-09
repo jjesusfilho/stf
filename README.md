@@ -1,8 +1,22 @@
 
+-   [STF](#stf)
+    -   [Overview](#overview)
+    -   [Installation](#installation)
+    -   [Usage for STF](#usage-for-stf)
+        -   [Read metadata](#read-metadata)
+        -   [Read the full opinion text (inteiro teor):](#read-the-full-opinion-text-inteiro-teor)
+        -   [Use the docket number](#use-the-docket-number)
+        -   [Work with the annual list of rulings](#work-with-the-annual-list-of-rulings)
+        -   [Vocabulary correspondence](#vocabulary-correspondence)
+    -   [Caveats](#caveats)
+
 [![Travis build status](https://travis-ci.org/jjesusfilho/stf.svg?branch=master)](https://travis-ci.org/jjesusfilho/stf) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jjesusfilho/stf?branch=master&svg=true)](https://ci.appveyor.com/project/jjesusfilho/stf) [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
-stf
+STF
 ===
+
+Overview
+--------
 
 The goal of stf is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data so you might get it almost ready for your analysis.
 
@@ -31,23 +45,9 @@ You also have to download the `tesseract` trained data for Portuguese. You can f
 Usage for STF
 -------------
 
-### Caveats
-
-The STF precedents search service is flawed by poor design and inconsistent data. To number a few:
-
-1.  There is no Webapi, which entails creating webscrapers to download public data that should be available to researchers through open data protocols and endpoints;
-
-2.  The classes of the parties in a lawsuit are very messy. The way the justices, or their advisors, write the classes are transfered to the database without any normalization. To give an example, the reference to the attorney can be written in many forms: advogada, adv, advda, advdo, proc etc. The authors of this package have put some effort to fix that, but the creativity of the the justices and their advisors goes beyond our capacity to figure it out.
-
-3.  Contrary to other courts, such as TJSP and STJ, the search for decisions does not return all cases. If you don't have the docket number of every lawsuit about the matter or precedural class, you simply can't access everything that was decided.
-
-4.  Initially we thought that the spreadsheets listing all ruled cases of the past years were accurate, but after downloading them in different times, we have noticed that the number of cases can increase or decrease depending on the moment we downloaded. As the STF IT people don't make any clarification about these changes, there is no way to guess how many cases were actually ruled during a certain year.
-
-5.  Inconsistencies in the database are rife. Decisions without full opinion's text, dates of publication with no reference to the decisions' dates and signatures' dates. Decisons of one justice are assigned to another justice and so on.
-
 ### Read metadata
 
-Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression "excesso de prazo". You can apply this function:
+Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression "excesso de prazo". You can execute the following function:
 
 ``` r
 df<-get_stf_precedent_metadata(open_search="excesso de prazo")
@@ -73,7 +73,7 @@ In order to find all the options, use the help function:
 ?get_stf_precedent_metadata()
 ```
 
-Suppose now that you want to read all cases where "Telefônica" is a party. You can add the suffix ".PART." to the search:
+Suppose now that you want to read all cases where "Telefônica" is a party. You can add the suffix ".PART." to the search sentence:
 
 ``` r
 telefonicaDF<-get_stf_precedent_metadata("telefonica.PART.")
@@ -96,8 +96,7 @@ decisionTelefonica<-download_stf_dockets(telefonicaDF[1,]).
 # Downloads just the first decision from the dataset imported above.
 ```
 
-When you have the docket number
--------------------------------
+### Use the docket number
 
 If you have the docket number, you can use it to download all information about that lawsuit:
 
@@ -105,10 +104,9 @@ If you have the docket number, you can use it to download all information about 
 download_stf_dockets(action="HC",docket_number = "4040")
 ```
 
-Working with the list of annual rulings
----------------------------------------
+### Work with the annual list of rulings
 
-Another way to work with decisions ruled by the Supreme Court is by accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases.
+Another way to work with decisions ruled by the Supreme Court is accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases. You can check all functions at the reference tab, but pretty soon I will add an vignette showing how to go through a case.
 
 ### Vocabulary correspondence
 
@@ -132,3 +130,18 @@ The table below shows a rough translation of the Brazilian Supreme Court's opini
 | Origem               | Original jurisdiction |
 | Data da distribuição | Argued date           |
 | Data do julgamento   | Decision's date       |
+
+Caveats
+-------
+
+The STF precedents' (jurisprudence) search service is flawed by poor design and inconsistent data. To number a few:
+
+1.  Brazilian Supreme Court offers no Web API, which leads us to creating webscrapers to download public data that should be available to researchers through open data protocols and endpoints;
+
+2.  The classes of the parties in a lawsuit are very messy. The way justices, or their advisors, write the parties' information is transfered to the database without any normalization. To give an example, the reference to the attorney can be written in many forms: advogada, adv, advda, advdo, proc etc. The authors of this package have put some effort to fix that, but the creativity of the the justices and their advisors goes beyond our capacity to figure everythig out.
+
+3.  Contrary to other courts, such as TJSP and STJ, the search for decisions does not return all cases. If you don't have the docket number of every lawsuit about the matter or precedural class, you simply can't access everything that was decided.
+
+4.  Initially we thought that the spreadsheets listing all ruled cases of the past years were accurate, but after downloading them in different times, we have noticed that the number of cases can increase or decrease depending on the moment we downloaded. As the STF IT people don't make any clarification about these changes, there is no way to guess how many cases were actually ruled during a certain year.
+
+5.  Inconsistencies in the database are rife. Decisions without the full opinion's text, dates of publication with no reference to the decisions' dates and signatures' dates. Decisons of one justice are assigned to another justice etc.

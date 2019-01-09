@@ -14,11 +14,11 @@ read_stf_docket_sheet <- function(path=".", plan = "sequential"){
 
 
   oplan <- plan
-  on.exit(plan(oplan), add = TRUE)
+  on.exit(future::plan(oplan), add = TRUE)
 
   arquivos <- list.files(path,full.names = TRUE)
 
-  incidentes <- stringr::str_extract(arquivos,"\\d{3,}")
+  incidentes <- stringr::str_extract(arquivos,"\\d+(?=.html)")
 
   future::plan(plan)
 

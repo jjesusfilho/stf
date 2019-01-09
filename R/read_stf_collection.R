@@ -12,7 +12,7 @@
 #' \dontrun{
 #' read_stf_collection(classes=NULL,years=2017:2018)
 #' }
-read_stf_collection <- read_excel<-function (dir = ".", classes = NULL, years = NULL, plan = "sequential")
+read_stf_collection <- function (dir = ".", classes = NULL, years = NULL, plan = "sequential")
 {
   if (is.null(years)) {
     stop("The argument years is required.")
@@ -23,12 +23,17 @@ read_stf_collection <- read_excel<-function (dir = ".", classes = NULL, years = 
   files <- list.files(dir, full.names = TRUE, pattern = ".xlsx") %>%
     stringr::str_subset(anos)
   decisoes <- furrr::future_map_dfr(files, ~{
+
     df <- .x %>% readxl::read_excel(col_names = FALSE) %>%
-      dplyr::filter(dplyr::row_number() >= stringr::str_which(X__1,
-                                                              "Classe"))
+      setNames(paste0("x",1:length(.))) %>%
+      dplyr::filter(dplyr::row_number() >= stringr::str_which(x1, "Classe"))
+
     n <- t(df[1, ])
+
     df %>% purrr::set_names(n) %>% tail(-1)
+
   },.id="planilha")
+
   decisoes <- decisoes %>%
     janitor::clean_names() %>%
     dplyr::filter(!is.na(classe)) %>%
@@ -60,7 +65,7 @@ read_stf_collection <- read_excel<-function (dir = ".", classes = NULL, years = 
   },.id="planilha")
 
   decisoes <- base %>%
-    right_join(decisoes,by=c("planilha","id"))
+    dplyr::right_join(decisoes,by=c("planilha","id"))
 
   if (!is.null(classes)) {
     decisoes <- decisoes %>%
@@ -71,7 +76,5 @@ read_stf_collection <- read_excel<-function (dir = ".", classes = NULL, years = 
     dplyr::mutate(data_autuacao = janitor::excel_numeric_to_date(as.numeric(.data$data_autuacao)),
                   data_andamento = janitor::excel_numeric_to_date(as.numeric(.data$data_andamento))) %>%
     dplyr::mutate(ano_andamento = lubridate::year(.data$data_andamento)) %>%
-    mutate(link=NULL)
+    dplyr::mutate(link=NULL)
 }
-
-

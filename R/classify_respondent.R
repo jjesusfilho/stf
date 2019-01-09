@@ -12,7 +12,7 @@
 #' }
 classify_respondent <- function(partes){
 
-  df <- df %>%
+  df <- partes %>%
     dplyr::group_by_at(dplyr::vars(-.data$parte_nome)) %>%  # group by everything other than the value column.
     dplyr::mutate(row_id = 1:dplyr::n()) %>%
     dplyr::ungroup() %>%  # build group index
@@ -26,11 +26,14 @@ reclamado <-  df %>%
     na.omit() %>%
     dplyr::count(.data$reclamado) %>%
     dplyr::mutate(instancia = dplyr::case_when(
-      stringr::str_detect(.data$reclamado,"(?i)minist.rio") ~ "outros",
+      stringr::str_detect(.data$reclamado,"(?i)(c.mara)") ~ "segunda",
+      stringr::str_detect(.data$reclamado,"(?i)(minist.rio|promotor|delegad[ao])") ~ "outros",
+      stringr::str_detect(.data$reclamado,"(?i)(vara|comarca)") ~ "primeira",
       stringr::str_detect(.data$reclamado,"(?i)conselho superior") ~ "segunda",
-      stringr::str_detect(.data$reclamado,"(?i)superior") ~ "superior",
-      stringr::str_detect(.data$reclamado,"(?i)(tribunal regional|trt|tre|trf|tribunal de justi.a|c.mara|se..o|turma|col.gio|\\tj)") ~ "segunda",
-      stringr::str_detect(.data$reclamado,"(?i)(juiz|ju.za|juizado)") ~ "primeira",
+      stringr::str_detect(.data$reclamado,"(?i)supremo") ~ "supremo",
+      stringr::str_detect(.data$reclamado,"(?i)superior\\b") ~ "superior",
+      stringr::str_detect(.data$reclamado,"(?i)(ribunal regional|trt|tre|trf|tribunal de justi.a|c.mara|se..o|turma|col.gio|\\tj|desembargador)") ~ "segunda",
+      stringr::str_detect(.data$reclamado,"(?i)(ju.z|ju.za|juizado)") ~ "primeira",
       TRUE ~ "outros"
     )) %>%
 

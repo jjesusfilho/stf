@@ -2,12 +2,12 @@
 % Please edit documentation in R/download_stf_dockets.R
 \name{download_stf_dockets}
 \alias{download_stf_dockets}
-\title{Downloads Brazilian Supreme Court lawsuits based on type of action and docket number.}
+\title{Downloads Brazilian Supreme Court lawsuits based on the proceding class and the docket number.}
 \usage{
-download_stf_dockets(action = NULL, docket_number = NULL)
+download_stf_dockets(class = NULL, docket_number = NULL)
 }
 \arguments{
-\item{action}{This is what in Brazil is called classe processual}
+\item{class}{This is what in Brazil is called classe processual}
 
 \item{docket_number}{Number of the lawsuit}
 }
@@ -15,10 +15,10 @@ download_stf_dockets(action = NULL, docket_number = NULL)
 htmls in nine folders corresponding to each one of the stf webpage tabs.
 }
 \description{
-Downloads Brazilian Supreme Court lawsuits based on type of action and docket number.
+Downloads Brazilian Supreme Court lawsuits based on the proceding class and the docket number.
 }
 \examples{
 \dontrun{
-download_stf_dockets(action="HC",docket_number="4050")
+download_stf_dockets(class="HC",docket_number="4050")
 }
 }

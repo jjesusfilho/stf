@@ -22,7 +22,7 @@ download_stf_collection <- function(decision_type = NULL, years = NULL,dir="."){
   urls <- switch(decision_type,
                  colegiadas = sprintf("http://www.stf.jus.br/arquivo/cms/publicacaoBOInternet/anexo/decisoes/colegiadas/decisoes_colegiadas_geral_lista_%d.xlsx",years),
                  monocraticas= sprintf("http://www.stf.jus.br/arquivo/cms/publicacaoBOInternet/anexo/decisoes/monocraticas/decisoes_monocraticas_lista_%d.xlsx",years),
-                 presidentes= sprintf("http://www.stf.jus.br/arquivo/cms/publicacaoBOInternet/anexo/decisoes/monocraticas/decisoes_monocraticas_lista_presidente_%d.xlsx",years)
+                 presidente= sprintf("http://www.stf.jus.br/arquivo/cms/publicacaoBOInternet/anexo/decisoes/monocraticas/decisoes_monocraticas_lista_presidente_%d.xlsx",years)
 
   )
 
