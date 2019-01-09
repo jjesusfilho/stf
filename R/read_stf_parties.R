@@ -8,42 +8,39 @@
 #'
 #' @examples
 #' \dontrun{
-#' partes<- read_stf_parties(path=".",plan="multiprocess")
+#' partes <- read_stf_parties(path = ".", plan = "multiprocess")
 #' }
-#'
-read_stf_parties <- function(path=".", plan="sequential"){
-
+#' 
+read_stf_parties <- function(path = ".", plan = "sequential") {
   arquivos <- list.files(path, pattern = ".html", full.names = TRUE)
 
-  processos <- stringr::str_extract(arquivos,"\\d+(?=\\.html)")
+  processos <- stringr::str_extract(arquivos, "\\d+(?=\\.html)")
 
   nomes <- tibble::tibble(
-
     partes = c("RECLTE", "ADV", "RECLDO", "INTDO", "PROC", "BENEF"),
 
-    correcao = c("reclamante","advogado","reclamado","intimado","procurador","beneficiario")
+    correcao = c("reclamante", "advogado", "reclamado", "intimado", "procurador", "beneficiario")
   )
 
 
   future::plan(plan)
 
-  partes <- furrr::future_map2_dfr(arquivos,processos,purrr::possibly(~{
+  partes <- furrr::future_map2_dfr(arquivos, processos, purrr::possibly(~ {
     conteudo <- xml2::read_html(.x)
 
-    coluna <- xml2::xml_find_all(conteudo,"//div[@class='detalhe-parte']") %>%
+    coluna <- xml2::xml_find_all(conteudo, "//div[@class='detalhe-parte']") %>%
       xml2::xml_text() %>%
       unlist() %>%
       stringr::str_extract(".+?(?=\\.)") %>%
-      pmatch(nomes$partes,duplicates.ok = TRUE) %>%
+      pmatch(nomes$partes, duplicates.ok = TRUE) %>%
       nomes$correcao[.]
 
     parte_nome <-
-      xml2::xml_find_all(conteudo,"//div[@class='nome-parte']") %>%
+      xml2::xml_find_all(conteudo, "//div[@class='nome-parte']") %>%
       xml2::xml_text() %>%
-      iconv("UTF-8","latin1//TRANSLIT") %>%
+      iconv("UTF-8", "latin1//TRANSLIT") %>%
       stringr::str_remove("&nbsp")
 
-    tibble::tibble(incidente=.y,parte=coluna,parte_nome=parte_nome)
-
-  },NULL))
+    tibble::tibble(incidente = .y, parte = coluna, parte_nome = parte_nome)
+  }, NULL))
 }

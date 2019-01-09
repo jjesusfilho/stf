@@ -12,9 +12,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' detalhes <- read_stf_details(path=".",plan="multiprocess")
+#' detalhes <- read_stf_details(path = ".", plan = "multiprocess")
 #' }
-#'
+#' 
 read_stf_details <- function(path = ".", plan = "sequential") {
   files <- list.files(path, pattern = ".html", full.names = TRUE)
 
@@ -22,9 +22,8 @@ read_stf_details <- function(path = ".", plan = "sequential") {
 
   future::plan(plan)
 
-  furrr::future_map2_dfr(files, incidentes, purrr::possibly(~{
-
-   content <- xml2::read_html(.x)
+  furrr::future_map2_dfr(files, incidentes, purrr::possibly(~ {
+    content <- xml2::read_html(.x)
 
     meio <- content %>%
       xml2::xml_find_all("//*[contains(@class,'badge')]") %>%
@@ -45,20 +44,19 @@ read_stf_details <- function(path = ".", plan = "sequential") {
       xml2::xml_find_all("//input[@id='classe-numero-processo']") %>%
       xml2::xml_attr("value")
 
-    relator_atual <-  content %>%
+    relator_atual <- content %>%
       xml2::xml_find_all("//div[contains(@class,'processo-dados')][2]") %>%
       xml2::xml_text() %>%
       stringr::str_extract("(?<=: ).+")
 
-    tibble::tibble(incidente = .y,
-                   meio,
-                   sigilo,
-                   numero_unico,
-                   classe_numero,
-                   relator_atual) %>%
-      tidyr::separate(classe_numero,c("classe","numero")," ")
-
+    tibble::tibble(
+      incidente = .y,
+      meio,
+      sigilo,
+      numero_unico,
+      classe_numero,
+      relator_atual
+    ) %>%
+      tidyr::separate(classe_numero, c("classe", "numero"), " ")
   }, NULL), .progress = TRUE)
-
-
 }

@@ -10,4 +10,4 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-globalVariables(c(".",".x",".y","classe"))
+globalVariables(c(".", ".x", ".y", "classe"))

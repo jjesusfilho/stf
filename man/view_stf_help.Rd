@@ -16,6 +16,7 @@ Displays STF's help page on browser.
 \dontrun{
 view_stf_help()
 }
+
 }
 \keyword{help}
 \keyword{stf,}

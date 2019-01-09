@@ -12,18 +12,13 @@
 #' df <- get_stf_rtf()
 #' }
 get_stf_rtf <- function(url) {
+  id <- stringr::str_extract(url, "\\d{3,}")
 
-  id <- stringr::str_extract(url,"\\d{3,}")
-
-  purrr::map2_dfr(url,id,purrr::possibly(~{
-
-    texto<-unrtf::unrtf(.x,"text") %>%
+  purrr::map2_dfr(url, id, purrr::possibly(~ {
+    texto <- unrtf::unrtf(.x, "text") %>%
       stringr::str_remove("\\X+---------+") %>%
       stringr::str_squish()
 
-    tibble::tibble(texto=texto,id=.y)
-
-  },NULL))
-
+    tibble::tibble(texto = texto, id = .y)
+  }, NULL))
 }
-

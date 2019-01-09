@@ -19,7 +19,7 @@ Reads Brazilian Supreme Court decision's docket sheet.
 }
 \examples{
 \dontrun{
-andamento <- read_stf_docket_sheet(path=".",plan="multiprocess")
+andamento <- read_stf_docket_sheet(path = ".", plan = "multiprocess")
 }
 
 }

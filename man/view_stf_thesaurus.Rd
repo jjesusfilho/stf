@@ -16,6 +16,7 @@ Displays STF's thesaurus.
 \dontrun{
 view_stf_thesaurus()
 }
+
 }
 \keyword{stf,}
 \keyword{thesaurus}

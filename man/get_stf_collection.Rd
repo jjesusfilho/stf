@@ -19,6 +19,6 @@ Wraper around functions download_stf_collection and read_stf_collection.
 }
 \examples{
 \dontrun{
-get_stf_colletion(decision_type="monocraticas",years=c(2017,2018))
+get_stf_colletion(decision_type = "monocraticas", years = c(2017, 2018))
 }
 }

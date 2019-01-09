@@ -22,6 +22,6 @@ You don't need to inform which urls are rtfs.
 }
 \examples{
 \dontrun{
-download_stf_rtf(sheet=andamento)
+download_stf_rtf(sheet = andamento)
 }
 }

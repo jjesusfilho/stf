@@ -20,6 +20,6 @@ Reads data from information tab.
 }
 \examples{
 \dontrun{
-informacao<-read_stf_information("html",plan="multiprocess")
+informacao <- read_stf_information("html", plan = "multiprocess")
 }
 }

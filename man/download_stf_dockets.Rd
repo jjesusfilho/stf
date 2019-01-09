@@ -19,6 +19,6 @@ Downloads Brazilian Supreme Court lawsuits based on the proceding class and the 
 }
 \examples{
 \dontrun{
-download_stf_dockets(class="HC",docket_number="4050")
+download_stf_dockets(class = "HC", docket_number = "4050")
 }
 }

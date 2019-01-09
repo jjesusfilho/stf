@@ -20,7 +20,7 @@ Reads docket parties names.
 }
 \examples{
 \dontrun{
-partes<- read_stf_parties(path=".",plan="multiprocess")
+partes <- read_stf_parties(path = ".", plan = "multiprocess")
 }
 
 }

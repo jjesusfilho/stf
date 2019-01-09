@@ -16,24 +16,19 @@ get_stf_opinion <- function(df) {
   setwd(tempdir())
   tmp_file <- tempfile(pattern = "inteiro", fileext = ".pdf")
   on.exit(setwd(diretorio), unlink(tmp_file))
-  file <- purrr::map2(df$url_inteiro_teor, df$eletronico, purrr::possibly(~{
+  file <- purrr::map2(df$url_inteiro_teor, df$eletronico, purrr::possibly(~ {
     if (.y == TRUE) {
       pdftools::pdf_text(.x)
     } else {
-      httr::GET(.x,httr::write_disk(path=tmp_file,overwrite=TRUE))
-      files <- pdftools::pdf_convert(tmp_file,dpi=400)
+      httr::GET(.x, httr::write_disk(path = tmp_file, overwrite = TRUE))
+      files <- pdftools::pdf_convert(tmp_file, dpi = 400)
       files %>%
-        purrr::map(~{
+        purrr::map(~ {
           .x %>%
-            tesseract::ocr(engine=tesseract::tesseract("por"))
+            tesseract::ocr(engine = tesseract::tesseract("por"))
         })
-
     }
-  },NA_character_,quiet=FALSE))
+  }, NA_character_, quiet = FALSE))
 
-  file %>% purrr::map_chr(~stringr::str_c(.x,sep="\n",collapse=""))
+  file %>% purrr::map_chr(~ stringr::str_c(.x, sep = "\n", collapse = ""))
 }
-
-
-
-

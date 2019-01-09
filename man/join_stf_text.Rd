@@ -22,6 +22,6 @@ Joins pdf and rtf texts to docket sheet
 }
 \examples{
 \dontrun{
-andamento <- join_text(sheet=andamento,rtf=texto_rtf,texto_pdf)
+andamento <- join_text(sheet = andamento, rtf = texto_rtf, texto_pdf)
 }
 }

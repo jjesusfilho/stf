@@ -8,15 +8,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' download_stf_dockets(class="HC",docket_number="4050")
+#' download_stf_dockets(class = "HC", docket_number = "4050")
 #' }
 download_stf_dockets <- function(class = NULL,
-                                 docket_number = NULL){
+                                 docket_number = NULL) {
   if (is.null(class) | is.null(docket_number)) {
     stop("You must provide both the class and the docket_number")
   }
 
-##
+  ##
 
   urls <-
     paste0(
@@ -28,29 +28,29 @@ download_stf_dockets <- function(class = NULL,
 
 
 
-diretorios <-
-  c(
-  "partes",
-  "andamentos",
-  "informacoes",
-  "deslocamentos",
-  "peticoes",
-  "decisoes",
-  "recursos",
-  "pautas"
-)
+  diretorios <-
+    c(
+      "partes",
+      "andamentos",
+      "informacoes",
+      "deslocamentos",
+      "peticoes",
+      "decisoes",
+      "recursos",
+      "pautas"
+    )
 
-purrr::walk(diretorios,dir.create)
+  purrr::walk(diretorios, dir.create)
 
   cd <- crul::Async$new(urls <- urls)
 
   detalhes <- cd$get()
 
-  incidente <- purrr::map_chr(detalhes,  ~ .x$url) %>%
+  incidente <- purrr::map_chr(detalhes, ~ .x$url) %>%
     stringr::str_extract("\\d+")
 
   dir.create("detalhes")
-  arquivos <- paste0("detalhes",format(Sys.Date(),"/date_%Y_%m_%d_"),incidente, ".html")
+  arquivos <- paste0("detalhes", format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
 
 
   purrr::walk2(detalhes, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))
@@ -99,11 +99,9 @@ purrr::walk(diretorios,dir.create)
 
     incidente <- stringr::str_extract(.x, "\\d+")
 
-    arquivos <- paste0(.y,format(Sys.Date(),"/date_%Y_%m_%d_"), incidente, ".html")
+    arquivos <- paste0(.y, format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
 
 
     purrr::walk2(res, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))
-
   }, NULL))
-
 }

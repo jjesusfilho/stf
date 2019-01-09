@@ -20,6 +20,6 @@ Reads pdf files
 }
 \examples{
 \dontrun{
-read_stf_pdf(file="")
+read_stf_pdf(file = "")
 }
 }

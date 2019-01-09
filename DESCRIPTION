@@ -15,7 +15,7 @@ Description: Retrieves data from Brazilian Supreme Court
     decisions.
 License: MIT + file LICENSE
 Depends: 
-    R (>= 3.1)
+    R (>= 3.2.0)
 Imports: 
     assertthat,
     crul,

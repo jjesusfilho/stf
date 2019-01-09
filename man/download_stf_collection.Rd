@@ -22,6 +22,6 @@ Downloads Brazilian Supreme Courts decisions' collection
 }
 \examples{
 \dontrun{
-download_stf_colletion(decision_type="monocraticas",years=c(2017,2018),path=".")
+download_stf_colletion(decision_type = "monocraticas", years = c(2017, 2018), path = ".")
 }
 }

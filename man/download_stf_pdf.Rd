@@ -19,6 +19,6 @@ Downloads pdf text documents based on docket sheet
 }
 \examples{
 \dontrun{
-download_stf_pdf(sheet=andamento)
+download_stf_pdf(sheet = andamento)
 }
 }

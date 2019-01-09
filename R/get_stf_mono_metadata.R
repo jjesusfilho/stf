@@ -30,10 +30,12 @@ stf_url <- function(x, y) {
     ceiling()
   tinyURL <- numero_tinyurl[[2]]
   urls <-
-    stringr::str_c("http://www.stf.jus.br/portal/jurisprudencia/",
-                   tinyURL,
-                   "&pagina=",
-                   1:paginas)
+    stringr::str_c(
+      "http://www.stf.jus.br/portal/jurisprudencia/",
+      tinyURL,
+      "&pagina=",
+      1:paginas
+    )
 }
 # End of the function
 
@@ -47,63 +49,110 @@ stf_urls <- purrr::possibly(stf_url, "ignore")
 # STF parties description is very messy. This functions does its best to correct all the parties descriptions.
 stf_parties_names <- function(z) {
   z %>%
-    purrr::map_chr( ~ {
+    purrr::map_chr(~ {
       .x %>%
-        stringr::str_replace(stringr::regex("(adv|dpu).*\\s*", ignore_case = T),
-                             "Advogado") %>%
-        stringr::str_replace(stringr::regex("AG.*E.*\\s*", ignore_case = T),
-                             "Agravante") %>%
-        stringr::str_replace(stringr::regex("AG.*(o|a).*\\s*", ignore_case = T),
-                             "Agravado") %>%
+        stringr::str_replace(
+          stringr::regex("(adv|dpu).*\\s*", ignore_case = T),
+          "Advogado"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("AG.*E.*\\s*", ignore_case = T),
+          "Agravante"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("AG.*(o|a).*\\s*", ignore_case = T),
+          "Agravado"
+        ) %>%
         stringr::str_replace(
           stringr::regex(".*(COATOR|coatro|autoridade).*\\s*", ignore_case = T),
           "Coator"
         ) %>%
-        stringr::str_replace(stringr::regex("emb.*(o|a).*\\s*", ignore_case = T),
-                             "Embargado") %>%
-        stringr::str_replace(stringr::regex("emb.*e.*\\s*", ignore_case = T),
-                             "Embargante") %>%
-        stringr::str_replace(stringr::regex("EXT.*\\s*", ignore_case = T),
-                             "Extraditando") %>%
-        stringr::str_replace(stringr::regex("imp.*d.*\\s*", ignore_case = T),
-                             "Impetrado") %>%
-        stringr::str_replace(stringr::regex("imp.*t.*\\s*|IMPRE\\s*", ignore_case = T),
-                             "Impetrante") %>%
-        stringr::str_replace(stringr::regex("^p(a|c|e|t).*\\s*", ignore_case = T),
-                             "Paciente") %>%
-        stringr::str_replace(stringr::regex(".*rec.*e.*\\s*", ignore_case = T),
-                             "Recorrente") %>%
-        stringr::str_replace(stringr::regex(".*rec.*(o|a).*\\s*", ignore_case = T),
-                             "Recorrido") %>%
-        stringr::str_replace(stringr::regex(".*req.*e.*\\s*", ignore_case = T),
-                             "Requerente") %>%
-        stringr::str_replace(stringr::regex(".*req.*(o|a).*\\s*", ignore_case = T),
-                             "Requerido") %>%
-        stringr::str_replace(stringr::regex("^proc.*\\s*", ignore_case = T),
-                             "Procurador") %>%
-        stringr::str_replace(stringr::regex("^sus.*e.*\\s*", ignore_case = T),
-                             "Suscitante") %>%
-        stringr::str_replace(stringr::regex("^sus.*(o|a).*\\s*", ignore_case = T),
-                             "Suscitado") %>%
-        stringr::str_replace(stringr::regex(".*curiae.*\\s*", ignore_case = T),
-                             "Amicus_curiae") %>%
-        stringr::str_replace(stringr::regex("rc.*e.*\\s*", ignore_case = T),
-                             "Reclamante") %>%
-        stringr::str_replace(stringr::regex("rc.*(o|a).*\\s*", ignore_case = T),
-                             "Reclamado") %>%
-        stringr::str_replace(stringr::regex("intd(o|a).*\\s*", ignore_case = T),
-                             "Interessado") %>%
-        stringr::str_replace(stringr::regex("r\u00E9u*.*\\s*", ignore_case = T),
-                             "R\u00E9u") %>%
+        stringr::str_replace(
+          stringr::regex("emb.*(o|a).*\\s*", ignore_case = T),
+          "Embargado"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("emb.*e.*\\s*", ignore_case = T),
+          "Embargante"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("EXT.*\\s*", ignore_case = T),
+          "Extraditando"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("imp.*d.*\\s*", ignore_case = T),
+          "Impetrado"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("imp.*t.*\\s*|IMPRE\\s*", ignore_case = T),
+          "Impetrante"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("^p(a|c|e|t).*\\s*", ignore_case = T),
+          "Paciente"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex(".*rec.*e.*\\s*", ignore_case = T),
+          "Recorrente"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex(".*rec.*(o|a).*\\s*", ignore_case = T),
+          "Recorrido"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex(".*req.*e.*\\s*", ignore_case = T),
+          "Requerente"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex(".*req.*(o|a).*\\s*", ignore_case = T),
+          "Requerido"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("^proc.*\\s*", ignore_case = T),
+          "Procurador"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("^sus.*e.*\\s*", ignore_case = T),
+          "Suscitante"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("^sus.*(o|a).*\\s*", ignore_case = T),
+          "Suscitado"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex(".*curiae.*\\s*", ignore_case = T),
+          "Amicus_curiae"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("rc.*e.*\\s*", ignore_case = T),
+          "Reclamante"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("rc.*(o|a).*\\s*", ignore_case = T),
+          "Reclamado"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("intd(o|a).*\\s*", ignore_case = T),
+          "Interessado"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("r\u00E9u*.*\\s*", ignore_case = T),
+          "R\u00E9u"
+        ) %>%
         stringr::str_replace(stringr::regex("autor.*", ignore_case = T), "Autor") %>%
-        stringr::str_replace(stringr::regex("litis.*pass.*", ignore_case = T),
-                             "Listisconsorte_passivo") %>%
-        stringr::str_replace(stringr::regex("litis.*at.*", ignore_case = T),
-                             "Listisconsorte_ativo") %>%
+        stringr::str_replace(
+          stringr::regex("litis.*pass.*", ignore_case = T),
+          "Listisconsorte_passivo"
+        ) %>%
+        stringr::str_replace(
+          stringr::regex("litis.*at.*", ignore_case = T),
+          "Listisconsorte_ativo"
+        ) %>%
         stringr::str_replace(stringr::regex("DND(oa).*", ignore_case = T), "Denunciado") %>%
-        stringr::str_replace(stringr::regex("inves(oa).*", ignore_case = T),
-                             "Investigado")
-
+        stringr::str_replace(
+          stringr::regex("inves(oa).*", ignore_case = T),
+          "Investigado"
+        )
     })
 }
 # End of the function
@@ -147,19 +196,19 @@ get_stf_mono_metadata <- function(open_search, parties_names = TRUE) {
         stringr::str_split("\n")
 
       processo <- recurso %>%
-        purrr::map_chr( ~ stringr::str_extract(.x[[1]], ".*?(?=\\/)"))
+        purrr::map_chr(~ stringr::str_extract(.x[[1]], ".*?(?=\\/)"))
 
       origem <- recurso %>%
-        purrr::map_chr( ~ stringr::str_extract(.x[[1]], "(?<=\\/).*")) %>%
+        purrr::map_chr(~ stringr::str_extract(.x[[1]], "(?<=\\/).*")) %>%
         stringr::str_trim()
 
       classe <- recurso %>%
-        purrr::map_chr( ~ stringr::str_trim(.x[[2]]))
+        purrr::map_chr(~ stringr::str_trim(.x[[2]]))
 
 
 
       relator <- recurso %>%
-        purrr::map_chr( ~ {
+        purrr::map_chr(~ {
           .x[[3]] %>%
             stringr::str_extract("(?<=Relator\\(a\\)\\:).*?(?=Relator|Julgamento)") %>%
             stringr::str_extract("(?<=Min\\.\\s).*")
@@ -171,7 +220,7 @@ get_stf_mono_metadata <- function(open_search, parties_names = TRUE) {
 
 
       data_julgamento <- recurso %>%
-        purrr::map_chr( ~ {
+        purrr::map_chr(~ {
           .x[[3]] %>%
             stringr::str_extract("\\d{2}\\/\\d{2}\\/\\d{4}")
         }) %>%
@@ -198,8 +247,7 @@ get_stf_mono_metadata <- function(open_search, parties_names = TRUE) {
         xml2::xml_find_all("//p[strong[contains(.,'Parte')]]/following-sibling::pre[1]") %>%
         xml2::xml_text() %>%
         stringr::str_extract_all("\\w.*\\:.*(\r\n)*\\w*?") %>%
-
-        purrr::modify_depth(1,  ~ {
+        purrr::modify_depth(1, ~ {
           .x %>%
             setNames(stringr::str_extract(., ".*(?=\\:)"))
         })
@@ -207,11 +255,13 @@ get_stf_mono_metadata <- function(open_search, parties_names = TRUE) {
       partes <- dplyr::bind_rows(!!!partes)
 
       partes <- partes %>%
-        purrr::map_dfr( ~ stringr::str_replace(.x, ".*?(\\:\\s)", ""))
+        purrr::map_dfr(~ stringr::str_replace(.x, ".*?(\\:\\s)", ""))
 
       partes <- partes %>%
-        dplyr::select(-dplyr::matches(stringr::regex("rela|red.*", ignore_case =
-                                                       TRUE)))
+        dplyr::select(-dplyr::matches(stringr::regex("rela|red.*",
+          ignore_case =
+            TRUE
+        )))
 
       if (parties_names) {
         names(partes) <- stf_parties_names(z = names(partes))
@@ -236,8 +286,10 @@ get_stf_mono_metadata <- function(open_search, parties_names = TRUE) {
         ) %>%
         xml2::xml_attrs() %>%
         stringr::str_extract("numero.*") %>%
-        stringr::str_c("http://www.stf.jus.br/portal/processo/verProcessoAndamento.asp?",
-                       .)
+        stringr::str_c(
+          "http://www.stf.jus.br/portal/processo/verProcessoAndamento.asp?",
+          .
+        )
 
       ## The code below creates a data frame with all the metadata grabbed above.
 
@@ -254,7 +306,6 @@ get_stf_mono_metadata <- function(open_search, parties_names = TRUE) {
           partes,
           stringsAsFactors = FALSE
         )
-
     },
     data.frame(
       processo = NA_character_,

@@ -21,7 +21,7 @@ Reads decision details
 }
 \examples{
 \dontrun{
-detalhes <- read_stf_details(path=".",plan="multiprocess")
+detalhes <- read_stf_details(path = ".", plan = "multiprocess")
 }
 
 }

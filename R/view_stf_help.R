@@ -6,17 +6,15 @@
 #' \dontrun{
 #' view_stf_help()
 #' }
-
+#' 
 #' @export
-view_stf_help <- function(){
-  url<-"http://www.stf.jus.br/portal/cms/verTexto.asp?servico=jurisprudenciaPesquisaGeral&pagina=ajudaPesquisaJurisprudencia&popup=S"
+view_stf_help <- function() {
+  url <- "http://www.stf.jus.br/portal/cms/verTexto.asp?servico=jurisprudenciaPesquisaGeral&pagina=ajudaPesquisaJurisprudencia&popup=S"
 
   viewer <- getOption("viewer")
-  if (!is.null(viewer))
+  if (!is.null(viewer)) {
     viewer(url)
-  else
+  } else {
     utils::browseURL(url)
-
+  }
 }
-
-

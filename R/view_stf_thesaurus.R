@@ -6,14 +6,14 @@
 #' \dontrun{
 #' view_stf_thesaurus()
 #' }
-
+#' 
 #' @export
-view_stf_thesaurus<-function(){
-  url<-"http://www.stf.jus.br/portal/jurisprudencia/pesquisarVocabularioJuridico.asp"
+view_stf_thesaurus <- function() {
+  url <- "http://www.stf.jus.br/portal/jurisprudencia/pesquisarVocabularioJuridico.asp"
   viewer <- getOption("viewer")
-  if (!is.null(viewer))
+  if (!is.null(viewer)) {
     viewer(url)
-  else
-    utils::browseURL(url)}
-
-
+  } else {
+    utils::browseURL(url)
+  }
+}

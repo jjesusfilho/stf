@@ -20,6 +20,6 @@ Reads rtf files
 }
 \examples{
 \dontrun{
-read_stf_rtf(file="")
+read_stf_rtf(file = "")
 }
 }

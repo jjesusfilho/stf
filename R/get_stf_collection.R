@@ -8,14 +8,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_stf_colletion(decision_type="monocraticas",years=c(2017,2018))
+#' get_stf_colletion(decision_type = "monocraticas", years = c(2017, 2018))
 #' }
 get_stf_collection <- function(decision_type = NULL, years = NULL) {
+  dir <- tempdir()
+  on.exit(unlink(dir))
 
- dir <- tempdir()
- on.exit(unlink(dir))
-
- download_stf_collection(decision_type=decision_type,years=years,dir=dir)
- read_stf_collection(dir=dir,classes=NULL,years=years)
-
+  download_stf_collection(decision_type = decision_type, years = years, dir = dir)
+  read_stf_collection(dir = dir, classes = NULL, years = years)
 }
