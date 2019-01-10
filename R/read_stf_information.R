@@ -86,5 +86,5 @@ read_stf_information <- function(path = ".", plan = "sequential") {
       .data$numero_origem,
       .data$procedencia
     ) %>%
-    dplyr::mutate(data_protocolo = lubridate::dmy(data_protocolo))
+    dplyr::mutate(data_protocolo = lubridate::dmy(.data$data_protocolo))
 }
