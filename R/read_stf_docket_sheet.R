@@ -9,7 +9,7 @@
 #' \dontrun{
 #' andamento <- read_stf_docket_sheet(path = ".", plan = "multiprocess")
 #' }
-#' 
+#'
 read_stf_docket_sheet <- function(path = ".", plan = "sequential") {
   oplan <- plan
   on.exit(future::plan(oplan), add = TRUE)
@@ -33,6 +33,10 @@ read_stf_docket_sheet <- function(path = ".", plan = "sequential") {
     titulo <- item %>%
       purrr::map(~ xml2::xml_find_first(.x, ".//h5[contains(@class,'andamento-nome')]") %>%
         xml2::xml_text(trim = TRUE)) %>%
+      unlist()
+
+    invalido <- item %>%
+      purrr::map(~ xml2::xml_find_first(.x, "boolean(.//h5[contains(@class,'andamento-invalido')])")) %>%
       unlist()
 
     descricao <- item %>%
@@ -60,7 +64,7 @@ read_stf_docket_sheet <- function(path = ".", plan = "sequential") {
 
     doc_id <- stringr::str_extract(doc_url, "\\d{3,}")
 
-    tibble::tibble(incidente = .y, data_andamento, titulo, orgao_julgador, descricao, doc, doc_url, doc_id) %>%
+    tibble::tibble(incidente = .y, data_andamento, titulo,invalido, orgao_julgador, descricao, doc, doc_url, doc_id) %>%
       tidyr::unnest() %>%
       dplyr::distinct()
   }, NULL), .progress = TRUE)

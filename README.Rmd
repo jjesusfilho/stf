@@ -24,15 +24,15 @@ options(knitr.table.format = "html")
 # STF
 ## Overview
 
-The goal of stf is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data so you might get it almost ready for your analysis.
+The goal of STF is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data, with the objective of making it as ready as possible for analysis. 
 
 Functions are grouped in five categories:
 
-1. Download functions: They start with the verb download and create file or directories.
-2. Read functions: They read data from files downloaded by download functions.
-3. Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they just subsequently apply the corresponding download and read functions without storing any object to your disk.
-4. View functions: They don't return any object or file, they just browse the help pages from STF gateway.
-5. Tidy functions. I am still building these functions. They will help you cleaning and preprocessing data for posterior analysis. I will only add fuctions that are stf specific, other tidy functions are available in the [JurisMiner](github.com/courtsbr/JurisMiner) and the  [abjutils](github.com/courtsbr/abjutils) packages.
+- Download functions: They start with the verb download and create file or directories.
+- Read functions: They read data from files downloaded by download functions.
+- Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they subsequently apply the corresponding download and read functions without storing any object to your disk.
+- View functions: They don’t return any object or file, they just browse the help pages from STF gateway.
+- Tidy functions: these functions are still being created. They will help clean and preprocess data for posterior analysis. I will only add fuctions that are STF specific. Other tidy functions are available in the [JurisMiner](github.com/courtsbr/JurisMiner) and the [abjutils](github.com/courtsbr/abjutils) packages.
 
 ## Installation
 

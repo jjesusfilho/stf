@@ -1,7 +1,7 @@
 Package: stf
-Title: Functions to collect and manipulate Brazilian's Supreme
+Title: Provide functions to collect and manipulate Brazilian's Supreme
     Court decisions
-Version: 0.0.0.9201
+Version: 0.0.0.9206
 Authors@R: 
     c(person(given = "Jose",
              family = "de Jesus Filho",
@@ -44,3 +44,6 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+URL: https://jjesusfilho.github.io/stf/
+Remotes:  
+    jjesusfilho/stf

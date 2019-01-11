@@ -4,11 +4,18 @@
 \name{stf-package}
 \alias{stf}
 \alias{stf-package}
-\title{stf: Functions to collect and manipulate Brazilian's Supreme
+\title{stf: Provide functions to collect and manipulate Brazilian's Supreme
     Court decisions}
 \description{
 Retrieves data from Brazilian Supreme Court
     decisions.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://jjesusfilho.github.io/stf/}
+}
+
 }
 \author{
 \strong{Maintainer}: Jose de Jesus Filho \email{jjesus@abj.org.br}
