@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Provide functions to collect and manipulate Brazilian's Supreme
+<title>Provides functions to collect and manipulate Brazilian's Supreme
     Court decisions • stf</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Provide functions to collect and manipulate Brazilian's Supreme
+<script src="pkgdown.js"></script><meta property="og:title" content="Provides functions to collect and manipulate Brazilian's Supreme
     Court decisions">
 <meta property="og:description" content="Retrieves data from Brazilian Supreme Court
     decisions.">
@@ -85,8 +85,8 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install stf from github with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jjesusfilho/stf"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"jjesusfilho/stf"</span>)</a></code></pre></div>
 <p>You have to make sure the packages <a href="https://github.com/ropensci/tesseract">tesseract</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> are installed as well as their dependencies.</p>
 <p>You also have to download the <code>tesseract</code> trained data for Portuguese. You can find directions for Linux, Mac-OS and Windows <a href="https://github.com/tesseract-ocr/tesseract/wiki">here</a></p>
 </div>
@@ -97,32 +97,32 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <h3 class="hasAnchor">
 <a href="#read-metadata" class="anchor"></a>Read metadata</h3>
 <p>Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression “excesso de prazo”. You can execute the following function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="dt">open_search=</span><span class="st">"excesso de prazo"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="dt">open_search=</span><span class="st">"excesso de prazo"</span>)</a></code></pre></div>
 <p>Or simply:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</a></code></pre></div>
 <p>By using “adj2” you are telling the search engine that “prazo” is one word apart from “excesso”.</p>
 <p>If you want to search for monocratic decisions, you can use another function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df&lt;-<span class="kw"><a href="reference/get_stf_mono_metadata.html">get_stf_mono_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">df&lt;-<span class="kw"><a href="reference/get_stf_mono_metadata.html">get_stf_mono_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</a></code></pre></div>
 <p>In order to find all the options, use the help function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">?<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>()</a></code></pre></div>
 <p>Suppose now that you want to read all cases where “Telefônica” is a party. You can add the suffix “.PART.” to the search sentence:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">telefonicaDF&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"telefonica.PART."</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">telefonicaDF&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"telefonica.PART."</span>)</a></code></pre></div>
 <p>If you want to see all the possible suffixes, the function <code>stf_help_view()</code> will load the help page on R viewer pane:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/view_stf_help.html">view_stf_help</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/view_stf_help.html">view_stf_help</a></span>()</a></code></pre></div>
 </div>
 <div id="read-the-full-opinion-text-inteiro-teor" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read-the-full-opinion-text-inteiro-teor" class="anchor"></a>Read the full opinion text (inteiro teor):</h3>
 <p>Once you have imported the metadata, you can use the same data frame to import the full opinion’s text. Beware that opinions published before 2011 and even some of that year are in pdf image, not in text. Those opinions are downloaded, converted to <code>png</code>, and subsequently submmited to OCR in order to be read.</p>
 <p>The limitation is that it takes a considerable amount of time to read the opinion’s text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decisionTelefonica&lt;-<span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(telefonicaDF[<span class="dv">1</span>,]). 
-<span class="co"># Downloads just the first decision from the dataset imported above.</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">decisionTelefonica&lt;-<span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(telefonicaDF[<span class="dv">1</span>,]). </a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># Downloads just the first decision from the dataset imported above.</span></a></code></pre></div>
 </div>
 <div id="use-the-docket-number" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-the-docket-number" class="anchor"></a>Use the docket number</h3>
 <p>If you have the docket number, you can use it to download all information about that lawsuit:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(<span class="dt">action=</span><span class="st">"HC"</span>,<span class="dt">docket_number =</span> <span class="st">"4040"</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(<span class="dt">action=</span><span class="st">"HC"</span>,<span class="dt">docket_number =</span> <span class="st">"4040"</span>)</a></code></pre></div>
 </div>
 <div id="work-with-the-annual-list-of-rulings" class="section level3">
 <h3 class="hasAnchor">
