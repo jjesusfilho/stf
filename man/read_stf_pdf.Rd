@@ -4,13 +4,10 @@
 \alias{read_stf_pdf}
 \title{Reads pdf files}
 \usage{
-read_stf_pdf(file = NULL, plan = "sequential")
+read_stf_pdf(file = NULL)
 }
 \arguments{
 \item{file}{Paths to the pdf files to be read.}
-
-\item{plan}{Defaults to "sequential". Check \code{future::plan} for more
-information.}
 }
 \value{
 a tibble with tree columns: incidente, texto, and doc_id.

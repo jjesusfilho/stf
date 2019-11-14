@@ -4,13 +4,10 @@
 \alias{read_stf_information}
 \title{Reads data from information tab.}
 \usage{
-read_stf_information(path = ".", plan = "sequential")
+read_stf_information(path = ".")
 }
 \arguments{
 \item{path}{where the htmls are.}
-
-\item{plan}{default to "sequential". See \code{future::plan} for
-more options.}
 }
 \value{
 a tibble with data from the information tab.

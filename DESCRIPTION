@@ -17,33 +17,34 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 3.2.0)
 Imports: 
-    assertthat,
-    crul,
-    dplyr,
-    furrr,
-    future,
-    httr,
-    janitor,
-    lubridate,
-    magrittr,
-    pdftools,
-    purrr,
-    readxl,
-    rlang,
-    rvest,
-    stringr,
-    tesseract,
-    tibble,
-    tidyr,
-    unrtf,
-    xml2
+    assertthat (>= 0.2.1),
+    crul (>= 0.8.4),
+    dplyr (>= 0.8.3),
+    furrr (>= 0.1.0),
+    future (>= 1.14.0),
+    httr (>= 1.4.1),
+    janitor (>= 1.2.0),
+    lubridate (>= 1.7.4),
+    magrittr (>= 1.5),
+    pdftools (>= 2.2),
+    purrr (>= 0.3.3),
+    readxl (>= 1.3.1),
+    rlang (>= 0.1.2),
+    rvest (>= 0.3.4),
+    stringr (>= 1.4.0),
+    tesseract (>= 4.1),
+    tibble (>= 2.1.3),
+    tidyr (>= 1.0.0),
+    unrtf (>= 1.3),
+    xml2 (>= 1.2.2)
 Suggests: 
-    covr,
-    testthat
+    covr (>= 3.3.2),
+    testthat (>= 2.3.0),
+    roxygen2 (>= 6.1.1)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 URL: https://jjesusfilho.github.io/stf/
-Remotes:  
+Remotes: 
     jjesusfilho/stf

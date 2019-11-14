@@ -2,6 +2,8 @@
 #'
 #' @param class This is what in Brazil is called classe processual
 #' @param docket_number Number of the lawsuit
+#' @param dir directory under which all subdirectories will
+#'     be placed.
 #'
 #' @return htmls in nine folders corresponding to each one of the stf webpage tabs.
 #' @export
@@ -11,7 +13,8 @@
 #' download_stf_dockets(class = "HC", docket_number = "4050")
 #' }
 download_stf_dockets <- function(class = NULL,
-                                 docket_number = NULL) {
+                                 docket_number = NULL,
+                                 dir = ".") {
   if (is.null(class) | is.null(docket_number)) {
     stop("You must provide both the class and the docket_number")
   }
@@ -38,7 +41,8 @@ download_stf_dockets <- function(class = NULL,
       "decisoes",
       "recursos",
       "pautas"
-    )
+    ) %>%
+    file.path(dir,.)
 
   purrr::walk(diretorios, dir.create)
 
@@ -49,8 +53,9 @@ download_stf_dockets <- function(class = NULL,
   incidente <- purrr::map_chr(detalhes, ~ .x$url) %>%
     stringr::str_extract("\\d+")
 
-  dir.create("detalhes")
-  arquivos <- paste0("detalhes", format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
+  dir.create(file.path(dir,"detalhes"))
+
+  arquivos <- paste0(dir,"/detalhes", format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
 
 
   purrr::walk2(detalhes, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))

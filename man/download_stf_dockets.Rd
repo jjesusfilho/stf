@@ -4,12 +4,15 @@
 \alias{download_stf_dockets}
 \title{Downloads Brazilian Supreme Court lawsuits based on the proceding class and the docket number.}
 \usage{
-download_stf_dockets(class = NULL, docket_number = NULL)
+download_stf_dockets(class = NULL, docket_number = NULL, dir = ".")
 }
 \arguments{
 \item{class}{This is what in Brazil is called classe processual}
 
 \item{docket_number}{Number of the lawsuit}
+
+\item{dir}{directory under which all subdirectories will
+be placed.}
 }
 \value{
 htmls in nine folders corresponding to each one of the stf webpage tabs.

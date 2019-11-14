@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_stf_rtf.R
 \name{download_stf_rtf}
 \alias{download_stf_rtf}
-\title{Downloads rtf documents based on docs_url column from docket sheet data.}
+\title{Downloads rtf documents based on doc_url column from docket sheet data.}
 \usage{
 download_stf_rtf(sheet, path = ".")
 }
@@ -15,7 +15,7 @@ download_stf_rtf(sheet, path = ".")
 files with rtf texts.
 }
 \description{
-Downloads rtf documents based on docs_url column from docket sheet data.
+Downloads rtf documents based on doc_url column from docket sheet data.
 }
 \details{
 You don't need to inform which urls are rtfs.

@@ -14,15 +14,14 @@
 #' \dontrun{
 #' detalhes <- read_stf_details(path = ".", plan = "multiprocess")
 #' }
-#' 
+#'
 read_stf_details <- function(path = ".", plan = "sequential") {
   files <- list.files(path, pattern = ".html", full.names = TRUE)
 
   incidentes <- stringr::str_extract(files, "\\d+(?=\\.html)")
 
-  future::plan(plan)
 
-  furrr::future_map2_dfr(files, incidentes, purrr::possibly(~ {
+  purrr::map2_dfr(files, incidentes, purrr::possibly(~ {
     content <- xml2::read_html(.x)
 
     meio <- content %>%
@@ -58,5 +57,5 @@ read_stf_details <- function(path = ".", plan = "sequential") {
       relator_atual
     ) %>%
       tidyr::separate(classe_numero, c("classe", "numero"), " ")
-  }, NULL), .progress = TRUE)
+  }, NULL))
 }
