@@ -10,7 +10,7 @@
 #' \dontrun{
 #' partes <- read_stf_parties(path = ".", plan = "multiprocess")
 #' }
-#' 
+#'
 read_stf_parties <- function(path = ".", plan = "sequential") {
   arquivos <- list.files(path, pattern = ".html", full.names = TRUE)
 

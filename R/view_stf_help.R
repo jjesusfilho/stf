@@ -6,7 +6,7 @@
 #' \dontrun{
 #' view_stf_help()
 #' }
-#' 
+#'
 #' @export
 view_stf_help <- function() {
   url <- "http://www.stf.jus.br/portal/cms/verTexto.asp?servico=jurisprudenciaPesquisaGeral&pagina=ajudaPesquisaJurisprudencia&popup=S"

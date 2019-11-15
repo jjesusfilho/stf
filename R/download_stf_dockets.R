@@ -42,7 +42,7 @@ download_stf_dockets <- function(class = NULL,
       "recursos",
       "pautas"
     ) %>%
-    file.path(dir,.)
+    file.path(dir, .)
 
   purrr::walk(diretorios, dir.create)
 
@@ -53,9 +53,9 @@ download_stf_dockets <- function(class = NULL,
   incidente <- purrr::map_chr(detalhes, ~ .x$url) %>%
     stringr::str_extract("\\d+")
 
-  dir.create(file.path(dir,"detalhes"))
+  dir.create(file.path(dir, "detalhes"))
 
-  arquivos <- paste0(dir,"/detalhes", format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
+  arquivos <- paste0(dir, "/detalhes", format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
 
 
   purrr::walk2(detalhes, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))

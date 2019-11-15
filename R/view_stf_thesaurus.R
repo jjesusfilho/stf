@@ -6,7 +6,7 @@
 #' \dontrun{
 #' view_stf_thesaurus()
 #' }
-#' 
+#'
 #' @export
 view_stf_thesaurus <- function() {
   url <- "http://www.stf.jus.br/portal/jurisprudencia/pesquisarVocabularioJuridico.asp"

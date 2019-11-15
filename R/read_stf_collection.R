@@ -31,7 +31,9 @@ read_stf_collection <- function(dir = ".", classes = NULL, years = NULL, plan = 
 
     n <- t(df[1, ])
 
-    df %>% purrr::set_names(n) %>% tail(-1)
+    df %>%
+      purrr::set_names(n) %>%
+      tail(-1)
   }, .id = "planilha")
 
   decisoes <- decisoes %>%

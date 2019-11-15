@@ -9,8 +9,6 @@
 #' read_stf_pdf(file = "")
 #' }
 read_stf_pdf <- function(file = NULL) {
-
-
   purrr::map_dfr(file, purrr::possibly(~ {
     texto <- pdftools::pdf_text(.x) %>%
       paste0(collapse = "")

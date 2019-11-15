@@ -64,7 +64,7 @@ read_stf_docket_sheet <- function(path = ".", plan = "sequential") {
 
     doc_id <- stringr::str_extract(doc_url, "\\d{3,}")
 
-    tibble::tibble(incidente = .y, data_andamento, titulo,invalido, orgao_julgador, descricao, doc, doc_url, doc_id) %>%
+    tibble::tibble(incidente = .y, data_andamento, titulo, invalido, orgao_julgador, descricao, doc, doc_url, doc_id) %>%
       tidyr::unnest() %>%
       dplyr::distinct()
   }, NULL), .progress = TRUE)
