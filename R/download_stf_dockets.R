@@ -36,11 +36,11 @@ download_stf_dockets <- function(class = NULL,
       "partes",
       "andamentos",
       "informacoes",
-      "deslocamentos",
-      "peticoes",
-      "decisoes",
-      "recursos",
-      "pautas"
+     # "deslocamentos",
+      #"peticoes",
+      #"decisoes",
+      #"recursos",
+      #"pautas"
     ) %>%
     file.path(dir, .)
 
@@ -73,27 +73,27 @@ download_stf_dockets <- function(class = NULL,
     url_informacoes = sprintf(
       "http://portal.stf.jus.br/processos/abaInformacoes.asp?incidente=%s",
       incidente
-    ),
-    url_deslocamentos = sprintf(
-      "http://portal.stf.jus.br/processos/abaDeslocamentos.asp?incidente=%s",
-      incidente
-    ),
-    url_peticoes = sprintf(
-      "http://portal.stf.jus.br/processos/abaPeticoes.asp?incidente=%s",
-      incidente
-    ),
-    url_decisoes = sprintf(
-      "http://portal.stf.jus.br/processos/abaDecisoes.asp?incidente=%s",
-      incidente
-    ),
-    url_recursos = sprintf(
-      "http://portal.stf.jus.br/processos/abaRecursos.asp?incidente=%s",
-      incidente
-    ),
-    url_pautas = sprintf(
-      "http://portal.stf.jus.br/processos/abaPautas.asp?incidente=%s",
-      incidente
     )
+    # url_deslocamentos = sprintf(
+    #   "http://portal.stf.jus.br/processos/abaDeslocamentos.asp?incidente=%s",
+    #   incidente
+    # ),
+    # url_peticoes = sprintf(
+    #   "http://portal.stf.jus.br/processos/abaPeticoes.asp?incidente=%s",
+    #   incidente
+    # ),
+    # url_decisoes = sprintf(
+    #   "http://portal.stf.jus.br/processos/abaDecisoes.asp?incidente=%s",
+    #   incidente
+    # ),
+    # url_recursos = sprintf(
+    #   "http://portal.stf.jus.br/processos/abaRecursos.asp?incidente=%s",
+    #   incidente
+    # ),
+    # url_pautas = sprintf(
+    #   "http://portal.stf.jus.br/processos/abaPautas.asp?incidente=%s",
+    #   incidente
+    # )
   )
 
 
