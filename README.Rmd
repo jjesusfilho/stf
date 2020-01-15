@@ -114,6 +114,13 @@ download_stf_dockets(action="HC",docket_number = "4040")
 
 Another way to work with decisions ruled by the Supreme Court is accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases. You can check all functions at the reference tab, but pretty soon I will add an vignette showing how to go through a case.
 
+We have provided a dataset with annual rullings' collection from 2010 to 2019 in the package. Thus for these years, you don't need to download the spreadsheet, just load the data:
+
+```r
+data(collection_2010_2019)
+```
+
+
 ### Vocabulary correspondence
 
 The table below shows a rough translation  of the Brazilian Supreme Court's opinion's elements to US English:

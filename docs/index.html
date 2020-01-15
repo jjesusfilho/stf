@@ -63,26 +63,7 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<ul>
-<li>
-<a href="#stf">STF</a>
-<ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#installation">Installation</a></li>
-<li>
-<a href="#usage-for-stf">Usage for STF</a>
-<ul>
-<li><a href="#read-metadata">Read metadata</a></li>
-<li><a href="#read-the-full-opinion-text-inteiro-teor">Read the full opinion text (inteiro teor):</a></li>
-<li><a href="#use-the-docket-number">Use the docket number</a></li>
-<li><a href="#work-with-the-annual-list-of-rulings">Work with the annual list of rulings</a></li>
-<li><a href="#vocabulary-correspondence">Vocabulary correspondence</a></li>
-</ul>
-</li>
-<li><a href="#caveats">Caveats</a></li>
-</ul>
-</li>
-</ul>
+
 <div id="stf" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#stf" class="anchor"></a>STF</h1></div>
@@ -146,6 +127,8 @@
 <h3 class="hasAnchor">
 <a href="#work-with-the-annual-list-of-rulings" class="anchor"></a>Work with the annual list of rulings</h3>
 <p>Another way to work with decisions ruled by the Supreme Court is accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases. You can check all functions at the reference tab, but pretty soon I will add an vignette showing how to go through a case.</p>
+<p>We have provided a dataset with annual rullings’ collection from 2010 to 2019 in the package. Thus for these years, you don’t need to download the spreadsheet, just load the data:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(collection_<span class="dv">2010</span>_<span class="dv">2019</span>)</a></code></pre></div>
 </div>
 <div id="vocabulary-correspondence" class="section level3">
 <h3 class="hasAnchor">
