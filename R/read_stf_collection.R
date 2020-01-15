@@ -3,7 +3,6 @@
 #' @param dir directory where to find the xlsx files.
 #' @param classes proceding (classe)
 #' @param years numeric vector of years to read.
-#' @param plan default to "sequential". Check future::plan for datails.
 #' @importFrom rlang .data
 #' @return a tibble with all columns read
 #' @export
@@ -12,11 +11,10 @@
 #' \dontrun{
 #' read_stf_collection(classes = NULL, years = 2017:2018)
 #' }
-read_stf_collection <- function(dir = ".", classes = NULL, years = NULL, plan = "sequential") {
+read_stf_collection <- function(dir = ".", classes = NULL, years = NULL) {
   if (is.null(years)) {
     stop("The argument years is required.")
   }
-  future::plan(plan)
   anos <- paste0(years, collapse = "|") %>% paste0(
     "(", .,
     ")"

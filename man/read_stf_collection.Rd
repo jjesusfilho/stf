@@ -4,12 +4,7 @@
 \alias{read_stf_collection}
 \title{Read STF collection}
 \usage{
-read_stf_collection(
-  dir = ".",
-  classes = NULL,
-  years = NULL,
-  plan = "sequential"
-)
+read_stf_collection(dir = ".", classes = NULL, years = NULL)
 }
 \arguments{
 \item{dir}{directory where to find the xlsx files.}
@@ -17,8 +12,6 @@ read_stf_collection(
 \item{classes}{proceding (classe)}
 
 \item{years}{numeric vector of years to read.}
-
-\item{plan}{default to "sequential". Check future::plan for datails.}
 }
 \value{
 a tibble with all columns read

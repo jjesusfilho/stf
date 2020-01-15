@@ -1,0 +1,24 @@
+#' @title collection_2010_2019
+#' @description STF collection from 2010 to 2019
+#' @format dataframe with 735360 obs, and 19 columns:
+#' \describe{
+#'   \item{\code{hyperling}}{hyperling to the docket}
+#'   \item{\code{incidente}}{docker identification number}
+#'   \item{\code{id}}{serial number}
+#'   \item{\code{planilha}}{sheet number}
+#'   \item{\code{classe}}{petition type}
+#'   \item{\code{id}}{docket number}
+#'   \item{\code{data_autuacao}}{argued date}
+#'   \item{\code{relator atual}}{reporter}
+#'   \item{\code{nome_ministro_a}}{justice's name}
+#'   \item{\code{classificacao_stf}}{STF classification}
+#'   \item{\code{tipo_decisao}}{decision type}
+#'   \item{\code{orgao_julgador}}{judicial panel}
+#'   \item{\code{data_andamento}}{action date}
+#'   \item{\code{preferencia_criminal}}{criminal case urgency}
+#'   \item{\code{assuntos}}{matter}
+#'   \item{\code{qtd_ocorrencias}}{number of actions}
+#'   \item{\code{ano_andamento}}{action year}
+#' }
+#' @source \url{https://stf.jus.br/}
+"collection_2010_2019"
