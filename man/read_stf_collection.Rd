@@ -4,8 +4,12 @@
 \alias{read_stf_collection}
 \title{Read STF collection}
 \usage{
-read_stf_collection(dir = ".", classes = NULL, years = NULL,
-  plan = "sequential")
+read_stf_collection(
+  dir = ".",
+  classes = NULL,
+  years = NULL,
+  plan = "sequential"
+)
 }
 \arguments{
 \item{dir}{directory where to find the xlsx files.}

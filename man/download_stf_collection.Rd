@@ -4,8 +4,7 @@
 \alias{download_stf_collection}
 \title{Downloads Brazilian Supreme Courts decisions' collection}
 \usage{
-download_stf_collection(decision_type = NULL, years = NULL,
-  dir = ".")
+download_stf_collection(decision_type = NULL, years = NULL, dir = ".")
 }
 \arguments{
 \item{decision_type}{either "monocraticas", "presidente" or "colegiadas"}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_stf_precedent_sheet.R
 \name{get_stf_precedent_sheet}
 \alias{get_stf_precedent_sheet}
-\title{Downloads STF precedent sheet}
+\title{Gets STF precedent sheet}
 \usage{
 get_stf_precedent_sheet(url)
 }
@@ -13,7 +13,7 @@ get_stf_precedent_sheet(url)
 tibble with the docket sheet from precedent search
 }
 \description{
-Downloads STF precedent sheet
+Gets STF precedent sheet
 }
 \keyword{andamento}
 \keyword{jurisprudência,}

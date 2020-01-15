@@ -3,7 +3,6 @@
 \docType{package}
 \name{stf}
 \alias{stf}
-\alias{stf-package}
 \title{\code{stf} package}
 \description{
 Downloads and organizes Brazilian Supreme Court's Decisions
