@@ -12,10 +12,12 @@
 read_stf_information <- function(path = ".") {
   files <- list.files(path, full.names = TRUE)
 
-  incidentes <- stringr::str_extract(files, "\\d+(?=.html)")
 
 
-  informacoes <- purrr::map2_dfr(files, incidentes, purrr::possibly(~ {
+  informacoes <- purrr::map_dfr(files,  purrr::possibly(purrrogress::with_progress(~{
+
+    incidente <- stringr::str_extract(.x, "\\d+(?=.html)")
+
     conteudo <- xml2::read_html(.x, encoding = "UTF-8")
 
 
@@ -67,7 +69,7 @@ read_stf_information <- function(path = ".") {
 
 
     s <- cbind(
-      incidente = .y,
+      incidente = incidente,
       assunto1 = assunto1,
       assunto2 = assunto2,
       assunto3 = assunto3,
@@ -78,7 +80,7 @@ read_stf_information <- function(path = ".") {
       procedencia = procedencia
     ) %>%
       tibble::as_tibble()
-  }, NULL), .progress = TRUE) %>%
+  }), NULL)) %>%
     dplyr::select(
       .data$incidente,
       .data$assunto1,

@@ -4,13 +4,10 @@
 \alias{read_stf_rtf}
 \title{Reads rtf files}
 \usage{
-read_stf_rtf(file = NULL, plan = "sequential")
+read_stf_rtf(files = NULL)
 }
 \arguments{
-\item{file}{of paths to the rtf files to be read.}
-
-\item{plan}{Defaults to "sequential". Check \code{future::plan}
-for datails.}
+\item{files}{of paths to the rtf files to be read.}
 }
 \value{
 a tibble with tree columns: incidente, texto, and doc_id.
@@ -20,6 +17,6 @@ Reads rtf files
 }
 \examples{
 \dontrun{
-read_stf_rtf(file = "")
+read_stf_rtf(files = "")
 }
 }

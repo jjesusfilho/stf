@@ -4,13 +4,10 @@
 \alias{read_stf_parties}
 \title{Reads docket parties names.}
 \usage{
-read_stf_parties(path = ".", plan = "sequential")
+read_stf_parties(path = ".")
 }
 \arguments{
 \item{path}{where to find the htmls.}
-
-\item{plan}{default to "sequential". See \code{future::plan}
-for all options.}
 }
 \value{
 Tibble with docket number, party name, and party class.

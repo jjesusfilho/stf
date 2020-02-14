@@ -2,6 +2,7 @@
 #'
 #' @param class This is what in Brazil is called classe processual
 #' @param docket_number Number of the lawsuit
+#' @param abas c("partes","andamentos","informacoes","detalhes")
 #' @param dir directory under which all subdirectories will
 #'     be placed.
 #'
@@ -14,9 +15,15 @@
 #' }
 download_stf_dockets <- function(class = NULL,
                                  docket_number = NULL,
+                                 abas = c("detalhes","partes","andamentos","informacoes"),
                                  dir = ".") {
   if (is.null(class) | is.null(docket_number)) {
     stop("You must provide both the class and the docket_number")
+  }
+
+  if (abas[[1]]!="detalhes"){
+
+    stop("The first aba must be 'detalhes'")
   }
 
   ##
@@ -32,72 +39,36 @@ download_stf_dockets <- function(class = NULL,
 
 
   diretorios <-
-    c(
-      "partes",
-      "andamentos",
-      "informacoes",
-     # "deslocamentos",
-      #"peticoes",
-      #"decisoes",
-      #"recursos",
-      #"pautas"
-    ) %>%
+    abas %>%
     file.path(dir, .)
 
   purrr::walk(diretorios, dir.create)
 
-  cd <- crul::Async$new(urls <- urls)
+  incidente<-  purrr::map(urls,~{
 
-  detalhes <- cd$get()
+    resposta <-  httr::RETRY("GET",.x)
+    incidente <- resposta$url %>%
+      stringr::str_extract("\\d+")
+    arquivo <- paste0(dir, "/detalhes", format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
+    writeBin(resposta$content,arquivo)
+    incidente
+  }) %>%
+    unlist()
 
-  incidente <- purrr::map_chr(detalhes, ~ .x$url) %>%
-    stringr::str_extract("\\d+")
-
-  dir.create(file.path(dir, "detalhes"))
-
-  arquivos <- paste0(dir, "/detalhes", format(Sys.Date(), "/date_%Y_%m_%d_"), incidente, ".html")
-
-
-  purrr::walk2(detalhes, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))
-
-
-  bases <- list(
-    url_partes = sprintf(
-      "http://portal.stf.jus.br/processos/abaPartes.asp?incidente=%s",
-      incidente
-    ),
-    url_andamentos = sprintf(
-      "http://portal.stf.jus.br/processos/abaAndamentos.asp?incidente=%s",
-      incidente
-    ),
-    url_informacoes = sprintf(
-      "http://portal.stf.jus.br/processos/abaInformacoes.asp?incidente=%s",
-      incidente
-    )
-    # url_deslocamentos = sprintf(
-    #   "http://portal.stf.jus.br/processos/abaDeslocamentos.asp?incidente=%s",
-    #   incidente
-    # ),
-    # url_peticoes = sprintf(
-    #   "http://portal.stf.jus.br/processos/abaPeticoes.asp?incidente=%s",
-    #   incidente
-    # ),
-    # url_decisoes = sprintf(
-    #   "http://portal.stf.jus.br/processos/abaDecisoes.asp?incidente=%s",
-    #   incidente
-    # ),
-    # url_recursos = sprintf(
-    #   "http://portal.stf.jus.br/processos/abaRecursos.asp?incidente=%s",
-    #   incidente
-    # ),
-    # url_pautas = sprintf(
-    #   "http://portal.stf.jus.br/processos/abaPautas.asp?incidente=%s",
-    #   incidente
-    # )
-  )
+  #purrr::walk2(detalhes, arquivos, purrr::possibly(~ writeBin(.x$content, .y), NULL))
 
 
-  purrr::walk2(bases, diretorios, purrr::possibly(~ {
+  bases<-purrr::map(abas[-1],~{
+
+    sprintf("http://portal.stf.jus.br/processos/aba%s.asp?incidente=%s",stringr::str_to_title(.x),incidente)
+  }) %>%
+    purrr::set_names(paste0("url_",abas[-1]))
+
+
+
+
+  purrr::walk2(bases, diretorios[-1], purrr::possibly(~ {
+
     cd <- crul::Async$new(urls <- .x)
 
     res <- cd$get()

@@ -109,7 +109,12 @@
     <p>Downloads Brazilian Supreme Court lawsuits based on the proceding class and the docket number.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>download_stf_dockets</span>(<span class='kw'>class</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>docket_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>download_stf_dockets</span>(
+  <span class='kw'>class</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>docket_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>abas</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"detalhes"</span>, <span class='st'>"partes"</span>, <span class='st'>"andamentos"</span>, <span class='st'>"informacoes"</span>),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"."</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -121,6 +126,10 @@
     <tr>
       <th>docket_number</th>
       <td><p>Number of the lawsuit</p></td>
+    </tr>
+    <tr>
+      <th>abas</th>
+      <td><p>c("partes","andamentos","informacoes","detalhes")</p></td>
     </tr>
     <tr>
       <th>dir</th>

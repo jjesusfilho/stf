@@ -29,7 +29,7 @@ stf_url <- function(x, y, w) {
 }
 # End of the function
 
-# This functions encapsulates the previous function in the purrr::possibly function for the control
+# This functions encapsulates the previous function in the purrr::possibly function to control
 # errors and the absense of results in the specified database. So this the actual function
 # that's going to be used.
 
@@ -87,7 +87,7 @@ stf_parties_names <- function(z) {
 #' @return Dataframe with the metadata
 #'
 #' @export
-get_stf_precedent_metadata <- function(open_search, dt_start, dt_end, parties_names = TRUE) {
+get_stf_precedent_metadata <- function(open_search, dt_start="", dt_end="", parties_names = TRUE) {
 
 
 
@@ -99,7 +99,7 @@ get_stf_precedent_metadata <- function(open_search, dt_start, dt_end, parties_na
 
   ## This whole chunck collects the content of every ten precedents loaded by the urls
 
-  urls %>% purrr::map_dfr(purrr::possibly(~ {
+  urls %>% purrr::map(purrr::possibly(~ {
 
     ## Grabs the parsed page.
     principal <- .x %>%
@@ -183,25 +183,12 @@ get_stf_precedent_metadata <- function(open_search, dt_start, dt_end, parties_na
 
     ## This chunk will get all parties of the lawsuit and their respective descriptions.
     partes <- principal %>%
-      xml2::xml_find_all("//p[strong[contains(.,'Parte')]]/following-sibling::pre[1]") %>%
-      xml2::xml_text() %>%
-      stringr::str_extract_all("\\w.*\\:.*(\r\n)*\\w*?") %>%
-      purrr::modify_depth(1, ~ {
-        .x %>%
-          setNames(stringr::str_extract(., ".*(?=\\:)"))
-      })
-
-    partes <- dplyr::bind_rows(!!!partes)
+      xml2::xml_find_all("//ul[@class='abas']/following-sibling::div")
 
     partes <- partes %>%
-      purrr::map_dfr(~ stringr::str_replace(.x, ".*?(\\:\\s)", ""))
+      map(~xml2::xml_find_first(.x,"p[strong[contains(.,'Parte')]]/following-sibling::pre[1]") %>%
+            xml2::xml_text())
 
-    partes <- partes %>%
-      dplyr::select(-dplyr::matches(stringr::regex("rela|red.*", ignore_case = TRUE)))
-
-    if (parties_names) {
-      names(partes) <- stf_parties_names(z = names(partes))
-    }
 
     ementa <- principal %>%
       xml2::xml_find_all("//div[contains(@style,'line-height: 150%;text-align: justify;')]") %>%
@@ -251,13 +238,11 @@ get_stf_precedent_metadata <- function(open_search, dt_start, dt_end, parties_na
       stringr::str_c("http://www.stf.jus.br/portal/processo/verProcessoAndamento.asp?", .)
 
     ## The code below creates a data frame with all the metadata grabbed above.
-    data.frame(processo, origem, classe, relator, relator_acordao,
+    tibble::tibble(processo, origem, classe, relator, relator_acordao,
       data_julgamento, data_publicacao, orgao_julgador,
       eletronico, ementa, voto, decisao, url_inteiro_teor,
-      url_andamento, partes,
-      stringsAsFactors = FALSE
-    )
-  }, data.frame(processo = NA_character_, origem = NA_character_, classe = NA_character_, relator = NA_character_, relator_acordao = NA_character_, data_julgamento = NA_character_, data_publicacao = NA_character_, orgao_julgador = NA_character_, eletronico = NA, ementa = NA_character_, voto = NA_character_, decisao = NA_character_, url_inteiro_teor = NA_character_, url_andamento = NA_character_, partes = NA_character_),
+      url_andamento, partes)
+  }, tibble::tibble(processo = NA_character_, origem = NA_character_, classe = NA_character_, relator = NA_character_, relator_acordao = NA_character_, data_julgamento = NA_character_, data_publicacao = NA_character_, orgao_julgador = NA_character_, eletronico = NA, ementa = NA_character_, voto = NA_character_, decisao = NA_character_, url_inteiro_teor = NA_character_, url_andamento = NA_character_, partes = NA_character_),
   quiet = FALSE
   ))
 }

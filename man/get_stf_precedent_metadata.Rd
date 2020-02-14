@@ -4,7 +4,12 @@
 \alias{get_stf_precedent_metadata}
 \title{Returns metadada from Brazilian Supreme Court precedents}
 \usage{
-get_stf_precedent_metadata(open_search, dt_start, dt_end, parties_names = TRUE)
+get_stf_precedent_metadata(
+  open_search,
+  dt_start = "",
+  dt_end = "",
+  parties_names = TRUE
+)
 }
 \arguments{
 \item{open_search}{Words to be searched}

@@ -1,8 +1,6 @@
 #' Reads docket parties names.
 #'
 #' @param path where to find the htmls.
-#' @param plan default to "sequential". See \code{future::plan}
-#'     for all options.
 #' @return Tibble with docket number, party name, and party class.
 #' @export
 #'
@@ -11,10 +9,9 @@
 #' partes <- read_stf_parties(path = ".", plan = "multiprocess")
 #' }
 #'
-read_stf_parties <- function(path = ".", plan = "sequential") {
+read_stf_parties <- function(path = ".") {
   arquivos <- list.files(path, pattern = ".html", full.names = TRUE)
 
-  processos <- stringr::str_extract(arquivos, "\\d+(?=\\.html)")
 
   nomes <- tibble::tibble(
     partes = c("RECLTE", "ADV", "RECLDO", "INTDO", "PROC", "BENEF"),
@@ -23,9 +20,12 @@ read_stf_parties <- function(path = ".", plan = "sequential") {
   )
 
 
-  future::plan(plan)
 
-  partes <- furrr::future_map2_dfr(arquivos, processos, purrr::possibly(~ {
+  partes <- purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~ {
+
+    incidente <- stringr::str_extract(arquivos, "\\d+(?=\\.html)")
+
+
     conteudo <- xml2::read_html(.x)
 
     coluna <- xml2::xml_find_all(conteudo, "//div[@class='detalhe-parte']") %>%
@@ -41,6 +41,6 @@ read_stf_parties <- function(path = ".", plan = "sequential") {
       iconv("UTF-8", "latin1//TRANSLIT") %>%
       stringr::str_remove("&nbsp")
 
-    tibble::tibble(incidente = .y, parte = coluna, parte_nome = parte_nome)
-  }, NULL))
+    tibble::tibble(incidente = incidente, parte = coluna, parte_nome = parte_nome)
+  }), NULL))
 }
