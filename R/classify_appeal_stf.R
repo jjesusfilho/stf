@@ -1,6 +1,6 @@
 classify_appeal_stf <- function (x) 
 {
-  x <- x %>% stringr::str_sub(-200) %>% tolower() %>% stringi::stri_trans_general("latin-ascii")
+  x <- x %>% stringr::str_sub(-500) %>% tolower() %>% stringi::stri_trans_general("latin-ascii")
   dplyr::case_when(stringi::stri_detect_regex(x, "(?=.*\\bderam\\b)(?=.*\\bneg[oa]\\w*\\b)") ~ 
                      "duvida", stringi::stri_detect_regex(x, "(?=.*\\bderam\\b)(?=.*\\bprejudicado\\b)") ~ 
                      "duvida", stringi::stri_detect_regex(x, "(?=.*\\bneg[oa]\\w*\\b)(?=.*\\bprejudicado\\b)") ~ 
@@ -22,6 +22,10 @@ classify_appeal_stf <- function (x)
                      "anulado",
                    stringi::stri_detect_regex(x, "(rejeit)") ~ 
                      "embargos rejeitados",
+                   stringi::stri_detect_regex(x, "\\bprocedente") ~ 
+                     "procedente",
+                   stringi::stri_detect_regex(x, "improcedente") ~ 
+                     "improcedente",
                    stringi::stri_detect_regex(x, "diligencia") ~ 
                      "conversão em diligência", stringi::stri_detect_regex(x, 
                                                                            "(prej|extin)") ~ "prejudicado/extinto", TRUE ~ NA_character_)
