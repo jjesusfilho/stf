@@ -37,7 +37,8 @@ Imports:
     tidyr (>= 1.0.0),
     unrtf (>= 1.3),
     xml2 (>= 1.2.2),
-    purrrogress
+    purrrogress,
+    stringi
 Suggests: 
     covr (>= 3.3.2),
     testthat (>= 2.3.0),
