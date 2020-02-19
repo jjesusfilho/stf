@@ -99,7 +99,7 @@ get_stf_precedent_metadata <- function(open_search, dt_start="", dt_end="", part
 
   ## This whole chunck collects the content of every ten precedents loaded by the urls
 
-  urls %>% purrr::map(purrr::possibly(~ {
+  urls %>% purrr::map_dfr(purrr::possibly(~ {
 
     ## Grabs the parsed page.
     principal <- .x %>%
@@ -126,14 +126,14 @@ get_stf_precedent_metadata <- function(open_search, dt_start="", dt_end="", part
 
 
     classe <- recurso %>%
-      purrr::map_chr(~ stringr::str_trim(.x[[6]]))
+      purrr::map_chr(~ stringr::str_trim(.x[stringr::str_which(.x,'(?i)relator')-1]))
 
 
 
 
     relator <- recurso %>%
       purrr::map_chr(~ {
-        .x[[7]] %>%
+        stringr::str_subset(.x,"(?i)relator") %>%
           stringr::str_extract("(?<=Relator\\(a\\)\\:).*?(?=Relator|Julgamento)") %>%
           stringr::str_extract("(?<=Min\\.\\s).*")
       })
@@ -142,7 +142,7 @@ get_stf_precedent_metadata <- function(open_search, dt_start="", dt_end="", part
 
     relator_acordao <- recurso %>%
       purrr::map_chr(~ {
-        .x[[7]] %>%
+        stringr::str_subset(.x,"(?i)relator") %>%
           stringr::str_extract("(?<=Relator\\(a\\)\\sp\\/\\sAc\u00F3rd\u00E3o\\:).*(?=Julgamento)") %>%
           stringr::str_extract("(?<=Min\\.\\s).*")
       })
@@ -153,7 +153,7 @@ get_stf_precedent_metadata <- function(open_search, dt_start="", dt_end="", part
 
     data_julgamento <- recurso %>%
       purrr::map_chr(~ {
-        .x[[7]] %>%
+        stringr::str_subset(.x,"(?i)relator") %>%
           stringr::str_extract("\\d{2}\\/\\d{2}\\/\\d{4}")
       })
 
@@ -161,7 +161,7 @@ get_stf_precedent_metadata <- function(open_search, dt_start="", dt_end="", part
 
     orgao_julgador <- recurso %>%
       purrr::map_chr(~ {
-        .x[[7]] %>%
+        stringr::str_subset(.x,"(?i)relator") %>%
           stringr::str_extract("(?<=.rg.o Julgador\\:).*")
       })
 
