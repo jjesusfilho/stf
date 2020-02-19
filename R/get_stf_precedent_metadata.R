@@ -186,7 +186,7 @@ get_stf_precedent_metadata <- function(open_search, dt_start="", dt_end="", part
       xml2::xml_find_all("//ul[@class='abas']/following-sibling::div")
 
     partes <- partes %>%
-      map(~xml2::xml_find_first(.x,"p[strong[contains(.,'Parte')]]/following-sibling::pre[1]") %>%
+      purrr::map(~xml2::xml_find_first(.x,"p[strong[contains(.,'Parte')]]/following-sibling::pre[1]") %>%
             xml2::xml_text())
 
 
