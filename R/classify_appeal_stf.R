@@ -8,7 +8,9 @@
 classify_appeal_stf <- function (x)
 {
   x <- x  %>% tolower() %>% stringi::stri_trans_general("latin-ascii") %>%
-    stringi::stri_replace_all_regex("vencidos?\\X+","")
+    stringi::stri_replace_all_regex("vencidos?\\X{60}","")
+
+
   dplyr::case_when(stringi::stri_detect_regex(x, "(?=.*\\bderam\\b)(?=.*\\bneg[oa]\\w*\\b)") ~
                      "duvida", stringi::stri_detect_regex(x, "(?=.*\\bderam\\b)(?=.*\\bprejudicado\\b)") ~
                      "duvida", stringi::stri_detect_regex(x, "(?=.*\\bneg[oa]\\w*\\b)(?=.*\\bprejudicado\\b)") ~
@@ -18,8 +20,8 @@ classify_appeal_stf <- function (x)
                      "não conhecido", stringi::stri_detect_regex(x, "desconh\\w+") ~
                      "desconhecido", stringi::stri_detect_regex(x, "nao\\s+conhec\\w+") ~
                      "desconhecido", stringi::stri_detect_regex(x, "(desprov\\w+|improv\\w+)") ~
-                     "improvido", stringi::stri_detect_regex(x, "(nao|nega\\w+)\\s+provi\\X*") ~
-                     "improvido", stringi::stri_detect_regex(x, "prove\\w+") ~
+                     "improvido", stringi::stri_detect_regex(x, "(nao|nega\\w+|negou|negado|negar)\\s+provi\\X*") ~
+                     "improvido", stringi::stri_detect_regex(x, "provi\\w+") ~
                      "provido", stringi::stri_detect_regex(x, "mantiveram") ~
                      "improvido", stringi::stri_detect_regex(x, "acolh\\w+") ~
                      "provido", stringi::stri_detect_regex(x, "(deu|deram|da\\-*\\s*se|dando\\-*(se)*|comporta|\\bdou\\b|confere\\-se|se\\s*\\-*da|merece)") ~
@@ -34,6 +36,18 @@ classify_appeal_stf <- function (x)
                      "procedente",
                    stringi::stri_detect_regex(x, "improcedente") ~
                      "improcedente",
+                   stringi::stri_detect_regex(x, "(improvimento|improvido)") ~
+                     "improvido",
+                   stringi::stri_detect_regex(x, "(\\bprovimento|\\bprovido)") ~
+                     "provido",
+                   stringi::stri_detect_regex(x, "(indefiro|indeferido|indeferiu|indefere)") ~
+                     "indeferido",
+                   stringi::stri_detect_regex(x, "(\\bdeferido|\\bdefiro|\\bdeferiu|\\bdefere)") ~
+                     "deferido",
+                   stringi::stri_detect_regex(x, "rejeito os embargos") ~
+                     "embargos rejeitados",
+                   stringi::stri_detect_regex(x, "acolheu os embargos") ~
+                     "embargos acolhidos",
                    stringi::stri_detect_regex(x,"(?i)extin..o") ~ "extinto",
                    stringi::stri_detect_regex(x, "diligencia") ~
                      "conversão em diligência",
