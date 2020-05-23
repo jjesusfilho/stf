@@ -1,6 +1,7 @@
 #' Reads data from information tab.
 #'
-#' @param path where the htmls are.
+#' @param files Vector of html files.
+#' @param path where the htmls are if files is NULL.
 #' @importFrom rlang .data
 #' @return a tibble with data from the information tab.
 #' @export
@@ -9,7 +10,7 @@
 #' \dontrun{
 #' informacao <- read_stf_information("html", plan = "multiprocess")
 #' }
-read_stf_information <- function(path = ".") {
+read_stf_information <- function(files = NULL, path = ".") {
   files <- list.files(path, full.names = TRUE)
 
 
