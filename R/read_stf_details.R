@@ -22,11 +22,16 @@ read_stf_details <- function(files = NULL, path = ".") {
 
   }
 
-  incidentes <- stringr::str_extract(files, "\\d+(?=\\.html)")
 
 
-  purrr::map2_dfr(files, incidentes, purrr::possibly(~ {
+  purrr::map_dfr(files, purrr::possibly(purrrogress::with_progress(~ {
+
+    incidente <- stringr::str_extract(.x, "\\d+(?=\\.html)")
+
+
     content <- xml2::read_html(.x)
+
+
 
     meio <- content %>%
       xml2::xml_find_all("//*[contains(@class,'badge')]") %>%
@@ -53,7 +58,7 @@ read_stf_details <- function(files = NULL, path = ".") {
       stringr::str_extract("(?<=: ).+")
 
     tibble::tibble(
-      incidente = .y,
+      incidente = incidente,
       meio,
       sigilo,
       numero_unico,
@@ -61,5 +66,5 @@ read_stf_details <- function(files = NULL, path = ".") {
       relator_atual
     ) %>%
       tidyr::separate(classe_numero, c("classe", "numero"), " ")
-  }, NULL))
+  }), NULL))
 }
