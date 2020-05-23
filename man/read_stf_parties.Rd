@@ -4,10 +4,12 @@
 \alias{read_stf_parties}
 \title{Reads docket parties names.}
 \usage{
-read_stf_parties(path = ".")
+read_stf_parties(files = NULL, path = ".")
 }
 \arguments{
-\item{path}{where to find the htmls.}
+\item{files}{Paths to files.}
+
+\item{path}{Where to find the htmls if files NULL.}
 }
 \value{
 Tibble with docket number, party name, and party class.
@@ -17,7 +19,7 @@ Reads docket parties names.
 }
 \examples{
 \dontrun{
-partes <- read_stf_parties(path = ".", plan = "multiprocess")
+partes <- read_stf_parties(path = ".")
 }
 
 }

@@ -4,12 +4,14 @@
 \alias{read_stf_docket_sheet}
 \title{Reads Brazilian Supreme Court decision's docket sheet.}
 \usage{
-read_stf_docket_sheet(path = ".", plan = "sequential")
+read_stf_docket_sheet(files = NULL, path = ".", plan = "sequential")
 }
 \arguments{
-\item{path}{where to find the htmls downloaded by download_docket}
+\item{files}{Vector of html files downloaded by download_docket}
 
-\item{plan}{defalts to sequential. See \code{future::plan} for all options.}
+\item{path}{Where to find the htmls if files is NULL}
+
+\item{plan}{Defalts to sequential. See \code{future::plan} for all options.}
 }
 \value{
 tibble with follow-up details

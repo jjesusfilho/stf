@@ -1,8 +1,7 @@
 #' Reads decision details
 #'
-#' @param path where to find the htmls
-#' @param plan default to "sequential", see \code{future::plan},
-#'     for all options.
+#' @param files Files with full path.
+#' @param path Where to find the htmls
 #'
 #' @return tibble with meio (public or eletronic), sigilo (secrecy),
 #'     numero_unico (unique number), relator_atual (current justice)
@@ -12,11 +11,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' detalhes <- read_stf_details(path = ".", plan = "multiprocess")
+#' detalhes <- read_stf_details(path = ".")
 #' }
 #'
-read_stf_details <- function(path = ".", plan = "sequential") {
-  files <- list.files(path, pattern = ".html", full.names = TRUE)
+read_stf_details <- function(files = NULL, path = ".") {
+
+  if(is.null(files)){
+
+    files <- list.files(path, pattern = ".html", full.names = TRUE)
+
+  }
 
   incidentes <- stringr::str_extract(files, "\\d+(?=\\.html)")
 

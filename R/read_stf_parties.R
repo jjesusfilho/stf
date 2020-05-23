@@ -1,46 +1,49 @@
 #' Reads docket parties names.
 #'
-#' @param path where to find the htmls.
+#' @param files Paths to files.
+#' @param path Where to find the htmls if files NULL.
 #' @return Tibble with docket number, party name, and party class.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' partes <- read_stf_parties(path = ".", plan = "multiprocess")
+#' partes <- read_stf_parties(path = ".")
 #' }
 #'
-read_stf_parties <- function(path = ".") {
-  arquivos <- list.files(path, pattern = ".html", full.names = TRUE)
+read_stf_parties <- function (files = NULL, path = ".")
+{
+
+  if (is.null(files)){
+
+    files <- list.files(path, pattern = ".html", full.names = TRUE)
 
 
-  nomes <- tibble::tibble(
-    partes = c("RECLTE", "ADV", "RECLDO", "INTDO", "PROC", "BENEF"),
-
-    correcao = c("reclamante", "advogado", "reclamado", "intimado", "procurador", "beneficiario")
-  )
+  }
 
 
+  partes <- purrr::map_dfr(files, purrr::possibly(purrrogress::with_progress(~{
 
-  partes <- purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~ {
+    incidente <- stringr::str_extract(.x, "\\d+(?=\\.html)")
 
-    incidente <- stringr::str_extract(arquivos, "\\d+(?=\\.html)")
+    x <- xml2::read_html(.x)
 
-
-    conteudo <- xml2::read_html(.x)
-
-    coluna <- xml2::xml_find_all(conteudo, "//div[@class='detalhe-parte']") %>%
+    col <-
+      xml2::xml_find_all(x, "//div[@class='detalhe-parte']") %>%
       xml2::xml_text() %>%
       unlist() %>%
-      stringr::str_extract(".+?(?=\\.)") %>%
-      pmatch(nomes$partes, duplicates.ok = TRUE) %>%
-      nomes$correcao[.]
+      stringr::str_extract(".+?(?=\\.)")
 
-    parte_nome <-
-      xml2::xml_find_all(conteudo, "//div[@class='nome-parte']") %>%
+
+    # pmatch(nomes$partes, duplicates.ok = TRUE) %>%
+    # nomes$correcao[.]
+
+    parte_nome <- xml2::xml_find_all(x, "//div[@class='nome-parte']") %>%
       xml2::xml_text() %>%
       iconv("UTF-8", "latin1//TRANSLIT") %>%
       stringr::str_remove("&nbsp")
 
-    tibble::tibble(incidente = incidente, parte = coluna, parte_nome = parte_nome)
+    tibble::tibble(incidente = incidente,
+                   parte = col,
+                   parte_nome = parte_nome)
   }), NULL))
 }

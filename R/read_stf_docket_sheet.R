@@ -1,7 +1,8 @@
 #' Reads Brazilian Supreme Court decision's docket sheet.
 #'
-#' @param path where to find the htmls downloaded by download_docket
-#' @param plan defalts to sequential. See \code{future::plan} for all options.
+#' @param files Vector of html files downloaded by download_docket
+#' @param path Where to find the htmls if files is NULL
+#' @param plan Defalts to sequential. See \code{future::plan} for all options.
 #' @return tibble with follow-up details
 #' @export
 #'
@@ -10,11 +11,18 @@
 #' andamento <- read_stf_docket_sheet(path = ".", plan = "multiprocess")
 #' }
 #'
-read_stf_docket_sheet <- function(path = ".", plan = "sequential") {
+read_stf_docket_sheet <- function(files = NULL, path = ".", plan = "sequential") {
+
   oplan <- plan
+
   on.exit(future::plan(oplan), add = TRUE)
 
+
+  if(is.null(files)){
+
   arquivos <- list.files(path, full.names = TRUE)
+
+  }
 
   incidentes <- stringr::str_extract(arquivos, "\\d+(?=.html)")
 
@@ -67,5 +75,6 @@ read_stf_docket_sheet <- function(path = ".", plan = "sequential") {
     tibble::tibble(incidente = .y, data_andamento, titulo, invalido, orgao_julgador, descricao, doc, doc_url, doc_id) %>%
       tidyr::unnest() %>%
       dplyr::distinct()
+
   }, NULL), .progress = TRUE)
 }

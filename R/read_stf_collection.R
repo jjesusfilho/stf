@@ -1,6 +1,7 @@
 #' Read STF collection
 #'
-#' @param dir directory where to find the xlsx files.
+#' @param files Vector of xlsx files
+#' @param dir directory where to find the xlsx files if files is NULL
 #' @param classes proceding (classe)
 #' @param years numeric vector of years to read.
 #' @importFrom rlang .data
@@ -11,16 +12,24 @@
 #' \dontrun{
 #' read_stf_collection(classes = NULL, years = 2017:2018)
 #' }
-read_stf_collection <- function(dir = ".", classes = NULL, years = NULL) {
+read_stf_collection <- function(files = NULL, dir = ".", classes = NULL, years = NULL) {
+
+
   if (is.null(years)) {
     stop("The argument years is required.")
   }
+
   anos <- paste0(years, collapse = "|") %>% paste0(
     "(", .,
     ")"
   )
+
+  if(is.null(files)){
+
   files <- list.files(dir, full.names = TRUE, pattern = ".xlsx") %>%
     stringr::str_subset(anos)
+  }
+
   decisoes <- furrr::future_map_dfr(files, ~ {
     df <- .x %>%
       readxl::read_excel(col_names = FALSE) %>%

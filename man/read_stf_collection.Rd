@@ -4,10 +4,12 @@
 \alias{read_stf_collection}
 \title{Read STF collection}
 \usage{
-read_stf_collection(dir = ".", classes = NULL, years = NULL)
+read_stf_collection(files = NULL, dir = ".", classes = NULL, years = NULL)
 }
 \arguments{
-\item{dir}{directory where to find the xlsx files.}
+\item{files}{Vector of xlsx files}
+
+\item{dir}{directory where to find the xlsx files if files is NULL}
 
 \item{classes}{proceding (classe)}
 

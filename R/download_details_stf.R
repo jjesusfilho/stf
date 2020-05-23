@@ -6,7 +6,7 @@
 #' @return htmls
 #' @export
 #'
-download_details_stf <- function(incidente =NULL, dir="."){
+stf_download_details <- function(incidente =NULL, dir="."){
 
 
   uri<-"https://portal.stf.jus.br/processos/detalhe.asp?incidente="
@@ -16,6 +16,7 @@ download_details_stf <- function(incidente =NULL, dir="."){
     arquivo<-file.path(dir,paste0("detalhes_stf_incidente_",.x,".html"))
 
     url <- paste0(uri,.x)
+
     httr::GET(url,httr::write_disk(arquivo,overwrite = TRUE))
 
   }),NULL))

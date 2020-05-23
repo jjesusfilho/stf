@@ -4,13 +4,12 @@
 \alias{read_stf_details}
 \title{Reads decision details}
 \usage{
-read_stf_details(path = ".", plan = "sequential")
+read_stf_details(files = NULL, path = ".")
 }
 \arguments{
-\item{path}{where to find the htmls}
+\item{files}{Files with full path.}
 
-\item{plan}{default to "sequential", see \code{future::plan},
-for all options.}
+\item{path}{Where to find the htmls}
 }
 \value{
 tibble with meio (public or eletronic), sigilo (secrecy),
@@ -21,7 +20,7 @@ Reads decision details
 }
 \examples{
 \dontrun{
-detalhes <- read_stf_details(path = ".", plan = "multiprocess")
+detalhes <- read_stf_details(path = ".")
 }
 
 }

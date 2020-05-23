@@ -4,7 +4,8 @@
 \name{collection_2010_2019}
 \alias{collection_2010_2019}
 \title{collection_2010_2019}
-\format{dataframe with 735360 obs, and 19 columns:
+\format{
+dataframe with 735360 obs, and 19 columns:
 \describe{
 \item{\code{hyperling}}{hyperling to the docket}
 \item{\code{incidente}}{docker identification number}
@@ -23,7 +24,8 @@
 \item{\code{assuntos}}{matter}
 \item{\code{qtd_ocorrencias}}{number of actions}
 \item{\code{ano_andamento}}{action year}
-}}
+}
+}
 \source{
 \url{https://stf.jus.br/}
 }
