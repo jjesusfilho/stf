@@ -7,21 +7,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Provides functions to collect and manipulate Brazilian's Supreme
     Court decisions • stf</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Provides functions to collect and manipulate Brazilian's Supreme
     Court decisions">
 <meta property="og:description" content="Retrieves data from Brazilian Supreme Court
     decisions.">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">stf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9400</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9500</span>
       </span>
     </div>
 
@@ -48,6 +48,9 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="articles/index.html">Articles</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -84,8 +87,8 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install stf from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"jjesusfilho/stf"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"jjesusfilho/stf"</span>)</pre></div>
 <p>You have to make sure the packages <a href="https://github.com/ropensci/tesseract">tesseract</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> are installed as well as their dependencies.</p>
 <p>You also have to download the <code>tesseract</code> trained data for Portuguese. You can find directions for Linux, Mac-OS and Windows <a href="https://github.com/tesseract-ocr/tesseract/wiki">here</a></p>
 </div>
@@ -96,39 +99,39 @@
 <h3 class="hasAnchor">
 <a href="#read-metadata" class="anchor"></a>Read metadata</h3>
 <p>Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression “excesso de prazo”. You can execute the following function:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="dt">open_search=</span><span class="st">"excesso de prazo"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu">get_stf_precedent_metadata</span>(<span class="kw">open_search</span><span class="kw">=</span><span class="st">"excesso de prazo"</span>)</pre></div>
 <p>Or simply:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">df&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu">get_stf_precedent_metadata</span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
 <p>By using “adj2” you are telling the search engine that “prazo” is one word apart from “excesso”.</p>
 <p>If you want to search for monocratic decisions, you can use another function:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">df&lt;-<span class="kw"><a href="reference/get_stf_mono_metadata.html">get_stf_mono_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu">get_stf_mono_metadata</span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
 <p>In order to find all the options, use the help function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">?<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="r">?<span class="fu">get_stf_precedent_metadata</span>()</pre></div>
 <p>Suppose now that you want to read all cases where “Telefônica” is a party. You can add the suffix “.PART.” to the search sentence:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">telefonicaDF&lt;-<span class="kw"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"telefonica.PART."</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="no">telefonicaDF</span><span class="kw">&lt;-</span><span class="fu">get_stf_precedent_metadata</span>(<span class="st">"telefonica.PART."</span>)</pre></div>
 <p>If you want to see all the possible suffixes, the function <code>stf_help_view()</code> will load the help page on R viewer pane:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/view_stf_help.html">view_stf_help</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="fu">view_stf_help</span>()</pre></div>
 </div>
 <div id="read-the-full-opinion-text-inteiro-teor" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read-the-full-opinion-text-inteiro-teor" class="anchor"></a>Read the full opinion text (inteiro teor):</h3>
 <p>Once you have imported the metadata, you can use the same data frame to import the full opinion’s text. Beware that opinions published before 2011 and even some of that year are in pdf image, not in text. Those opinions are downloaded, converted to <code>png</code>, and subsequently submmited to OCR in order to be read.</p>
 <p>The limitation is that it takes a considerable amount of time to read the opinion’s text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">decisionTelefonica&lt;-<span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(telefonicaDF[<span class="dv">1</span>,]). </a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># Downloads just the first decision from the dataset imported above.</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="r">decisionTelefonica&lt;-download_stf_dockets(telefonicaDF[1,]). 
+# Downloads just the first decision from the dataset imported above.</pre></div>
 </div>
 <div id="use-the-docket-number" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-the-docket-number" class="anchor"></a>Use the docket number</h3>
 <p>If you have the docket number, you can use it to download all information about that lawsuit:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(<span class="dt">action=</span><span class="st">"HC"</span>,<span class="dt">docket_number =</span> <span class="st">"4040"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="fu">download_stf_dockets</span>(<span class="kw">action</span><span class="kw">=</span><span class="st">"HC"</span>,<span class="kw">docket_number</span> <span class="kw">=</span> <span class="st">"4040"</span>)</pre></div>
 </div>
 <div id="work-with-the-annual-list-of-rulings" class="section level3">
 <h3 class="hasAnchor">
 <a href="#work-with-the-annual-list-of-rulings" class="anchor"></a>Work with the annual list of rulings</h3>
 <p>Another way to work with decisions ruled by the Supreme Court is accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases. You can check all functions at the reference tab, but pretty soon I will add an vignette showing how to go through a case.</p>
 <p>We have provided a dataset with annual rullings’ collection from 2010 to 2019 in the package. Thus for these years, you don’t need to download the spreadsheet, just load the data:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(collection_<span class="dv">2010</span>_<span class="dv">2019</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">collection_2010_2019</span>)</pre></div>
 </div>
 <div id="vocabulary-correspondence" class="section level3">
 <h3 class="hasAnchor">
@@ -224,7 +227,7 @@
 
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
@@ -264,7 +267,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
