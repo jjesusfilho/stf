@@ -14,7 +14,7 @@ stf_download_parties <- function(incidente, dir = "."){
 
     url <- paste0("http://portal.stf.jus.br/processos/abaPartes.asp?incidente=",.x)
 
-    arquivo <- paste0(dir, "/partes", format(Sys.Date(), "/date_%Y_%m_%d_incidente_"), .x, ".html")
+    arquivo <- file.path(dir,paste0(format(Sys.Date(), "date_%Y_%m_%d_incidente_"), .x, ".html"))
 
     httr::RETRY("GET",url,httr::write_disk(arquivo))
 
