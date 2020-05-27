@@ -115,7 +115,7 @@
     <p>Reads Brazilian Supreme Court decision's docket sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_stf_docket_sheet</span>(<span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>plan</span> <span class='kw'>=</span> <span class='st'>"sequential"</span>)</pre>
+    <pre class="usage"><span class='fu'>read_stf_docket_sheet</span>(<span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -128,10 +128,6 @@
       <th>path</th>
       <td><p>Where to find the htmls if files is NULL</p></td>
     </tr>
-    <tr>
-      <th>plan</th>
-      <td><p>Defalts to sequential. See <code><a href='https://rdrr.io/pkg/future/man/plan.html'>future::plan</a></code> for all options.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -140,7 +136,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>andamento</span> <span class='kw'>&lt;-</span> <span class='fu'>read_stf_docket_sheet</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>plan</span> <span class='kw'>=</span> <span class='st'>"multiprocess"</span>)
+<span class='no'>andamento</span> <span class='kw'>&lt;-</span> <span class='fu'>read_stf_docket_sheet</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -4,10 +4,12 @@
 \alias{read_stf_information}
 \title{Reads data from information tab.}
 \usage{
-read_stf_information(path = ".")
+read_stf_information(files = NULL, path = ".")
 }
 \arguments{
-\item{path}{where the htmls are.}
+\item{files}{Vector of html files.}
+
+\item{path}{where the htmls are if files is NULL.}
 }
 \value{
 a tibble with data from the information tab.
