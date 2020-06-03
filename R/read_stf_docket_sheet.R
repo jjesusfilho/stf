@@ -23,7 +23,7 @@ read_stf_docket_sheet <- function(files = NULL, path = ".") {
 
 
 
-  purrr::map_dfr(files,  purrr::possibly(purrrogress::withprogress(~{
+  purrr::map_dfr(files,  purrr::possibly(purrrogress::with_progress(~{
 
     incidente <- stringr::str_extract(.x, "\\d+(?=.html)")
 
