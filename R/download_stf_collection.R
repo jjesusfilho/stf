@@ -25,5 +25,8 @@ download_stf_collection <- function(decision_type = NULL, years = NULL, dir = ".
   files <- stringr::str_extract(urls, "decisoes_.+(?=\\.)") %>%
     stringr::str_c(dir, "/", ., ".xlsx")
 
-  purrr::walk2(urls, files, ~ httr::GET(.x, httr::write_disk(.y, overwrite = T)))
+  purrr::walk2(urls, files, ~ httr::GET(.x, httr::write_disk(.y, overwrite = T),
+                                        httr::user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
+
+                                        ))
 }

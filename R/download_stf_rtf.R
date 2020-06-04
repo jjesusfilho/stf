@@ -18,6 +18,9 @@ download_stf_rtf <- function(sheet, path = ".") {
   purrr::walk2(sheet$doc_url, sheet$incidente, purrr::possibly(~ {
     doc_id <- stringr::str_extract(.x, "\\d{3,}")
 
-    httr::GET(.x, httr::write_disk(paste0(path, "/incidente_", .y, "_docid_", doc_id, ".rtf"), overwrite = TRUE))
+    httr::GET(.x, httr::write_disk(paste0(path, "/incidente_", .y, "_docid_", doc_id, ".rtf"), overwrite = TRUE),
+              httr::user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
+
+              )
   }, NULL))
 }

@@ -23,7 +23,10 @@ stf_download_details2 <- function(class = NULL, docket_number = NULL,dir = "."){
 
 
     resposta <-  .x %>%
-      httr::RETRY("GET",.)
+      httr::RETRY("GET",.,
+                  httr::user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
+
+                  )
 
     incidente <- resposta$url %>%
       stringr::str_extract("\\d+")

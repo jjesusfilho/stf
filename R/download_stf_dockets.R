@@ -71,7 +71,11 @@ download_stf_dockets <- function(class = NULL,
 
     cd <- crul::Async$new(urls <- .x)
 
-    res <- cd$get()
+    res <- cd$get(
+      httr::user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")
+
+
+    )
 
     incidente <- stringr::str_extract(.x, "\\d+")
 

@@ -49,6 +49,11 @@ You also have to download the `tesseract` trained data for Portuguese. You can f
 
 ## Usage for STF
 
+## Main data
+
+Following is the scheme of the main data:
+
+![schema](images/stf.png)
 
 ### Read metadata
 

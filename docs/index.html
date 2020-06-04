@@ -95,22 +95,28 @@
 <div id="usage-for-stf" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage-for-stf" class="anchor"></a>Usage for STF</h2>
+</div>
+<div id="main-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#main-data" class="anchor"></a>Main data</h2>
+<p>Following is the scheme of the main data:</p>
+<iframe src="stf.html">
 <div id="read-metadata" class="section level3">
 <h3 class="hasAnchor">
 <a href="#read-metadata" class="anchor"></a>Read metadata</h3>
 <p>Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression “excesso de prazo”. You can execute the following function:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu">get_stf_precedent_metadata</span>(<span class="kw">open_search</span><span class="kw">=</span><span class="st">"excesso de prazo"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="kw">open_search</span><span class="kw">=</span><span class="st">"excesso de prazo"</span>)</pre></div>
 <p>Or simply:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu">get_stf_precedent_metadata</span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
 <p>By using “adj2” you are telling the search engine that “prazo” is one word apart from “excesso”.</p>
 <p>If you want to search for monocratic decisions, you can use another function:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu">get_stf_mono_metadata</span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_mono_metadata.html">get_stf_mono_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
 <p>In order to find all the options, use the help function:</p>
-<div class="sourceCode" id="cb5"><pre class="r">?<span class="fu">get_stf_precedent_metadata</span>()</pre></div>
+<div class="sourceCode" id="cb5"><pre class="r">?<span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>()</pre></div>
 <p>Suppose now that you want to read all cases where “Telefônica” is a party. You can add the suffix “.PART.” to the search sentence:</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">telefonicaDF</span><span class="kw">&lt;-</span><span class="fu">get_stf_precedent_metadata</span>(<span class="st">"telefonica.PART."</span>)</pre></div>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="no">telefonicaDF</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"telefonica.PART."</span>)</pre></div>
 <p>If you want to see all the possible suffixes, the function <code>stf_help_view()</code> will load the help page on R viewer pane:</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu">view_stf_help</span>()</pre></div>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/view_stf_help.html">view_stf_help</a></span>()</pre></div>
 </div>
 <div id="read-the-full-opinion-text-inteiro-teor" class="section level3">
 <h3 class="hasAnchor">
@@ -124,7 +130,7 @@
 <h3 class="hasAnchor">
 <a href="#use-the-docket-number" class="anchor"></a>Use the docket number</h3>
 <p>If you have the docket number, you can use it to download all information about that lawsuit:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="fu">download_stf_dockets</span>(<span class="kw">action</span><span class="kw">=</span><span class="st">"HC"</span>,<span class="kw">docket_number</span> <span class="kw">=</span> <span class="st">"4040"</span>)</pre></div>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(<span class="kw">action</span><span class="kw">=</span><span class="st">"HC"</span>,<span class="kw">docket_number</span> <span class="kw">=</span> <span class="st">"4040"</span>)</pre></div>
 </div>
 <div id="work-with-the-annual-list-of-rulings" class="section level3">
 <h3 class="hasAnchor">
@@ -210,6 +216,7 @@
 </tbody>
 </table>
 </div>
+</iframe>
 </div>
 <div id="caveats" class="section level2">
 <h2 class="hasAnchor">
