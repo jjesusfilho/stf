@@ -11,7 +11,12 @@
 #' }
 read_stf_rtf <- function(files = NULL) {
 
-  purrr::map_dfr(files, purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar$new(total = length(files))
+
+  purrr::map_dfr(files, purrr::possibly(~{
+
+    pb$tick()
+
     doc_id <- stringr::str_extract(.x, "(?<=docid_)\\d+")
 
     incidente <- stringr::str_extract(.x, "(?<=incidente_)\\d+")
@@ -21,5 +26,5 @@ read_stf_rtf <- function(files = NULL) {
       stringr::str_squish()
 
     tibble::tibble(incidente = incidente, texto = texto, doc_id = doc_id)
-  }), NULL))
+  }, NULL))
 }

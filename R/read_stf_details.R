@@ -22,9 +22,11 @@ read_stf_details <- function(files = NULL, path = ".") {
 
   }
 
+ pb <- progress::progress_bar$new(total = length(files))
 
+  purrr::map_dfr(files, purrr::possibly(~ {
 
-  purrr::map_dfr(files, purrr::possibly(purrrogress::with_progress(~ {
+    pb$tick()
 
     incidente <- stringr::str_extract(.x, "\\d+(?=\\.html)")
 
@@ -66,5 +68,5 @@ read_stf_details <- function(files = NULL, path = ".") {
       relator_atual
     ) %>%
       tidyr::separate(classe_numero, c("classe", "numero"), " ")
-  }), NULL))
+  }, NULL))
 }

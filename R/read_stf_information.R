@@ -17,10 +17,17 @@ read_stf_information <- function (files = NULL, path = ".")
     files <- list.files(path, full.names = TRUE)
   }
 
+  pb <- progress::progress_bar$new(total = length(files))
+
   informacoes <-
-    purrr::map_dfr(files, purrr::possibly(purrrogress::with_progress( ~ {
+    purrr::map_dfr(files, purrr::possibly( ~ {
+
+      pb$tick()
+
       incidente <- stringr::str_extract(.x, "\\d+(?=.html)")
+
       conteudo <- xml2::read_html(.x, encoding = "UTF-8")
+
       assunto1 <-
         conteudo %>% xml2::xml_find_all(
           "//div[normalize-space(text())='Assunto:']/following-sibling::div/ul/li[1]"
@@ -80,7 +87,7 @@ read_stf_information <- function (files = NULL, path = ".")
         numero_origem = numero_origem,
         procedencia = procedencia
       ) %>% tibble::as_tibble()
-    }), NULL)) %>% dplyr::select(
+    }, NULL)) %>% dplyr::select(
       .data$incidente,
       .data$assunto1,
       .data$assunto2,

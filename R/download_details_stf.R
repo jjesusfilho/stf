@@ -11,7 +11,11 @@ stf_download_details <- function(incidente =NULL, dir="."){
 
   uri<-"https://portal.stf.jus.br/processos/detalhe.asp?incidente="
 
-  purrr::walk(incidente,purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar$new(total = length(incidente))
+
+  purrr::walk(incidente,purrr::possibly(~{
+
+    pb$tick()
 
     arquivo<-file.path(dir,paste0("detalhes_stf_incidente_",.x,".html"))
 
@@ -22,7 +26,7 @@ stf_download_details <- function(incidente =NULL, dir="."){
 
               )
 
-  }),NULL))
+  },NULL))
 
 
 }

@@ -11,12 +11,23 @@
 #'
 #' @export
 get_stf_opinion <- function(df) {
+
   stopifnot(is.logical(df$eletronico))
+
   diretorio <- getwd()
+
   setwd(tempdir())
+
   tmp_file <- tempfile(pattern = "inteiro", fileext = ".pdf")
+
   on.exit(setwd(diretorio), unlink(tmp_file))
+
+  pb <- progress::progress_bar$new(total = nrow(df))
+
   file <- purrr::map2(df$url_inteiro_teor, df$eletronico, purrr::possibly(~ {
+
+    pb$tick()
+
     if (.y == TRUE) {
       pdftools::pdf_text(.x)
     } else {

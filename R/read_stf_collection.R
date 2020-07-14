@@ -30,8 +30,13 @@ read_stf_collection <- function(files = NULL, dir = ".", classes = NULL, years =
     stringr::str_subset(anos)
   }
 
-  decisoes <- furrr::future_map_dfr(files, ~ {
-    df <- .x %>%
+  pb <- progress::progress_bar$new(total= length(files))
+
+  decisoes <- purrr::map_dfr(files, ~ {
+
+    pb$tick()
+
+     df <- .x %>%
       readxl::read_excel(col_names = FALSE) %>%
       setNames(paste0("x", 1:length(.))) %>%
       dplyr::filter(dplyr::row_number() >= stringr::str_which(x1, "Classe"))

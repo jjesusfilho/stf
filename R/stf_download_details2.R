@@ -17,10 +17,13 @@ stf_download_details2 <- function(class = NULL, docket_number = NULL,dir = "."){
     docket_number
   )
 
-  incidente <-  purrr::map(urls,purrr::possibly(purrrogress::with_progress(~{
+
+  pb <- progress::progress_bar$new(total = length(urls))
+
+  incidente <-  purrr::map(urls,purrr::possibly(~{
 
 
-
+   pb$tick()
 
     resposta <-  .x %>%
       httr::RETRY("GET",.,
@@ -37,7 +40,7 @@ stf_download_details2 <- function(class = NULL, docket_number = NULL,dir = "."){
 
     incidente
 
-  }),NULL)) %>%
+  },NULL)) %>%
     unlist()
 
   return(incidente)

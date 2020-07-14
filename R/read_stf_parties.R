@@ -20,8 +20,12 @@ read_stf_parties <- function (files = NULL, path = ".")
 
   }
 
+  pb <- progress::progress_bar$new(total = length(files))
 
-  partes <- purrr::map_dfr(files, purrr::possibly(purrrogress::with_progress(~{
+
+  partes <- purrr::map_dfr(files, purrr::possibly(~{
+
+    pb$tick()
 
     incidente <- stringr::str_extract(.x, "\\d+(?=\\.html)")
 
@@ -45,5 +49,5 @@ read_stf_parties <- function (files = NULL, path = ".")
     tibble::tibble(incidente = incidente,
                    parte = col,
                    parte_nome = parte_nome)
-  }), NULL))
+  }, NULL))
 }

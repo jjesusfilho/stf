@@ -9,10 +9,11 @@
 stf_download_information <- function(incidente, dir = "."){
 
 
+  pb <- progress::progress_bar$new(total = length(incidente))
 
-  purrr::walk(incidente,purrr::possibly(purrrogress::with_progress(~{
+  purrr::walk(incidente,purrr::possibly(~{
 
-
+    pb$tick()
 
     url <- paste0("http://portal.stf.jus.br/processos/abaInformacoes.asp?incidente=",.x)
 
@@ -23,6 +24,6 @@ stf_download_information <- function(incidente, dir = "."){
 
                 )
 
-  }),NULL))
+  },NULL))
 
 }

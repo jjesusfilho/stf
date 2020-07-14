@@ -8,9 +8,11 @@
 #'
 stf_download_parties <- function(incidente, dir = "."){
 
+  pb <- progress::progress_bar$new(total = length(incidente))
 
+  purrr::walk(incidente,purrr::possibly(~{
 
-  purrr::walk(incidente,purrr::possibly(purrrogress::with_progress(~{
+    pb$tick()
 
     url <- paste0("http://portal.stf.jus.br/processos/abaPartes.asp?incidente=",.x)
 
@@ -21,6 +23,6 @@ stf_download_parties <- function(incidente, dir = "."){
 
                 )
 
-  }),NULL))
+  },NULL))
 
 }

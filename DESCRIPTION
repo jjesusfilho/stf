@@ -20,8 +20,6 @@ Imports:
     assertthat (>= 0.2.1),
     crul (>= 0.8.4),
     dplyr (>= 0.8.3),
-    furrr (>= 0.1.0),
-    future (>= 1.14.0),
     httr (>= 1.4.1),
     janitor (>= 1.2.0),
     lubridate (>= 1.7.4),
@@ -32,17 +30,19 @@ Imports:
     rlang (>= 0.1.2),
     rvest (>= 0.3.4),
     stringr (>= 1.4.0),
-    tesseract (>= 4.1),
     tibble (>= 2.1.3),
     tidyr (>= 1.0.0),
     unrtf (>= 1.3),
     xml2 (>= 1.2.2),
-    purrrogress,
-    stringi
+    stringi,
+    progress
 Suggests: 
     covr (>= 3.3.2),
     testthat (>= 2.3.0),
-    roxygen2 (>= 6.1.1)
+    roxygen2 (>= 6.1.1),
+    tesseract (>= 4.1),
+    furrr (>= 0.1.0),
+    future (>= 1.14.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

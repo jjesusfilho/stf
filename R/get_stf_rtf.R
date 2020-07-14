@@ -12,13 +12,20 @@
 #' df <- get_stf_rtf()
 #' }
 get_stf_rtf <- function(url) {
+
   id <- stringr::str_extract(url, "\\d{3,}")
 
+  pb <- progress::progress_bar$new(total = length(url))
+
   purrr::map2_dfr(url, id, purrr::possibly(~ {
+
+    pb$tick()
+
     texto <- unrtf::unrtf(.x, "text") %>%
       stringr::str_remove("\\X+---------+") %>%
       stringr::str_squish()
 
     tibble::tibble(texto = texto, id = .y)
+
   }, NULL))
 }

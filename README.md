@@ -54,12 +54,6 @@ You can find directions for Linux, Mac-OS and Windows
 
 ## Usage for STF
 
-## Main data
-
-Following is the scheme of the main data:
-
-![schema](images/stf.png)
-
 ### Read metadata
 
 Suppose you want to get the metadata from the Brazilian Supreme Court

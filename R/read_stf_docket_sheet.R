@@ -21,9 +21,11 @@ read_stf_docket_sheet <- function(files = NULL, path = ".") {
 
   }
 
+ pb <- progress::progress_bar$new(total = length(files))
 
+  purrr::map_dfr(files,  purrr::possibly(~{
 
-  purrr::map_dfr(files,  purrr::possibly(purrrogress::with_progress(~{
+    pb$tick()
 
     incidente <- stringr::str_extract(.x, "\\d+(?=.html)")
 
@@ -74,5 +76,5 @@ read_stf_docket_sheet <- function(files = NULL, path = ".") {
       tidyr::unnest() %>%
       dplyr::distinct()
 
-  }), NULL))
+  }, NULL))
 }

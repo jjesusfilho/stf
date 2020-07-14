@@ -9,11 +9,19 @@
 #' read_stf_pdf(file = "")
 #' }
 read_stf_pdf <- function(file = NULL) {
-  purrr::map_dfr(file, purrr::possibly(purrrogress::with_progress(~{
+
+  pb <- progress::progress_bar$new(total = length(file))
+
+  purrr::map_dfr(file, purrr::possibly(~{
+
     texto <- pdftools::pdf_text(.x) %>%
       paste0(collapse = "")
+
     doc_id <- stringr::str_extract(.x, "(?<=docid_)\\d+")
+
     incidente <- stringr::str_extract(.x, "(?<=incidente_)\\d+")
+
     tibble::tibble(incidente = incidente, texto = texto, doc_id = doc_id)
-  }), NULL))
+
+  }, NULL))
 }

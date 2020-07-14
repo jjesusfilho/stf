@@ -9,8 +9,11 @@
 stf_download_sheet <- function(incidente, dir = "."){
 
 
+  pb <- progress::progress_bar$new(total = length(incidente))
 
-  purrr::walk(incidente,purrr::possibly(purrrogress::with_progress(~{
+  purrr::walk(incidente,purrr::possibly(~{
+
+    pb$tick()
 
     url <- paste0("http://portal.stf.jus.br/processos/abaAndamentos.asp?incidente=",.x)
 
@@ -21,6 +24,6 @@ stf_download_sheet <- function(incidente, dir = "."){
 
                 )
 
-  }),NULL))
+  },NULL))
 
 }
