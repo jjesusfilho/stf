@@ -30,7 +30,7 @@ stf_extract_date <- function(x = NULL){
 
       d <- x %>%
         stringr::str_squish() %>%
-        str_extract_all("\\d{1,2}\\.\\d{1,2}\\.\\d{4}") %>%
+        stringr::str_extract_all("\\d{1,2}\\.\\d{1,2}\\.\\d{4}") %>%
         unlist() %>%
         tail(1) %>%
         lubridate::parse_date_time(orders="%d.%m%Y")
