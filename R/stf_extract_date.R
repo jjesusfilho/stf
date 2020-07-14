@@ -43,5 +43,6 @@ stf_extract_date <- function(x = NULL){
 
   },NA_character_)) %>%
     purrr::map(~vctrs::`%0%`(.x,NA_character_)) %>%
-    unlist()
+    unlist() %>%
+    as.Date()
 }
