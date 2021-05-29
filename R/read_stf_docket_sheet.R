@@ -17,7 +17,7 @@ read_stf_docket_sheet <- function(files = NULL, path = ".") {
 
   if(is.null(files)){
 
-  files <- list.files(path, full.names = TRUE)
+  files <- list.files(path, full.names = TRUE, pattern = "sheet")
 
   }
 
