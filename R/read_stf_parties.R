@@ -15,7 +15,7 @@ read_stf_parties <- function (files = NULL, path = ".")
 
   if (is.null(files)){
 
-    files <- list.files(path, pattern = ".html", full.names = TRUE, pattern = "party")
+    files <- list.files(path,  full.names = TRUE, pattern = "party")
 
 
   }
