@@ -21,9 +21,13 @@ get_stf_rtf <- function(url) {
 
     pb$tick()
 
-    texto <- unrtf::unrtf(.x, "text") %>%
+    texto <- striprtf::read_rtf(.x) %>%
       stringr::str_remove("\\X+---------+") %>%
-      stringr::str_squish()
+      stringr::str_squish() %>%
+      stringr::str_replace_all("\\ue7e3","\\u00e7\\u00e3") %>%
+      unlist() %>%
+      stringr::str_c(collapse = "\n")
+
 
     tibble::tibble(texto = texto, id = .y)
 

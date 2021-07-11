@@ -1,15 +1,21 @@
-#' Reads rtf files
+#' Reads pdf files
 #'
-#' @param files of paths to the rtf files to be read.
-
+#' @param files Vector of pdf files  to be read.
+#' @param path  Path to pdf files if files are not informed
 #' @return a tibble with tree columns: incidente, texto, and doc_id.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' read_stf_rtf(files = "")
+#' pdf_read_stf(files = "")
 #' }
-read_stf_rtf <- function(files = NULL) {
+stf_read_pdf <- function(files = NULL, path = ".") {
+
+  if (is.null(file)){
+
+    files <- list.files(path, full.names = TRUE, pattern = "pdf$")
+
+  }
 
   pb <- progress::progress_bar$new(total = length(files))
 
@@ -17,14 +23,14 @@ read_stf_rtf <- function(files = NULL) {
 
     pb$tick()
 
+    texto <- suppressMessage(pdftools::pdf_text(.x)) %>%
+      paste0(collapse = "")
+
     doc_id <- stringr::str_extract(.x, "(?<=docid_)\\d+")
 
     incidente <- stringr::str_extract(.x, "(?<=incidente_)\\d+")
 
-    texto <- unrtf::unrtf(.x, "text") %>%
-      stringr::str_remove("\\X+---------+") %>%
-      stringr::str_squish()
-
     tibble::tibble(incidente = incidente, texto = texto, doc_id = doc_id)
+
   }, NULL))
 }

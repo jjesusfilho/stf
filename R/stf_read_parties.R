@@ -7,10 +7,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' partes <- read_stf_parties(path = ".")
+#' partes <- stf_read_parties(path = ".")
 #' }
 #'
-read_stf_parties <- function (files = NULL, path = ".")
+stf_read_parties <- function (files = NULL, path = ".")
 {
 
   if (is.null(files)){
@@ -47,7 +47,7 @@ read_stf_parties <- function (files = NULL, path = ".")
       stringr::str_remove("&nbsp")
 
     tibble::tibble(incidente = incidente,
-                   parte = col,
-                   parte_nome = parte_nome)
+                   tipo_parte = col,
+                   parte = parte_nome)
   }, NULL))
 }
