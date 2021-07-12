@@ -46,6 +46,11 @@ read_stf_information <- function (files = NULL, path = ".")
         xml2::xml_text(trim = TRUE)
 
 
+      if (purrr::is_empty(assunto1)) {
+        assunto1 <- NA_character_
+      }
+
+
       if (purrr::is_empty(assunto2)) {
         assunto2 <- NA_character_
       }
