@@ -11,7 +11,7 @@
 #' }
 stf_read_pdf <- function(files = NULL, path = ".") {
 
-  if (is.null(file)){
+  if (is.null(files)){
 
     files <- list.files(path, full.names = TRUE, pattern = "pdf$")
 
@@ -23,7 +23,7 @@ stf_read_pdf <- function(files = NULL, path = ".") {
 
     pb$tick()
 
-    texto <- suppressMessage(pdftools::pdf_text(.x)) %>%
+    texto <- suppressMessages(pdftools::pdf_text(.x)) %>%
       paste0(collapse = "")
 
     doc_id <- stringr::str_extract(.x, "(?<=docid_)\\d+")
