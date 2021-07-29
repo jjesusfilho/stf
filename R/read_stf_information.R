@@ -67,7 +67,7 @@ read_stf_information <- function (files = NULL, path = ".")
         xml2::xml_text(trim = TRUE)
       orgao_origem <-
         conteudo %>% xml2::xml_find_all(
-          "//div[normalize-space(text())='Órgão de Origem:']/following-sibling::div[1]"
+          "//div[normalize-space(text())='\u00d3rg\u00e3o de Origem:']/following-sibling::div[1]"
         ) %>%
         xml2::xml_text(trim = TRUE)
       origem <-
@@ -75,7 +75,7 @@ read_stf_information <- function (files = NULL, path = ".")
         xml2::xml_text(trim = TRUE)
       numero_origem <-
         conteudo %>% xml2::xml_find_all(
-          "//div[normalize-space(text())='Número de Origem:']/following-sibling::div[1]"
+          "//div[normalize-space(text())='N\u00famero de Origem:']/following-sibling::div[1]"
         ) %>%
         xml2::xml_text(trim = TRUE)
       procedencia <-
@@ -104,3 +104,11 @@ read_stf_information <- function (files = NULL, path = ".")
       .data$procedencia
     ) %>% dplyr::mutate(data_protocolo = lubridate::dmy(.data$data_protocolo))
 }
+
+
+#' @rdname read_stf_information
+#' @export
+stf_read_information <- read_stf_information
+
+
+
