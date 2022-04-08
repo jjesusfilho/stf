@@ -2,9 +2,12 @@
 % Please edit documentation in R/read_stf_information.R
 \name{read_stf_information}
 \alias{read_stf_information}
+\alias{stf_read_information}
 \title{Reads data from information tab.}
 \usage{
 read_stf_information(files = NULL, path = ".")
+
+stf_read_information(files = NULL, path = ".")
 }
 \arguments{
 \item{files}{Vector of html files.}

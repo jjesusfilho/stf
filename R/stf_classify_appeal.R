@@ -1,11 +1,11 @@
-#' classify appeals from stf based on decision summary
+#' classifies appeals from stf based on decision summary
 #'
 #' @param x strings vector
 #'
 #' @return tibble
 #' @export
 #'
-classify_appeal_stf <- function (x)
+stf_classify_appeal <- function (x)
 {
   x <- x  %>% tolower() %>% stringi::stri_trans_general("latin-ascii") %>%
     stringi::stri_replace_all_regex("vencidos?\\X{60}","")
@@ -17,7 +17,7 @@ classify_appeal_stf <- function (x)
                      "duvida", stringi::stri_detect_regex(x, "(?=.*\\bacolh\\w+\\b)(?=.*\\bneg[ao]\\w*\\b)") ~
                      "duvida", stringi::stri_detect_regex(x, "parcial\\w*\\sprovi\\w+") ~
                      "parcial", stringi::stri_detect_regex(x, "(nao\\sconhec\\w+|nao\\sse\\sconhec\\w+)") ~
-                     "não conhecido", stringi::stri_detect_regex(x, "desconh\\w+") ~
+                     "n\u00e3o conhecido", stringi::stri_detect_regex(x, "desconh\\w+") ~
                      "desconhecido", stringi::stri_detect_regex(x, "nao\\s+conhec\\w+") ~
                      "desconhecido", stringi::stri_detect_regex(x, "(desprov\\w+|improv\\w+)") ~
                      "improvido", stringi::stri_detect_regex(x, "(nao|nega\\w+|negou|negado|negar)\\s+provi\\X*") ~
@@ -27,7 +27,7 @@ classify_appeal_stf <- function (x)
                      "provido", stringi::stri_detect_regex(x, "(deu|deram|da\\-*\\s*se|dando\\-*(se)*|comporta|\\bdou\\b|confere\\-se|se\\s*\\-*da|merece)") ~
                      "provido", stringi::stri_detect_regex(x, "(nao\\sderam|nao\\smerece|se\\snega|nega\\-*\\s*se|negar\\-*\\s*lhe|nao\\scomporta|negram|negararam|nego|negar)") ~
                      "improvido", stringi::stri_detect_regex(x, "(homolog|desistencia)") ~
-                     "desistência",
+                     "desist\u00eancia",
                    stringi::stri_detect_regex(x, "(anular\\w*|nulo|nula|nulidade)") ~
                      "anulado",
                    stringi::stri_detect_regex(x, "(rejeit)") ~
@@ -50,9 +50,9 @@ classify_appeal_stf <- function (x)
                      "embargos acolhidos",
                    stringi::stri_detect_regex(x,"(?i)extin..o") ~ "extinto",
                    stringi::stri_detect_regex(x, "diligencia") ~
-                     "conversão em diligência",
+                     "convers\u00e3o em dilig\u00eancia",
                    stringi::stri_detect_regex(x,"(prej|extin)") ~ "prejudicado/extinto",
-                   stringi::stri_detect_regex(x,"converteu") ~ "conversão de classe",
+                   stringi::stri_detect_regex(x,"converteu") ~ "convers\u00e3o de classe",
 
                    TRUE ~ NA_character_)
 }
