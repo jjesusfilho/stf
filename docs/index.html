@@ -22,6 +22,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -34,18 +36,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">stf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9500</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.9500</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -67,161 +63,39 @@
   <div class="contents col-md-9">
 
 
-<div id="stf" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#stf" class="anchor"></a>STF</h1></div>
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p>The goal of STF is to retrieve and manipulate data from the Brazilian Supreme Court decisions. The package makes an effort to clean and tidy the data, with the objective of making it as ready as possible for analysis.</p>
-<p>Functions are grouped in five categories:</p>
-<ul>
-<li>Download functions: They start with the verb download and create file or directories.</li>
-<li>Read functions: They read data from files downloaded by download functions.</li>
-<li>Get functions: They create R objects, by retrieving and parsing the data from the url connection. In other words, they subsequently apply the corresponding download and read functions without storing any object to your disk.</li>
-<li>View functions: They don’t return any object or file, they just browse the help pages from STF gateway.</li>
-<li>Tidy functions: these functions are still being created. They will help clean and preprocess data for posterior analysis. I will only add fuctions that are STF specific. Other tidy functions are available in the <a href="github.com/courtsbr/JurisMiner">JurisMiner</a> and the <a href="github.com/courtsbr/abjutils">abjutils</a> packages.</li>
-</ul>
+<div class="section level1">
+<div class="page-header"><h1 id="stf">STF<a class="anchor" aria-label="anchor" href="#stf"></a>
+</h1></div>
+<div class="section level2">
+<h2 id="objetivo">Objetivo<a class="anchor" aria-label="anchor" href="#objetivo"></a>
+</h2>
+<p>Inicialmente, as funções e o manual estavam em inglês. No entanto, decidi passar o manual para inglês. As funções permanecem em inglês, por ora. Este pacote contêm funções tanto para baixar a jurisprudência por termos, quanto possibilita baixar toda a base do STF.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install stf from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"jjesusfilho/stf"</span>)</pre></div>
-<p>You have to make sure the packages <a href="https://github.com/ropensci/tesseract">tesseract</a> and <a href="https://github.com/ropensci/pdftools">pdftools</a> are installed as well as their dependencies.</p>
-<p>You also have to download the <code>tesseract</code> trained data for Portuguese. You can find directions for Linux, Mac-OS and Windows <a href="https://github.com/tesseract-ocr/tesseract/wiki">here</a></p>
+<div class="section level2">
+<h2 id="instalação">Instalação<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o"></a>
+</h2>
+<p>Para instalar o pacote stf, primeiramente instale o pacote remotes. Depois use o remotes para instalar o pacote stf:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jjesusfilho/stf"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="usage-for-stf" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage-for-stf" class="anchor"></a>Usage for STF</h2>
-<div id="read-metadata" class="section level3">
-<h3 class="hasAnchor">
-<a href="#read-metadata" class="anchor"></a>Read metadata</h3>
-<p>Suppose you want to get the metadata from the Brazilian Supreme Court panel opinions with the expression “excesso de prazo”. You can execute the following function:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="kw">open_search</span><span class="kw">=</span><span class="st">"excesso de prazo"</span>)</pre></div>
-<p>Or simply:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
-<p>By using “adj2” you are telling the search engine that “prazo” is one word apart from “excesso”.</p>
-<p>If you want to search for monocratic decisions, you can use another function:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">df</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_mono_metadata.html">get_stf_mono_metadata</a></span>(<span class="st">"excesso adj2 prazo"</span>)</pre></div>
-<p>In order to find all the options, use the help function:</p>
-<div class="sourceCode" id="cb5"><pre class="r">?<span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>()</pre></div>
-<p>Suppose now that you want to read all cases where “Telefônica” is a party. You can add the suffix “.PART.” to the search sentence:</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">telefonicaDF</span><span class="kw">&lt;-</span><span class="fu"><a href="reference/get_stf_precedent_metadata.html">get_stf_precedent_metadata</a></span>(<span class="st">"telefonica.PART."</span>)</pre></div>
-<p>If you want to see all the possible suffixes, the function <code>stf_help_view()</code> will load the help page on R viewer pane:</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/view_stf_help.html">view_stf_help</a></span>()</pre></div>
-</div>
-<div id="read-the-full-opinion-text-inteiro-teor" class="section level3">
-<h3 class="hasAnchor">
-<a href="#read-the-full-opinion-text-inteiro-teor" class="anchor"></a>Read the full opinion text (inteiro teor):</h3>
-<p>Once you have imported the metadata, you can use the same data frame to import the full opinion’s text. Beware that opinions published before 2011 and even some of that year are in pdf image, not in text. Those opinions are downloaded, converted to <code>png</code>, and subsequently submmited to OCR in order to be read.</p>
-<p>The limitation is that it takes a considerable amount of time to read the opinion’s text. Without parallelization, one opinion can take up to 4 minutes to be read. As an example, 2000 opinions might take over five days to be read.</p>
-<div class="sourceCode" id="cb8"><pre class="r">decisionTelefonica&lt;-download_stf_dockets(telefonicaDF[1,]). 
-# Downloads just the first decision from the dataset imported above.</pre></div>
-</div>
-<div id="use-the-docket-number" class="section level3">
-<h3 class="hasAnchor">
-<a href="#use-the-docket-number" class="anchor"></a>Use the docket number</h3>
-<p>If you have the docket number, you can use it to download all information about that lawsuit:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="reference/download_stf_dockets.html">download_stf_dockets</a></span>(<span class="kw">action</span><span class="kw">=</span><span class="st">"HC"</span>,<span class="kw">docket_number</span> <span class="kw">=</span> <span class="st">"4040"</span>)</pre></div>
-</div>
-<div id="work-with-the-annual-list-of-rulings" class="section level3">
-<h3 class="hasAnchor">
-<a href="#work-with-the-annual-list-of-rulings" class="anchor"></a>Work with the annual list of rulings</h3>
-<p>Another way to work with decisions ruled by the Supreme Court is accessing their spreadsheet of annual rulings. The spreadsheets are supposed to have all cases ruled in a year and give valuable information about the cases. You can check all functions at the reference tab, but pretty soon I will add an vignette showing how to go through a case.</p>
-<p>We have provided a dataset with annual rullings’ collection from 2010 to 2019 in the package. Thus for these years, you don’t need to download the spreadsheet, just load the data:</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">collection_2010_2019</span>)</pre></div>
-</div>
-<div id="vocabulary-correspondence" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vocabulary-correspondence" class="anchor"></a>Vocabulary correspondence</h3>
-<p>The table below shows a rough translation of the Brazilian Supreme Court’s opinion’s elements to US English:</p>
-<table class="table">
-<thead><tr class="header">
-<th>Portuguese</th>
-<th>English</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Acórdão</td>
-<td>Opinion</td>
-</tr>
-<tr class="even">
-<td>Ementa</td>
-<td>Syllabus</td>
-</tr>
-<tr class="odd">
-<td>Relator</td>
-<td>Reporter</td>
-</tr>
-<tr class="even">
-<td>Ministro</td>
-<td>Justice</td>
-</tr>
-<tr class="odd">
-<td>Órgão julgador</td>
-<td>Judicial panel</td>
-</tr>
-<tr class="even">
-<td>Decisão</td>
-<td>Decision</td>
-</tr>
-<tr class="odd">
-<td>Processo</td>
-<td>Docket number</td>
-</tr>
-<tr class="even">
-<td>Parte</td>
-<td>Party</td>
-</tr>
-<tr class="odd">
-<td>Andamento</td>
-<td>Docket sheet</td>
-</tr>
-<tr class="even">
-<td>Classe</td>
-<td>Petition type</td>
-</tr>
-<tr class="odd">
-<td>Prover/conceder</td>
-<td>Reverse</td>
-</tr>
-<tr class="even">
-<td>Desprover/denegar</td>
-<td>Affirm</td>
-</tr>
-<tr class="odd">
-<td>Anular decisão</td>
-<td>Remand</td>
-</tr>
-<tr class="even">
-<td>Origem</td>
-<td>Original jurisdiction</td>
-</tr>
-<tr class="odd">
-<td>Data da distribuição</td>
-<td>Argued date</td>
-</tr>
-<tr class="even">
-<td>Data do julgamento</td>
-<td>Decision’s date</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="caveats" class="section level2">
-<h2 class="hasAnchor">
-<a href="#caveats" class="anchor"></a>Caveats</h2>
-<p>The STF precedents’ (jurisprudence) search service is flawed by poor design and inconsistent data. To number a few:</p>
-<ol>
-<li><p>Brazilian Supreme Court offers no Web API, which leads us to creating webscrapers to download public data that should be available to researchers through open data protocols and endpoints;</p></li>
-<li><p>The classes of the parties in a lawsuit are very messy. The way justices, or their advisors, write the parties’ information is transfered to the database without any normalization. To give an example, the reference to the attorney can be written in many forms: advogada, adv, advda, advdo, proc etc. The authors of this package have put some effort to fix that, but the creativity of the the justices and their advisors goes beyond our capacity to figure everythig out.</p></li>
-<li><p>Contrary to other courts, such as TJSP and STJ, the search for decisions does not return all cases. If you don’t have the docket number of every lawsuit about the matter or precedural class, you simply can’t access everything that was decided.</p></li>
-<li><p>Initially we thought that the spreadsheets listing all ruled cases of the past years were accurate, but after downloading them in different times, we have noticed that the number of cases can increase or decrease depending on the moment we downloaded. As the STF IT people don’t make any clarification about these changes, there is no way to guess how many cases were actually ruled during a certain year.</p></li>
-<li><p>Inconsistencies in the database are rife. Decisions without the full opinion’s text, dates of publication with no reference to the decisions’ dates and signatures’ dates. Decisons of one justice are assigned to another justice etc.</p></li>
-</ol>
+<div class="section level2">
+<h2 id="como-usar">Como usar<a class="anchor" aria-label="anchor" href="#como-usar"></a>
+</h2>
+<p>Para baixar acórdãos e decisões monocráticas com termos de busca, use a função <code>stf_download_cjsg</code>. Se, por exemplo, você quiser baixar decisões com os termos “mulher, violência e gênero”, proceda da seguinte forma:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jjesusfilho.github.io/stf/" class="external-link">stf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"juris_stf"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/stf_download_cjsg.html">stf_download_cjsg</a></span><span class="op">(</span><span class="st">"mulher AND violência AND gênero"</span>, </span>
+<span>                  base <span class="op">=</span> <span class="st">"acordaos"</span>,</span>
+<span>                  size <span class="op">=</span> <span class="fl">20</span>, <span class="co">## baixará 20 acórdãos por vez. </span></span>
+<span>                  dir <span class="op">=</span> <span class="st">"juris_stf"</span><span class="op">)</span></span></code></pre></div>
+<p>Eu usei size = 20, mas você pode aumentar o número de decisões por arquivo para até 200.</p>
+<p>Depois disso, você pode ler esses acórdãos com a função <code>stf_read_cjsg</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/stf_read_cjsg.html">stf_read_cjsg</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="st">"juris_stf"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 
@@ -229,45 +103,55 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="community">
-<h2>Community</h2>
-<ul class="list-unstyled">
-<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Jose de Jesus Filho <br><small class="roles"> Author, maintainer </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="community">
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/jjesusfilho/stf"><img src="https://travis-ci.org/jjesusfilho/stf.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://ci.appveyor.com/project/jjesusfilho/stf"><img src="https://ci.appveyor.com/api/projects/status/github/jjesusfilho/stf?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
-<li><a href="https://codecov.io/github/jjesusfilho/stf?branch=master"><img src="https://codecov.io/gh/jjesusfilho/stf/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="SUPPORT.html">Getting help</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing stf</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Jose de Jesus Filho <br><small class="roles"> Author, maintainer </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/jjesusfilho/stf/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/jjesusfilho/stf/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Jose de Jesus Filho.</p>
+  <p></p>
+<p>Developed by Jose de Jesus Filho.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -275,6 +159,8 @@
 
   
 
+
+  
 
   </body>
 </html>
