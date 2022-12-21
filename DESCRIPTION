@@ -17,7 +17,6 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 3.2.0)
 Imports: 
-    assertthat (>= 0.2.1),
     dplyr (>= 0.8.3),
     httr (>= 1.4.1),
     lubridate (>= 1.7.4),
@@ -38,13 +37,12 @@ Imports:
     glue,
     jsonlite
 Suggests: 
-    covr (>= 3.3.2),
     testthat (>= 2.3.0),
     roxygen2 (>= 6.1.1),
-    tesseract (>= 4.1),
     rvest (>= 0.3.4),
     getPass,
-    crul (>= 0.8.4)
+    crul (>= 0.8.4),
+    assertthat (>= 0.2.1)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
