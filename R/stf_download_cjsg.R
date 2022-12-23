@@ -29,7 +29,7 @@ stf_download_cjsg <- function(search = "",
   ### as there is no R engine to manipulate json as is.
 
 
-  body <- modelo |>
+  body <- stf::modelo |>
     jqr::jq(glue::glue('.query.function_score.query.bool.filter[0].query_string.query = "{search}"')) |>
     jqr::jq(glue::glue('.post_filter.bool.must[0].term.base = "{base}"')) |>
     jqr::jq(glue::glue('.size = {size}'))
