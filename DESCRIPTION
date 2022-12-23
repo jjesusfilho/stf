@@ -32,8 +32,7 @@ Imports:
     progress,
     vctrs,
     striprtf,
-    RSQLite,
-    DBI,
+    jqr,
     glue,
     jsonlite
 Suggests: 
