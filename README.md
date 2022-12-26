@@ -9,7 +9,7 @@
 ## Objetivo
 
 Inicialmente, as funções e o manual estavam em inglês. No entanto,
-decidi passar o manual para inglês. As funções permanecem em inglês, por
+decidi passar o manual para português. As funções permanecem em inglês, por
 ora. Este pacote contêm funções tanto para baixar a jurisprudência por
 termos, quanto possibilita baixar toda a base do STF.
 
