@@ -65,22 +65,31 @@ read_stf_information <- function (files = NULL, path = ".")
           "//div[normalize-space(text())='Data de Protocolo:']/following-sibling::div[1]"
         ) %>%
         xml2::xml_text(trim = TRUE)
+
       orgao_origem <-
         conteudo %>% xml2::xml_find_all(
           "//div[normalize-space(text())='\u00d3rg\u00e3o de Origem:']/following-sibling::div[1]"
         ) %>%
-        xml2::xml_text(trim = TRUE)
+        xml2::xml_text(trim = TRUE) |>
+        dplyr::na_if("")
+
       origem <-
         conteudo %>% xml2::xml_find_all("//div[normalize-space(text())='Origem:']/following-sibling::div[1]") %>%
-        xml2::xml_text(trim = TRUE)
+        xml2::xml_text(trim = TRUE) |>
+        dplyr::na_if("")
+
       numero_origem <-
         conteudo %>% xml2::xml_find_all(
           "//div[normalize-space(text())='N\u00famero de Origem:']/following-sibling::div[1]"
         ) %>%
-        xml2::xml_text(trim = TRUE)
+        xml2::xml_text(trim = TRUE) |>
+        dplyr::na_if("")
+
       procedencia <-
         conteudo %>% xml2::xml_find_all("//*[@id='descricao-procedencia']") %>%
-        xml2::xml_text(trim = TRUE)
+        xml2::xml_text(trim = TRUE) |>
+        dplyr::na_if("-")
+
       s <- cbind(
         incidente = incidente,
         assunto1 = assunto1,
