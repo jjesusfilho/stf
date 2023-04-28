@@ -24,6 +24,8 @@ stf_download_information <- function(incidente, dir = "."){
 
                 )
 
+     Sys.sleep(1)
+    
   },NULL))
 
 }
