@@ -1,39 +1,110 @@
-#' Download STF decisions by free search
+#' Baixa acórdãos e decisões monocráticas do STF.
 #'
-#' @param search Terms (use AND or OR if needed)
-#' @param base Acordaos or decisoes
-#' @param size Number of decisions per page
-#' @param dir Directory
+#' @param livre Termos (use AND ou OR se necessário)
+#' @param base Acórdãos ou decisões
+#' @param dt_ini Data início dos julgamentos
+#' @param dt_fim Data fim dos julgamentos
+#' @param dtp_ini Data início da publicação
+#' @param dtp_fim Data final da publicação
+#' @param ministros Vetor com nome dos ministros. Não funciona ainda.
+#' @param classes Vetor com as classes processuais. Não funciona ainda.
+#' @param ufs Vetor com as siglas das unidades federativas. Não funciona ainda.
+#' @param tamanho Número de decisões por página
+#' @param dir Diretório
 #'
-#' @return json files.
+#' @return arquivos em json.
 #' @export
 #'
-stf_download_cjsg <- function(search = "",
+stf_baixar_cjsg <- function(livre = "",
                               base = c("acordaos", "decisoes"),
-                              size = 10,
+                              dt_ini = "",
+                              dt_fim = "",
+                              dtp_ini = "",
+                              dtp_fim = "",
+                              ministros = "",
+                              classes = "",
+                              ufs = "",
+                              tamanho = 10,
                               dir = "."){
 
 
+  datas <- mget(c("dt_ini","dt_fim","dtp_ini","dtp_fim")) |>
+  lubridate::dmy() |>
+  format("%d%m%Y") |>
+  tidyr::replace_na("")
 
-  size <- as.integer(size)
 
-  if (size > 200 | is.na(size)){
+ tamanho <- as.integer(tamanho)
 
-    stop("Argument size cannot be bigger then 200 \nand must be coercible to numeric")
+  if (tamanho > 200 | is.na(tamanho)){
+
+    stop("Argumento tamanho tem de ser convers\u00EDvel para num\u00E9rico e, no m\u00E1ximo, 200.")
 
   }
 
   base <- base[1]
 
-  ### This function uses SQLite json engine to set values to the json body,
-  ### as there is no R engine to manipulate json as is.
+  classes <- classes |>
+    jsonlite::toJSON()
+
+
+  ufs <- ufs |>
+    toupper() |>
+    jsonlite::toJSON()
+
+
+  ministros <- ministros |>
+    toupper() |>
+    stringi::stri_trans_general( "latin-ascii") |>
+    jsonlite::toJSON()
 
 
   body <- stf::modelo |>
-    jqr::jq(glue::glue('.query.function_score.query.bool.filter[0].query_string.query = "{search}"')) |>
+    jqr::jq(glue::glue('.query.function_score.query.bool.filter[0].query_string.query = "{livre}"')) |>
     jqr::jq(glue::glue('.post_filter.bool.must[0].term.base = "{base}"')) |>
-    jqr::jq(glue::glue('.size = {size}'))
+    jqr::jq(glue::glue('.size = {tamanho}'))
 
+
+  datas <- mget(c("dt_ini","dt_fim","dtp_ini","dtp_fim")) |>
+    lubridate::dmy() |>
+    format("%d%m%Y")
+
+  nd <- which(!is.na(datas))
+
+  if (identical(nd, c(1L,2L))){
+
+    body <- body |>
+      jqr::jq(glue::glue('.query.function_score.query.bool.filter[1].range.julgamento_data.format = "ddMMyyyy"')) |>
+      jqr::jq(glue::glue('.query.function_score.query.bool.filter[1].range.julgamento_data.gte = "{datas[1]}"')) |>
+      jqr::jq(glue::glue('.query.function_score.query.bool.filter[1].range.julgamento_data.lte = "{datas[2]}"'))
+
+    dt_arquivo <- datas |>
+      na.omit() |>
+      stringr::str_replace_all("\\D","_") |>
+      paste(collapse = "_")
+
+    } else if (identical(nd, c(3L,4L))){
+
+    body <- body |>
+      jqr::jq(glue::glue('.query.function_score.query.bool.filter[1].range.julgamento_data.format = "ddMMyyyy"')) |>
+      jqr::jq(glue::glue('.query.function_score.query.bool.filter[1].range.publicacao_data.gte = "{datas[3]}"')) |>
+      jqr::jq(glue::glue('.query.function_score.query.bool.filter[1].range.publicacao_data.lte = "{datas[4]}"'))
+
+    dt_arquivo <- datas |>
+           na.omit() |>
+           stringr::str_replace_all("\\D","_") |>
+           paste(collapse = "_")
+
+     } else if (all(is.na(nd))){
+
+    body <- body
+
+    dt_arquivo <- ""
+
+  } else {
+
+    stop("Voc\u00EA deve informar as datas de in\u00EDcio e fim do julgamento ou da publica\u00E7\u00E3o, n\u00E3o as duas.")
+  }
 
 
   h1 <- httr::add_headers(`User-Agent` = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0",
@@ -64,7 +135,7 @@ stf_download_cjsg <- function(search = "",
     jqr::jq(".result.hits.total.value")
 
 
-  sequencia <- seq(0, total,by = size )
+  sequencia <- seq(0, total,by = tamanho )
 
 
   purrr::walk(sequencia, purrr::possibly(~{
@@ -73,7 +144,7 @@ stf_download_cjsg <- function(search = "",
     body <- body |>
       jqr::jq(glue::glue(".from = {.x}"))
 
-    arquivo <- file.path(dir, paste0("stf_search_page_",.x, ".json") )
+    arquivo <- file.path(dir, paste0("stf_",dt_arquivo,"_search_page_",.x, ".json") )
 
     httr::POST(url,
                encode = "json",
