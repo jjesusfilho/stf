@@ -5,6 +5,7 @@
 \title{Baixa acórdãos e decisões monocráticas do STF.}
 \usage{
 stf_baixar_cjsg(
+  corpo = NULL,
   livre = "",
   base = c("acordaos", "decisoes"),
   dt_ini = "",
@@ -19,6 +20,8 @@ stf_baixar_cjsg(
 )
 }
 \arguments{
+\item{corpo}{Você pode usar o body(json da sua busca no STF)}
+
 \item{livre}{Termos (use AND ou OR se necessário)}
 
 \item{base}{Acórdãos ou decisões}

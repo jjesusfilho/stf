@@ -1,5 +1,6 @@
 #' Baixa acórdãos e decisões monocráticas do STF.
 #'
+#' @param corpo Você pode usar o body(json da sua busca no STF)
 #' @param livre Termos (use AND ou OR se necessário)
 #' @param base Acórdãos ou decisões
 #' @param dt_ini Data início dos julgamentos
@@ -15,7 +16,8 @@
 #' @return arquivos em json.
 #' @export
 #'
-stf_baixar_cjsg <- function(livre = "",
+stf_baixar_cjsg <- function(corpo = NULL,
+                              livre = "",
                               base = c("acordaos", "decisoes"),
                               dt_ini = "",
                               dt_fim = "",
@@ -58,6 +60,7 @@ stf_baixar_cjsg <- function(livre = "",
     stringi::stri_trans_general( "latin-ascii") |>
     jsonlite::toJSON()
 
+  if (is.null(corpo)){
 
   body <- stf::modelo |>
     jqr::jq(glue::glue('.query.function_score.query.bool.filter[0].query_string.query = "{livre}"')) |>
@@ -106,6 +109,22 @@ stf_baixar_cjsg <- function(livre = "",
     stop("Voc\u00EA deve informar as datas de in\u00EDcio e fim do julgamento ou da publica\u00E7\u00E3o, n\u00E3o as duas.")
   }
 
+
+  } else {
+
+    if (file.exists(corpo)){
+
+      body <- jqr::jq(file(corpo))
+
+      body <- body |>
+      jqr::jq(glue::glue('.size = {tamanho}'))
+
+    } else {
+
+      stop("Voc\u00EA deve informar um caminho v\u00E1lido para o corpo(json)")
+    }
+
+  }
 
   h1 <- httr::add_headers(`User-Agent` = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0",
                           `Accept` = "application/json, text/plain, */*",
