@@ -109,6 +109,9 @@
     <loc>/reference/stf_authenticate.html</loc>
   </url>
   <url>
+    <loc>/reference/stf_baixar_cjsg.html</loc>
+  </url>
+  <url>
     <loc>/reference/stf_classify_appeal.html</loc>
   </url>
   <url>
@@ -143,6 +146,9 @@
   </url>
   <url>
     <loc>/reference/stf_get_communication.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stf_ler_cjsg.html</loc>
   </url>
   <url>
     <loc>/reference/stf_read_cjsg.html</loc>
