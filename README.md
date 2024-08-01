@@ -53,5 +53,8 @@ df <- stf_ler_cjsg(dir = "juris_stf")
 
 O vídeo abaixo mostra a melhor forma de customizar sua busca.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mQDpUEQ37N4?si=4PdfNih8oYNHzY3X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-</iframe>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/mQDpUEQ37N4" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
