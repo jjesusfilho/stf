@@ -6,7 +6,7 @@
 #' @return tibble
 #' @export
 #'
-stf_read_cjsg <- function(files = NULL, dir = "."){
+stf_ler_cjsg <- function(files = NULL, dir = "."){
 
   if (is.null(files)){
 

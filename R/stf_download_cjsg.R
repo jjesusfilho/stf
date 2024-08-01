@@ -119,6 +119,8 @@ stf_baixar_cjsg <- function(corpo = NULL,
       body <- body |>
       jqr::jq(glue::glue('.size = {tamanho}'))
 
+      dt_arquivo <- ""
+
     } else {
 
       stop("Voc\u00EA deve informar um caminho v\u00E1lido para o corpo(json)")
@@ -163,7 +165,8 @@ stf_baixar_cjsg <- function(corpo = NULL,
     body <- body |>
       jqr::jq(glue::glue(".from = {.x}"))
 
-    arquivo <- file.path(dir, paste0("stf_",dt_arquivo,"_search_page_",.x, ".json") )
+    arquivo <- file.path(dir, paste0("stf_",dt_arquivo,"_search_page_",.x, ".json") ) |>
+               stringr::str_replace("__","_")
 
     httr::POST(url,
                encode = "json",
