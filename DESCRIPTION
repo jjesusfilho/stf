@@ -41,7 +41,9 @@ Suggests:
     rvest (>= 0.3.4),
     getPass,
     crul (>= 0.8.4),
-    assertthat (>= 0.2.1)
+    assertthat (>= 0.2.1),
+    methods,
+    qpdf
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

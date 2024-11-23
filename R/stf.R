@@ -10,5 +10,5 @@ NULL
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(c(".", "classe",  "incidente","doc_url",
                            "assunto1", "assunto2", "assunto3", "data_protocolo", "numero_origem",
-                           "orgao_origem", "origem", "procedencia"))
+                           "orgao_origem", "origem", "procedencia", "id_doc","sequencia"))
 }
