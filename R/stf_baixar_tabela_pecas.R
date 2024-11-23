@@ -10,13 +10,13 @@ stf_baixar_tabela_pecas <- function(incidente, diretorio = "."){
   
   if(any(stringr::str_detect(incidente,"\\D"))){
     
-    stop("O incidente deve conter somente números")
+    stop("O incidente deve conter somente n\u00FAmeros")
     
   }
   
   purrr::walk(incidente, purrr::possibly(~{
     
-    arquivo <- file.path(diretorio, paste0("tabela_docs_incidente_",.x,".html"))
+    arquivo <- file.path(diretorio, paste0("tabela_pecas_incidente_",.x,".html"))
     
     url_incidente <- paste0("https://redir.stf.jus.br/estfvisualizadorpub/jsp/consultarprocessoeletronico/ConsultarProcessoEletronico.jsf?seqobjetoincidente=", .x)
     

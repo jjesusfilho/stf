@@ -9,3 +9,4 @@
 ^LICENSE\.md$
 ^stf\.Rproj$
 ^\.Rproj\.user$
+^\.devcontainer$
