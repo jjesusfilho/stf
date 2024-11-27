@@ -19,7 +19,7 @@ stf_quantidade <- function (inicio = NULL, fim = NULL)
     
     urls <-   paste0("https://portal.stf.jus.br/processos/abaInformacoes.asp?incidente=", intervalo[1]:intervalo[2])
     
-    s <- purrr::map(urls, ~{
+     n <- purrr::map(urls, ~{
       
      r1 <-  httr::GET(.x,   
                     httr::user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36")) |> 
@@ -36,7 +36,7 @@ stf_quantidade <- function (inicio = NULL, fim = NULL)
       unlist()
     
     
-    if (length(s) == 0) {
+    if (length(n) == 0) {
       inicio <- inicio - (fim - inicio)
       fim <- mean(c(inicio, fim))
     }
