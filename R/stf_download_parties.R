@@ -1,18 +1,17 @@
-#' Download html with parties based on incidente
+#' Baixa html das partes com base no incidente
 #'
-#' @param incidente Incidente number
-#' @param dir Directory where to download the htmls
+#' @param incidente Número do incidente
+#' @param dirs Diretório onde armazenar os htmls
+#' @param sono = Sono entre requisições.
 #'
 #' @return htmls
 #' @export
 #'
-stf_download_parties <- function(incidente, dir = "."){
+stf_baixar_partes <- function(incidente, dir = ".", sono = 1){
 
-  pb <- progress::progress_bar$new(total = length(incidente))
 
   purrr::walk(incidente,purrr::possibly(~{
 
-    pb$tick()
 
     url <- paste0("http://portal.stf.jus.br/processos/abaPartes.asp?incidente=",.x)
 
@@ -23,6 +22,8 @@ stf_download_parties <- function(incidente, dir = "."){
 
                 )
 
-  },NULL))
+    Sys.sleep(sono)
+
+  },NULL), .progress = TRUE)
 
 }

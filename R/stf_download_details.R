@@ -1,12 +1,13 @@
-#' Download detailed information based on incidente number
+#' Baixa detalhes do capa com base no número do incidente
 #'
-#' @param incidente incidente number
-#' @param dir directory
+#' @param incidente Número do incidente
+#' @param dir diretório
+#' @param sono = Sono entre requisições.
 #'
 #' @return htmls
 #' @export
 #'
-stf_download_details <- function(incidente =NULL, dir="."){
+stf_baixar_detalhes <- function(incidente =NULL, dir=".", sono = 1){
 
 
   h <- httr::add_headers(`User-Agent`= "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36")
@@ -14,11 +15,9 @@ stf_download_details <- function(incidente =NULL, dir="."){
 
   uri<-"https://portal.stf.jus.br/processos/detalhe.asp?incidente="
 
-  pb <- progress::progress_bar$new(total = length(incidente))
 
   purrr::walk(incidente,purrr::possibly(~{
 
-    pb$tick()
 
     arquivo<-file.path(dir,paste0("detalhes_stf_incidente_",.x,".html"))
 
@@ -26,8 +25,8 @@ stf_download_details <- function(incidente =NULL, dir="."){
 
     httr::GET(url, h, httr::write_disk(arquivo,overwrite = TRUE))
 
+  Sys.sleep(sono)
 
-  },NULL))
-
+  },NULL), .progress = TRUE)
 
 }

@@ -1,19 +1,15 @@
-#' Download html with information based on incidente
+#' Baixa html com informação baseada no incidente
 #'
-#' @param incidente Incidente number
-#' @param dir Directory where to download the htmls
+#' @param incidente Número do incidente
+#' @param dir Diretório onde armazenar o html
+#' @param sono = Sono entre requisições.
 #'
 #' @return htmls
 #' @export
 #'
-stf_download_information <- function(incidente, dir = "."){
-
-
-  pb <- progress::progress_bar$new(total = length(incidente))
+stf_baixar_informacoes <- function(incidente, dir = ".", sono = 1){
 
   purrr::walk(incidente,purrr::possibly(~{
-
-    pb$tick()
 
     url <- paste0("http://portal.stf.jus.br/processos/abaInformacoes.asp?incidente=",.x)
 
@@ -24,8 +20,8 @@ stf_download_information <- function(incidente, dir = "."){
 
                 )
 
-     Sys.sleep(1)
+     Sys.sleep(sono)
     
-  },NULL))
+  },NULL), .progress = TRUE)
 
 }
