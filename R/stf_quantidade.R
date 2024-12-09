@@ -6,9 +6,7 @@
 #' @return Quantidade distribuída
 #' @export
 #'
-stf_quantidade <- function (inicio = NULL, fim = NULL)
-  
-{
+stf_quantidade <- function (inicio = NULL, fim = NULL) {
   
   
   while (fim - inicio > 7) {
