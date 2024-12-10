@@ -1,7 +1,7 @@
 #' Baixa html das partes com base no incidente
 #'
 #' @param incidente Número do incidente
-#' @param dirs Diretório onde armazenar os htmls
+#' @param dir Diretório onde armazenar os htmls
 #' @param sono = Sono entre requisições.
 #'
 #' @return htmls

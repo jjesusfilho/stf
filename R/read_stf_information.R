@@ -1,35 +1,34 @@
-#' Reads data from information tab.
+#' Lê dados baixados com stf_baixar_informacoes.R
 #'
-#' @param files Vector of html files.
-#' @param path where the htmls are if files is NULL.
+#' @param arquivos Vetor de arquivos
+#' @param dir Alternativamente informar diretorio.
 #' @importFrom rlang .data
-#' @return a tibble with data from the information tab.
+#' @return tibble
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' informacao <- read_stf_information("html", plan = "multiprocess")
-#' }
-read_stf_information <- function (files = NULL, path = ".")
+stf_ler_informacoes <- function (arquivos = NULL, dir = ".")
 {
   
-  if (is.null(files)){
-    files <- list.files(path, full.names = TRUE, pattern = "information")
+  if (is.null(arquivos)){
+    arquivos <- list.files(dir, full.names = TRUE, pattern = "information")
   }
   
-  pb <- progress::progress_bar$new(total = length(files))
   
   informacoes <-
-    purrr::map_dfr(files, purrr::possibly( ~ {
+    purrr::map_dfr(arquivos, purrr::possibly( ~ {
       
-      pb$tick()
       
       incidente <- stringr::str_extract(.x, "\\d+(?=.html)")
       
       conteudo <- xml2::read_html(.x, encoding = "UTF-8")
       
       
-      if (xml2::xml_find_first(conteudo, "boolean(//body[contains(., 'Seu acesso a este website foi bloqueado')])")){
+      if (
+        xml2::xml_find_first(conteudo, "boolean(//body[contains(., 'Seu acesso a este website foi bloqueado')])") | 
+        
+        xml2::xml_find_first(conteudo, "boolean(//body[contains(., '403 Forbidden')])")
+
+      ){
         
        data <-  tibble::tibble(
           incidente = incidente,
@@ -104,7 +103,7 @@ read_stf_information <- function (files = NULL, path = ".")
         dplyr::na_if("")
       
       procedencia <-
-        conteudo %>% xml2::xml_find_all("//*[@id='descricao-procedencia']") %>%
+        conteudo %>% xml2::xml_find_all("//*[@id='descricao-procedencia']") |>
         xml2::xml_text(trim = TRUE) |>
         dplyr::na_if("-")
       
@@ -118,12 +117,12 @@ read_stf_information <- function (files = NULL, path = ".")
         origem = origem,
         numero_origem = numero_origem,
         procedencia = procedencia
-      ) %>% tibble::as_tibble()
+      ) |> tibble::as_tibble()
       
       }
       
       data
-    }, NULL)) %>% 
+    }, NULL), .progress = TRUE) |>
     
     dplyr::select(
       incidente,
@@ -135,12 +134,12 @@ read_stf_information <- function (files = NULL, path = ".")
       origem,
       numero_origem,
       procedencia
-    ) %>% dplyr::mutate(data_protocolo = lubridate::dmy(data_protocolo))
+    ) |> dplyr::mutate(data_protocolo = lubridate::dmy(data_protocolo))
 }
 
-#' @rdname read_stf_information
+#' @rdname stf_ler_informacoes
 #' @export
-stf_read_information <- read_stf_information
+stf_read_information <- read_stf_information <- stf_ler_informacoes
 
 
 
