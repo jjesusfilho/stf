@@ -6,6 +6,7 @@
 \usage{
 stf_baixar_cjsg(
   corpo = NULL,
+  headers = NULL,
   livre = "",
   base = c("acordaos", "decisoes"),
   dt_ini = "",
@@ -21,6 +22,8 @@ stf_baixar_cjsg(
 }
 \arguments{
 \item{corpo}{Você pode usar o body(json da sua busca no STF)}
+
+\item{headers}{Necessário informar os headers com os cookies.}
 
 \item{livre}{Termos (use AND ou OR se necessário)}
 

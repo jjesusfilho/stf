@@ -1,6 +1,7 @@
 #' Baixa acórdãos e decisões monocráticas do STF.
 #'
 #' @param corpo Você pode usar o body(json da sua busca no STF)
+#' @param headers Necessário informar os headers com os cookies.
 #' @param livre Termos (use AND ou OR se necessário)
 #' @param base Acórdãos ou decisões
 #' @param dt_ini Data início dos julgamentos
@@ -17,6 +18,7 @@
 #' @export
 #'
 stf_baixar_cjsg <- function(corpo = NULL,
+                              headers = NULL,
                               livre = "",
                               base = c("acordaos", "decisoes"),
                               dt_ini = "",
@@ -26,8 +28,9 @@ stf_baixar_cjsg <- function(corpo = NULL,
                               ministros = "",
                               classes = "",
                               ufs = "",
-                              tamanho = 10,
+                              tamanho = 200,
                               dir = "."){
+
 
 
   datas <- mget(c("dt_ini","dt_fim","dtp_ini","dtp_fim")) |>
@@ -38,7 +41,7 @@ stf_baixar_cjsg <- function(corpo = NULL,
 
  tamanho <- as.integer(tamanho)
 
-  if (tamanho > 200 | is.na(tamanho)){
+  if (tamanho > 250 | is.na(tamanho)){
 
     stop("Argumento tamanho tem de ser convers\u00EDvel para num\u00E9rico e, no m\u00E1ximo, 200.")
 
@@ -114,7 +117,7 @@ stf_baixar_cjsg <- function(corpo = NULL,
 
     if (file.exists(corpo)){
 
-      body <- jqr::jq(file(corpo))
+      body <- readLines(corpo)
 
       body <- body |>
       jqr::jq(glue::glue('.size = {tamanho}'))
@@ -128,6 +131,8 @@ stf_baixar_cjsg <- function(corpo = NULL,
 
   }
 
+  if(is.null(headers)){
+
   h1 <- httr::add_headers(`User-Agent` = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0",
                           `Accept` = "application/json, text/plain, */*",
                           `Accept-Language` = "en-US,en;q=0.5",
@@ -139,17 +144,28 @@ stf_baixar_cjsg <- function(corpo = NULL,
                           `Sec-Fetch-Mode` = "cors",
                           `Sec-Fetch-Site` = "same-origin")
 
+  } else {
+
+
+    headers <- subset(headers, names(headers) != "Referer")
+    headers <- subset(headers, names(headers) != "Content-Length")
+
+
+    h1 <- httr::add_headers(headers)
+
+
+  }
+
   url <- "https://jurisprudencia.stf.jus.br/api/search/search"
 
 
-  conteudo <- httr::POST(url,
+  r1 <- httr::POST(url,
                          encode = "json",
                          h1,
-                         body = body) |>
-    httr::content("text", encoding = "UTF-8")
+                         body = body)
 
 
-
+  conteudo <- r1 |>   httr::content("text", encoding = "UTF-8")
 
 
   total <- conteudo |>
@@ -168,8 +184,9 @@ stf_baixar_cjsg <- function(corpo = NULL,
     arquivo <- file.path(dir, paste0("stf_",dt_arquivo,"_search_page_",.x, ".json") ) |>
                stringr::str_replace("__","_")
 
-    httr::POST(url,
+   resposta <-  httr::POST(url,
                encode = "json",
+               httr::set_cookies(unlist(r1$cookies)),
                h1,
                body = body,
                httr::write_disk(arquivo, overwrite = T))
